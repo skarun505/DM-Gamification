@@ -22,3 +22,4 @@ export interface AwardXPResult {
   level: number;
   levelTitle: string;
 }
+

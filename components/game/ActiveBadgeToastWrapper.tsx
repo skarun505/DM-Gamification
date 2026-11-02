@@ -8,3 +8,4 @@ export function ActiveBadgeToastWrapper() {
   const { activeBadgeToast, closeBadgeToast } = useGame();
   return <BadgeToast badge={activeBadgeToast} onClose={closeBadgeToast} />;
 }
+

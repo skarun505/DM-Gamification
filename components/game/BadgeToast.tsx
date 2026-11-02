@@ -54,3 +54,4 @@ export function BadgeToast({ badge, onClose }: BadgeToastProps) {
     </div>
   );
 }
+

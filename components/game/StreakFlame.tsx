@@ -41,3 +41,4 @@ export function StreakFlame({ streak, className = '', size = 'md' }: StreakFlame
     </div>
   );
 }
+

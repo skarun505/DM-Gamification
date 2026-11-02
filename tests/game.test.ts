@@ -78,3 +78,4 @@ describe('Gamification: Streak Logic', () => {
     expect(res.freezeUsed).toBe(false);
   });
 });
+

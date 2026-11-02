@@ -118,3 +118,4 @@ export function getInterviewScenarios(): InterviewScenario[] {
     return InterviewScenarioSchema.parse(data);
   });
 }
+

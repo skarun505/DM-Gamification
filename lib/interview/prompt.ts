@@ -22,3 +22,4 @@ Return valid JSON with:
   "better_answer": string (under 120 words),
   "one_tip": string
 }`;
+

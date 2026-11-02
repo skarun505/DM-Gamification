@@ -32,3 +32,4 @@ export function CoinBadge({ coins, className = '', size = 'md' }: CoinBadgeProps
     </div>
   );
 }
+

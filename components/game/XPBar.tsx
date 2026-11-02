@@ -44,3 +44,4 @@ export function XPBar({ xp, showDetails = true, className = '' }: XPBarProps) {
     </div>
   );
 }
+

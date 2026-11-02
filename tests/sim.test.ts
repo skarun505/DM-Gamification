@@ -63,3 +63,4 @@ describe('Simulator Engine', () => {
     expect(res.pixieCommentary.some((c) => c.includes('Pixel is not installed'))).toBe(true);
   });
 });
+

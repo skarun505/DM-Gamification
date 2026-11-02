@@ -19,3 +19,4 @@ export async function GET(req: NextRequest) {
   const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   return NextResponse.json(InterviewScenarioSchema.parse(data));
 }
+

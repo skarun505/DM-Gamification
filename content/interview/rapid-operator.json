@@ -20,3 +20,4 @@
   { "id": "ro-19", "q": "Which bidding strategy is recommended when starting creative tests in an ABO campaign?", "options": ["Lowest Cost (Highest Volume)", "Bid Cap set at ₹1", "Target ROAS set at 20x", "Manual CPM only"], "answer": 0, "explain": "Lowest Cost bidding ensures clean delivery across testing variants at current market rates." },
   { "id": "ro-20", "q": "What is a Lookback Window in Custom Audiences?", "options": ["The time taken to render a video", "How many days in the past Meta looks to capture user actions (e.g. past 14 days vs 180 days)", "The expiration date of an ad account", "The review time for an ad"], "answer": 1, "explain": "Lookback windows define recency: e.g., website visitors in the last 7 days vs 180 days." }
 ]
+

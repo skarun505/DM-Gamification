@@ -30,9 +30,28 @@ export default function DailyChallengePage() {
         const res = await fetch('/api/content/daily');
         if (res.ok) {
           const allQ = await res.json();
-          // Pick 3 random questions
-          const shuffled = [...allQ].sort(() => 0.5 - Math.random());
-          setQuestions(shuffled.slice(0, 3));
+          // Pick 3 random questions and dynamically shuffle their options
+          const selected = [...allQ]
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 3)
+            .map((q: any) => {
+              if (!q.options || q.options.length <= 1) return q;
+              const originalAns = q.answer;
+              const mapped = q.options.map((opt: string, i: number) => ({
+                text: opt,
+                isCorrect: i === originalAns,
+              }));
+              for (let i = mapped.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [mapped[i], mapped[j]] = [mapped[j], mapped[i]];
+              }
+              return {
+                ...q,
+                options: mapped.map((m: any) => m.text),
+                answer: mapped.findIndex((m: any) => m.isCorrect),
+              };
+            });
+          setQuestions(selected);
         }
       } catch (err) {
         console.error('Failed to load daily questions:', err);
@@ -194,3 +213,4 @@ export default function DailyChallengePage() {
     </div>
   );
 }
+

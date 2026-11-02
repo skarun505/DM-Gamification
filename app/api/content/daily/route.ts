@@ -5,3 +5,4 @@ export async function GET() {
   const questions = getDailyQuestions();
   return NextResponse.json(questions);
 }
+

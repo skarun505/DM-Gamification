@@ -75,3 +75,4 @@ drop policy if exists "iu insert" on interview_usage;
 create policy "iu insert" on interview_usage for insert with check (user_id = auth.uid());
 drop policy if exists "iu update" on interview_usage;
 create policy "iu update" on interview_usage for update using (user_id = auth.uid());
+

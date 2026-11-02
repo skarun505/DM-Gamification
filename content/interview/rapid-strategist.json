@@ -20,3 +20,4 @@
   { "id": "rs-19", "q": "What is a dark post in social advertising?", "options": ["An unpublished page post promoted purely as an ad, not appearing on the main public brand profile grid", "An ad run during nighttime", "An ad violating Meta policies", "An ad using black backgrounds"], "answer": 0, "explain": "Dark posts run in feeds as targeted ads without cluttering the brand's public profile feed." },
   { "id": "rs-20", "q": "In a mature e-commerce media plan, what is a typical healthy allocation between Meta and Google?", "options": ["~60-70% Meta (demand generation) and 30-40% Google (demand capture)", "100% Google only", "100% Meta only", "50% to newspaper classifieds"], "answer": 0, "explain": "Meta generates new demand while Google captures high-intent search and shopping volume." }
 ]
+

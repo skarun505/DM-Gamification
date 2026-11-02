@@ -212,3 +212,4 @@ begin
   insert into xp_events(user_id, source, ref, xp, coins) values (auth.uid(), p_source, p_ref, p_xp, p_coins);
   return me;
 end $$;
+

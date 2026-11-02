@@ -14,3 +14,4 @@ export const BENCHMARKS: Record<string, IndustryBenchmark> = {
   realestate: { industry: "Real Estate", baseCPM: 240, baseCTR: 0.011, baseCVR: 0.03, defaultAOV: 500000 },
   restaurant: { industry: "Food & Dining", baseCPM: 110, baseCTR: 0.020, baseCVR: 0.09, defaultAOV: 600 },
 };
+

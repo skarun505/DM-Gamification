@@ -20,3 +20,4 @@
   { "id": "rr-19", "q": "Approximately how many conversion events per week does an ad set need to exit the Learning Phase?", "options": ["5", "25", "≈ 50", "500"], "answer": 2, "explain": "Meta's machine learning model requires roughly 50 optimization events per 7-day window." },
   { "id": "rr-20", "q": "What happens when you constantly edit an ad set's audience or budget every 6 hours?", "options": ["Costs drop by 50%", "You reset the learning phase, keeping performance unstable and costs high", "Meta gives you bonus credits", "Nothing"], "answer": 1, "explain": "Significant edits reset the machine learning phase back to day 1." }
 ]
+

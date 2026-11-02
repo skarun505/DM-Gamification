@@ -177,5 +177,111 @@
     "options": ["Up to 15-20%", "300%", "10x", "Increase by exactly ₹1 every hour"],
     "answer": 0,
     "explain": "Increasing budget by more than 20% shocks the auction bidding algorithm and usually resets the learning phase."
+  },
+  {
+    "id": "dq-19",
+    "lessonSlug": "meta-strategist-04-attribution-and-incrementality",
+    "q": "If a product has a 50% gross profit margin, what is the minimum breakeven ROAS required on ad spend?",
+    "options": ["1.5x", "2.0x", "3.0x", "4.5x"],
+    "answer": 1,
+    "explain": "Breakeven ROAS = 1 / Gross Margin = 1 / 0.50 = 2.0x. Any ROAS above 2.0x generates net profit."
+  },
+  {
+    "id": "dq-20",
+    "lessonSlug": "meta-operator-04-conversions-api-events-manager",
+    "q": "What unique parameter is required to prevent duplicate counting when sending both Browser Pixel and Server CAPI events?",
+    "options": ["utm_source", "event_id", "client_ip_only", "user_agent_hash"],
+    "answer": 1,
+    "explain": "Meta uses a shared `event_id` and event name to deduplicate identical browser and server events within 48 hours."
+  },
+  {
+    "id": "dq-21",
+    "lessonSlug": "meta-strategist-03-advantage-plus-campaigns",
+    "q": "In Advantage+ Shopping Campaigns (ASC), what is the primary role of the media buyer?",
+    "options": [
+      "Micro-tweaking demographic age brackets every morning",
+      "Supplying high-quality diverse creative assets (hooks, UGC, angles) and monitoring blended MER",
+      "Manual day-parting bids hour by hour",
+      "Setting negative keywords on Instagram"
+    ],
+    "answer": 1,
+    "explain": "With ASC automating audience delivery, the media buyer's highest leverage task is strategic creative production and offer testing."
+  },
+  {
+    "id": "dq-22",
+    "lessonSlug": "meta-operator-08-creative-testing-framework",
+    "q": "Which metric should you inspect first to identify whether people are tuning out an ad before listening to the message?",
+    "options": ["Frequency over 30 days", "3-Second Video Hook Rate (3-sec views ÷ Impressions)", "Page Likes", "Return on ad spend"],
+    "answer": 1,
+    "explain": "The 3-second hook rate measures how effectively your opening frames grab attention in the feed. A benchmark below 20-25% indicates weak hooks."
+  },
+  {
+    "id": "dq-23",
+    "lessonSlug": "meta-strategist-08-policies-rejections-account-health",
+    "q": "Which of the following ad headlines strictly violates Meta's advertising policies?",
+    "options": [
+      "Discover our lightweight running shoes engineered for marathoners",
+      "Are you embarrassed by your extreme hair loss and thinning scalp?",
+      "3 productivity hacks every founder should know",
+      "Save 20% on all wooden dining tables this weekend only"
+    ],
+    "answer": 1,
+    "explain": "Calling out negative personal physical attributes directly ('Are you embarrassed by your extreme hair loss...') violates Meta Advertising Standards."
+  },
+  {
+    "id": "dq-24",
+    "lessonSlug": "meta-operator-05-getting-leads-forms-vs-web-vs-whatsapp",
+    "q": "Why do Instant Forms typically generate cheaper CPL than Landing Pages in Tier 2/3 Indian cities?",
+    "options": [
+      "Meta gives free ad space for forms",
+      "Users never leave the Instagram/Facebook app, pre-fill data automatically, and avoid slow mobile page loads",
+      "Forms only show to users with iPhones",
+      "Landing pages are banned in Tier 2 cities"
+    ],
+    "answer": 1,
+    "explain": "Zero page-load friction and native auto-fill dramatically increase form completion rates on mobile devices."
+  },
+  {
+    "id": "dq-25",
+    "lessonSlug": "meta-rookie-09-how-ad-auction-works",
+    "q": "In Meta's Total Value Auction formula (Bid × Estimated Action Rate + Ad Quality), what happens if your Ad Quality is exceptionally high?",
+    "options": [
+      "You can win auctions against competitors even while bidding a lower price",
+      "Meta automatically shuts down your campaign",
+      "You must pay double the cost per impression",
+      "Your ad only shows at midnight"
+    ],
+    "answer": 0,
+    "explain": "High ad quality and engagement compensate for lower monetary bids, lowering overall CPM."
+  },
+  {
+    "id": "dq-26",
+    "lessonSlug": "meta-strategist-06-account-structure-and-audits",
+    "q": "What negative phenomenon occurs when an advertiser runs 15 overlapping interest ad sets targeting the same metro audience in one account?",
+    "options": [
+      "Account-level auction overlap, bidding against oneself, and artificially inflating CPMs",
+      "Double revenue from each user",
+      "Automatic VIP status from Meta",
+      "Pixel data gets reset to 2018"
+    ],
+    "answer": 0,
+    "explain": "Self-competition in auctions forces Meta's deduplication system to suppress ad sets, driving up CPMs and destabilizing delivery."
+  },
+  {
+    "id": "dq-27",
+    "lessonSlug": "meta-operator-09-retargeting-funnels",
+    "q": "For an e-commerce brand selling ₹1,200 apparel, what is usually the most profitable retargeting audience window?",
+    "options": ["Website visitors from 365 days ago", "Viewed Content or Added to Cart in the last 7 to 14 days", "People who uninstalled Instagram", "Cold broad audience in Australia"],
+    "answer": 1,
+    "explain": "High intent decays rapidly. Users who added items to their cart within the last 7-14 days have the highest conversion probability."
+  },
+  {
+    "id": "dq-28",
+    "lessonSlug": "meta-strategist-07-client-reporting-communication",
+    "q": "When presenting monthly ad performance to a CEO, what should be the primary metric highlighted?",
+    "options": ["Number of link clicks", "Number of video likes", "Customer Acquisition Cost (CAC) and Net Profit/Revenue generated", "Ad account pixel ID"],
+    "answer": 2,
+    "explain": "Executive business leaders care about commercial business outcomes—cash flow, CAC, and net profit—not vanity impressions."
   }
 ]
+

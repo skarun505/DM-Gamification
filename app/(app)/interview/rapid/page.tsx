@@ -34,7 +34,26 @@ export default function RapidFirePage() {
         const res = await fetch('/api/content/interview-rapid');
         if (res.ok) {
           const data = await res.json();
-          const shuffled = [...data].sort(() => 0.5 - Math.random()).slice(0, 10);
+          const shuffled = [...data]
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 10)
+            .map((q: any) => {
+              if (!q.options || q.options.length <= 1) return q;
+              const originalAns = q.answer;
+              const mapped = q.options.map((opt: string, i: number) => ({
+                text: opt,
+                isCorrect: i === originalAns,
+              }));
+              for (let i = mapped.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [mapped[i], mapped[j]] = [mapped[j], mapped[i]];
+              }
+              return {
+                ...q,
+                options: mapped.map((m: any) => m.text),
+                answer: mapped.findIndex((m: any) => m.isCorrect),
+              };
+            });
           setQuestions(shuffled);
         }
       } catch (err) {
@@ -263,3 +282,4 @@ export default function RapidFirePage() {
     </div>
   );
 }
+

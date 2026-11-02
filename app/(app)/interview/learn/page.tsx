@@ -35,7 +35,9 @@ export default function LearnCardsPage() {
         const res = await fetch('/api/content/interview-questions');
         if (res.ok) {
           const data = await res.json();
-          setQuestions(data);
+          // Shuffle deck dynamically so every session is a fresh challenge
+          const shuffled = [...data].sort(() => 0.5 - Math.random());
+          setQuestions(shuffled);
         }
       } catch (err) {
         console.error('Failed to load learn cards:', err);
@@ -265,3 +267,4 @@ export default function LearnCardsPage() {
     </div>
   );
 }
+

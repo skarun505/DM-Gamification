@@ -117,3 +117,4 @@ AdQuest is designed from the ground up for mobile screens:
 
 ## 📄 License
 MIT License. Free for learners, educators, and mentors.
+

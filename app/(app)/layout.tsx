@@ -4,6 +4,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { BottomNav } from '@/components/layout/BottomNav';
 import { ActiveBadgeToastWrapper } from '@/components/game/ActiveBadgeToastWrapper';
+import { PixieFloatingBubble } from '@/components/ui/PixieFloatingBubble';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,8 +18,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </main>
           <BottomNav />
           <ActiveBadgeToastWrapper />
+          <PixieFloatingBubble />
         </div>
       </div>
     </GameProvider>
   );
 }
+

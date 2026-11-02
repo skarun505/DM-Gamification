@@ -44,3 +44,4 @@ export function getLevelInfo(xp: number): LevelInfo {
     xpNeededForNext: Math.max(0, nextLevelXP - safeXP),
   };
 }
+

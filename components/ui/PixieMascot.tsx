@@ -93,3 +93,4 @@ export function PixieMascot({ mood = 'happy', size = 64, className = '' }: Pixie
     </div>
   );
 }
+

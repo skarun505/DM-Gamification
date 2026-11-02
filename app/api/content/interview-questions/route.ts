@@ -7,3 +7,4 @@ export async function GET(req: NextRequest) {
   const questions = getInterviewQuestions(tier);
   return NextResponse.json(questions);
 }
+

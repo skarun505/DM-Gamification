@@ -167,3 +167,4 @@ export type BossBattle = z.infer<typeof BossBattleSchema>;
 export type BossStep = z.infer<typeof BossStepSchema>;
 export type InterviewQuestion = z.infer<typeof InterviewQuestionSchema>;
 export type InterviewScenario = z.infer<typeof InterviewScenarioSchema>;
+

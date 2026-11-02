@@ -10,3 +10,4 @@ export async function GET() {
   const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   return NextResponse.json(data);
 }
+

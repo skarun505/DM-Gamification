@@ -6,7 +6,7 @@ import { useGame } from '@/components/game/GameContext';
 import { StreakFlame } from '@/components/game/StreakFlame';
 import { CoinBadge } from '@/components/game/CoinBadge';
 import { PixieMascot } from '@/components/ui/PixieMascot';
-import { Bell, Sparkles, Volume2, VolumeX } from 'lucide-react';
+import { Bell, Sparkles, Volume2, VolumeX, Compass } from 'lucide-react';
 import { soundFx } from '@/lib/sound/audio';
 
 export function Navbar() {
@@ -45,6 +45,18 @@ export function Navbar() {
         <div className="flex items-center gap-2 sm:gap-3">
           <StreakFlame streak={profile?.streak ?? 1} size="sm" />
           <CoinBadge coins={profile?.coins ?? 0} size="sm" />
+
+          {/* Beginner Tour Button */}
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent('open-adquest-tour'))}
+            aria-label="How to Play Tour"
+            title="How to Play: Beginner Tour"
+            className="flex items-center gap-1.5 py-1.5 px-2.5 sm:px-3 rounded-xl bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/60 dark:hover:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 font-heading font-bold text-xs transition-all active:scale-95 border border-indigo-200/60 dark:border-indigo-800"
+          >
+            <Compass size={15} className="text-indigo-600 dark:text-indigo-400" />
+            <span className="hidden sm:inline">Tour</span>
+          </button>
 
           {/* Sound FX Toggle */}
           <button

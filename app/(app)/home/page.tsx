@@ -24,6 +24,7 @@ import {
   RotateCcw,
   BookMarked,
   ShieldAlert,
+  Compass,
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -117,6 +118,14 @@ export default function HomePage() {
               <span>View Map</span>
               <ArrowRight size={16} />
             </Link>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-adquest-tour'))}
+              className="py-3 px-4 rounded-2xl bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold text-sm shadow-md flex items-center gap-2 transition-all active:scale-95"
+            >
+              <Compass size={16} className="text-amber-950" />
+              <span>How to Play (Tour)</span>
+            </button>
           </div>
         </div>
 

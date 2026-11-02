@@ -110,7 +110,53 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div className="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">
+        {/* 1-Tap Quick Credentials for Testing */}
+        <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-700/80">
+          <div className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 flex items-center justify-between">
+            <span>⚡ Quick Login Credentials:</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setEmail('deepana@adquest.com');
+                setPassword('password123');
+              }}
+              className="p-2.5 rounded-xl border border-indigo-200 dark:border-indigo-800 bg-indigo-50/70 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 text-left transition-all group"
+            >
+              <span className="block text-xs font-bold text-indigo-700 dark:text-indigo-300">
+                👩‍💻 Deepana
+              </span>
+              <span className="block text-[10px] text-slate-500 dark:text-slate-400 truncate">
+                deepana@adquest.com
+              </span>
+              <span className="block text-[10px] text-indigo-500 dark:text-indigo-400 font-mono mt-0.5">
+                Pass: password123
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setEmail('learner@adquest.com');
+                setPassword('password123');
+              }}
+              className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 hover:bg-slate-100 dark:hover:bg-slate-800/80 text-left transition-all"
+            >
+              <span className="block text-xs font-bold text-slate-700 dark:text-slate-200">
+                🚀 Learner
+              </span>
+              <span className="block text-[10px] text-slate-500 dark:text-slate-400 truncate">
+                learner@adquest.com
+              </span>
+              <span className="block text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+                Pass: password123
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-5 text-center text-xs text-slate-500 dark:text-slate-400">
           New to AdQuest?{' '}
           <Link
             href="/signup"

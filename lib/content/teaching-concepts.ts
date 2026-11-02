@@ -325,3 +325,4 @@ export const ALL_TEACHING_CONCEPTS: Record<string, TeachingConcept> = {
     quizAnswerTeaser: 'Never call out personal insecurities directly (e.g. "Are you suffering from hair loss?"). Frame copy around the positive transformation.',
   },
 };
+

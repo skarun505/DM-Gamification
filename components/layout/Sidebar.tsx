@@ -46,7 +46,7 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="hidden md:flex flex-col w-64 shrink-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-5 min-h-screen">
+    <aside className="hidden md:flex flex-col w-64 shrink-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-5 sticky top-0 h-screen overflow-y-auto z-30">
       {/* Brand */}
       <div className="flex items-center gap-3 pb-6 border-b border-slate-100 dark:border-slate-800">
         <PixieMascot size={42} mood="happy" />

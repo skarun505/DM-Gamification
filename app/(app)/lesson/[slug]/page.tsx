@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import confetti from 'canvas-confetti';
-import { getLessonBySlug } from '@/lib/content/loader';
 import { Lesson, Block, QuizQuestion } from '@/lib/content/schema';
 import { useGame } from '@/components/game/GameContext';
 import { XP_REWARDS } from '@/lib/game/xp';
@@ -19,11 +18,11 @@ import {
   XCircle,
   HelpCircle,
   Sparkles,
-  Trophy,
   RotateCcw,
   BookOpen,
   MessageCircle,
   Eye,
+  AlertTriangle,
 } from 'lucide-react';
 import { ALL_TEACHING_CONCEPTS, TeachingConcept } from '@/lib/content/teaching-concepts';
 import { VisualGuideCard } from '@/components/teaching/VisualGuideCard';
@@ -37,8 +36,7 @@ export default function LessonPlayerPage() {
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [loading, setLoading] = useState(true);
-  const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
-  const [mode, setMode] = useState<'visual' | 'learn' | 'quiz' | 'result'>('visual');
+  const [mode, setMode] = useState<'learn' | 'quiz' | 'result' | 'mastery_failed'>('learn');
   const [isVisualPeekOpen, setIsVisualPeekOpen] = useState(false);
 
   // Quiz state
@@ -50,6 +48,11 @@ export default function LessonPlayerPage() {
   const [earnedXP, setEarnedXP] = useState(0);
   const [earnedCoins, setEarnedCoins] = useState(0);
   const [showHint, setShowHint] = useState(false);
+
+  // 2-Attempt per question state & 30% error rule tracking
+  const [attemptCount, setAttemptCount] = useState<number>(1);
+  const [failedQuestionIndices, setFailedQuestionIndices] = useState<Set<number>>(new Set());
+  const [attemptFeedback, setAttemptFeedback] = useState<string | null>(null);
 
   // Order question drag/sort state
   const [userOrder, setUserOrder] = useState<number[]>([]);
@@ -87,12 +90,15 @@ export default function LessonPlayerPage() {
         if (res.ok) {
           const data = await res.json();
           setLesson(data);
-          setMode('visual');
-          setCurrentBlockIndex(0);
+          setMode('learn');
           setCurrentQuizIndex(0);
           setSelectedAnswer(null);
           setIsAnswerSubmitted(false);
           setIsVisualPeekOpen(false);
+          setAttemptCount(1);
+          setFailedQuestionIndices(new Set());
+          setAttemptFeedback(null);
+          setShowHint(false);
           setScore(0);
         }
       } catch (err) {
@@ -103,25 +109,6 @@ export default function LessonPlayerPage() {
     }
     load();
   }, [slug]);
-
-  // Handle keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (mode === 'learn' && lesson) {
-        if (e.key === 'ArrowRight' || e.key === ' ') {
-          if (currentBlockIndex < lesson.blocks.length - 1) {
-            setCurrentBlockIndex((prev) => prev + 1);
-          } else {
-            setMode('quiz');
-          }
-        } else if (e.key === 'ArrowLeft' && currentBlockIndex > 0) {
-          setCurrentBlockIndex((prev) => prev - 1);
-        }
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [mode, currentBlockIndex, lesson]);
 
   if (loading) {
     return (
@@ -157,35 +144,16 @@ export default function LessonPlayerPage() {
 
   const nextConcept = lesson.next && ALL_TEACHING_CONCEPTS[lesson.next];
 
-  const currentBlock: Block = lesson.blocks[currentBlockIndex];
   const progressPercent =
-    mode === 'visual'
-      ? 20
-      : mode === 'learn'
-      ? 20 + Math.round(((currentBlockIndex + 1) / lesson.blocks.length) * 40)
+    mode === 'learn'
+      ? 35
       : mode === 'quiz'
-      ? 60 + Math.round(((currentQuizIndex + 1) / lesson.quiz.length) * 40)
+      ? 35 + Math.round(((currentQuizIndex + 1) / lesson.quiz.length) * 65)
       : 100;
 
   const currentQuestion: QuizQuestion | undefined = lesson.quiz[currentQuizIndex];
 
-  const handleNextBlock = () => {
-    if (currentBlockIndex < lesson.blocks.length - 1) {
-      setCurrentBlockIndex((prev) => prev + 1);
-    } else {
-      setMode('quiz');
-      setCurrentQuizIndex(0);
-      setSelectedAnswer(null);
-      setIsAnswerSubmitted(false);
-    }
-  };
-
-  const handlePrevBlock = () => {
-    if (currentBlockIndex > 0) {
-      setCurrentBlockIndex((prev) => prev - 1);
-    }
-  };
-
+  // SUBMIT HANDLER WITH 2 CHANCES PER WRONG ANSWER
   const handleQuizSubmit = async () => {
     if (selectedAnswer === null || !currentQuestion) return;
 
@@ -202,14 +170,38 @@ export default function LessonPlayerPage() {
       correct = selectedAnswer === currentQuestion.answer;
     }
 
-    setIsAnswerCorrect(correct);
-    setIsAnswerSubmitted(true);
-
     if (correct) {
+      setIsAnswerCorrect(true);
+      setIsAnswerSubmitted(true);
       setScore((prev) => prev + 1);
+      setAttemptFeedback(
+        attemptCount === 1
+          ? '🎉 Correct on first attempt! Great performance marketing instinct.'
+          : '✅ Correct on second chance! Good job identifying and correcting the mistake.'
+      );
+    } else {
+      if (attemptCount === 1) {
+        // CHANCE 1 FAILED: Grant Attempt 2!
+        setAttemptCount(2);
+        setShowHint(true);
+        setAttemptFeedback(
+          '⚠️ Not quite right! You have 1 attempt remaining. Review the clue below, adjust your selection, and check again.'
+        );
+      } else {
+        // CHANCE 2 FAILED: 2 attempts exhausted, reveal answer and log failure!
+        setIsAnswerCorrect(false);
+        setIsAnswerSubmitted(true);
+        setFailedQuestionIndices((prev) => {
+          const next = new Set(prev);
+          next.add(currentQuizIndex);
+          return next;
+        });
+        setAttemptFeedback('❌ 2 attempts used. Here is the correct answer and mentor explanation:');
+      }
     }
   };
 
+  // NEXT QUESTION OR RESULT WITH 30% ERROR MASTERY RULE
   const handleNextQuizQuestion = async () => {
     if (!lesson) return;
 
@@ -218,10 +210,22 @@ export default function LessonPlayerPage() {
       setSelectedAnswer(null);
       setIsAnswerSubmitted(false);
       setShowHint(false);
+      setAttemptCount(1);
+      setAttemptFeedback(null);
     } else {
-      // Quiz complete! Calculate rewards
-      const finalScore = isAnswerCorrect ? score + 1 : score;
+      // Quiz complete!
       const totalQuestions = lesson.quiz.length;
+      const totalFailed = failedQuestionIndices.size;
+      const failureRate = (totalFailed / totalQuestions) * 100;
+
+      // 30% ERROR RULE: If >30% of answers are wrong, must restart from scratch!
+      if (failureRate > 30) {
+        setMode('mastery_failed');
+        return;
+      }
+
+      // PASSED WITH >= 70% ACCURACY!
+      const finalScore = score;
       const isPerfect = finalScore === totalQuestions;
 
       let xpGained = XP_REWARDS.LESSON_COMPLETE.xp + finalScore * XP_REWARDS.QUIZ_CORRECT_ANSWER.xp;
@@ -280,6 +284,18 @@ export default function LessonPlayerPage() {
     }
   };
 
+  const handleRestartFromScratch = () => {
+    setMode('learn');
+    setCurrentQuizIndex(0);
+    setSelectedAnswer(null);
+    setIsAnswerSubmitted(false);
+    setAttemptCount(1);
+    setFailedQuestionIndices(new Set());
+    setAttemptFeedback(null);
+    setShowHint(false);
+    setScore(0);
+  };
+
   return (
     <div className="max-w-2xl mx-auto py-2 px-1">
       {/* Top Header / Progress Bar */}
@@ -296,15 +312,15 @@ export default function LessonPlayerPage() {
             {lesson.title}
           </div>
           <div className="flex items-center gap-2">
-            {mode !== 'visual' && (
+            {mode === 'quiz' && (
               <button
                 type="button"
-                onClick={() => setMode('visual')}
+                onClick={() => setIsVisualPeekOpen(true)}
                 className="flex items-center gap-1 text-indigo-600 hover:text-indigo-700 bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded-full text-xs font-bold transition-colors"
                 title="View Visual Guide"
               >
                 <Eye size={13} />
-                <span>Visual Guide</span>
+                <span>Peek Diagram</span>
               </button>
             )}
             <Link
@@ -317,7 +333,7 @@ export default function LessonPlayerPage() {
           </div>
         </div>
 
-        {/* Bar */}
+        {/* Progress Bar */}
         <div className="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
           <div
             className="bg-indigo-600 h-full rounded-full transition-all duration-300 ease-out"
@@ -326,177 +342,152 @@ export default function LessonPlayerPage() {
         </div>
       </div>
 
-      {/* Mode: VISUAL GUIDE */}
-      {mode === 'visual' && (
-        <VisualGuideCard
-          concept={activeConcept}
-          onProceedToQuiz={() => {
-            setMode('quiz');
-            setCurrentQuizIndex(0);
-            setSelectedAnswer(null);
-            setIsAnswerSubmitted(false);
-          }}
-          onProceedToLearn={() => {
-            setMode('learn');
-            setCurrentBlockIndex(0);
-          }}
-        />
-      )}
-
-      {/* Mode: LEARN */}
+      {/* COMBINED UNIFIED MODE: LEARN (Visual Guide + Lesson Blocks in ONE view) */}
       {mode === 'learn' && (
         <div className="space-y-6 animate-fadeIn">
-          {/* Card Frame */}
-          <div className="min-h-[300px] flex flex-col justify-center bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-card border border-slate-200/80 dark:border-slate-700">
-            {/* Block Content Rendering */}
-            {currentBlock.type === 'pixie' && (
-              <div className="flex items-start gap-4">
-                <PixieMascot mood="happy" size={54} />
-                <div className="flex-1 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/60 rounded-2xl p-4 text-slate-800 dark:text-slate-100 font-medium text-base sm:text-lg leading-relaxed">
-                  {currentBlock.text}
-                </div>
+          <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-card border border-slate-200 dark:border-slate-700 space-y-6">
+            {/* Header */}
+            <div className="flex items-center gap-3">
+              <span className="w-10 h-10 rounded-2xl bg-indigo-600 text-white font-heading font-extrabold text-sm flex items-center justify-center shrink-0 shadow-md">
+                #{activeConcept.unitNumber}
+              </span>
+              <div>
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 block">
+                  Unified Study Guide
+                </span>
+                <h2 className="font-heading font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+                  {lesson.title}
+                </h2>
+                <p className="text-xs text-slate-500 mt-0.5">{activeConcept.subtitle}</p>
               </div>
-            )}
+            </div>
 
-            {currentBlock.type === 'text' && (
-              <div className="text-slate-800 dark:text-slate-100 text-lg sm:text-xl font-medium leading-relaxed">
-                {currentBlock.text}
-              </div>
-            )}
+            {/* Visual Guide Graphic Embedded */}
+            <VisualGuideCard
+              concept={activeConcept}
+              isPeekModal={true}
+              onProceedToQuiz={() => {
+                setMode('quiz');
+                setCurrentQuizIndex(0);
+                setSelectedAnswer(null);
+                setIsAnswerSubmitted(false);
+                setAttemptCount(1);
+                setFailedQuestionIndices(new Set());
+              }}
+            />
 
-            {currentBlock.type === 'analogy' && (
-              <div className="bg-amber-50/70 dark:bg-amber-950/30 border-2 border-amber-300 dark:border-amber-800 rounded-2xl p-5">
-                <div className="flex items-center gap-2 text-amber-800 dark:text-amber-300 font-heading font-bold text-base mb-2">
-                  <Sparkles size={18} />
-                  <span>{currentBlock.title}</span>
-                </div>
-                <p className="text-slate-700 dark:text-slate-200 text-base sm:text-lg leading-relaxed">
-                  {currentBlock.text}
-                </p>
-              </div>
-            )}
+            {/* Lesson Knowledge Blocks */}
+            <div className="pt-4 border-t border-slate-200 dark:border-slate-700 space-y-4">
+              <h3 className="font-heading font-extrabold text-base text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                <BookOpen size={18} className="text-indigo-600" />
+                <span>Lesson Core Principles & Practical Application:</span>
+              </h3>
 
-            {currentBlock.type === 'compare' && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-slate-50 dark:bg-slate-900/60 rounded-2xl p-4 border border-slate-200 dark:border-slate-700">
-                  <h4 className="font-heading font-bold text-sm text-slate-700 dark:text-slate-300 mb-2">
-                    {currentBlock.left.title}
-                  </h4>
-                  <ul className="space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                    {currentBlock.left.points.map((pt, i) => (
-                      <li key={i} className="flex items-start gap-1.5">
-                        <span className="text-slate-400">•</span>
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-indigo-50/80 dark:bg-indigo-950/40 rounded-2xl p-4 border border-indigo-200 dark:border-indigo-800">
-                  <h4 className="font-heading font-bold text-sm text-indigo-700 dark:text-indigo-300 mb-2">
-                    {currentBlock.right.title}
-                  </h4>
-                  <ul className="space-y-1.5 text-xs sm:text-sm text-indigo-900 dark:text-indigo-200">
-                    {currentBlock.right.points.map((pt, i) => (
-                      <li key={i} className="flex items-start gap-1.5">
-                        <span className="text-indigo-500 font-bold">✓</span>
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
-
-            {currentBlock.type === 'steps' && (
-              <div className="space-y-3">
-                <h4 className="font-heading font-bold text-base text-slate-800 dark:text-slate-100">
-                  {currentBlock.title}
-                </h4>
-                <div className="space-y-2">
-                  {currentBlock.items.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-sm font-semibold"
-                    >
-                      <span className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
-                        {idx + 1}
-                      </span>
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {currentBlock.type === 'table' && (
-              <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
-                <table className="w-full text-left text-xs sm:text-sm">
-                  <thead className="bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 font-heading">
-                    <tr>
-                      {currentBlock.headers.map((h, i) => (
-                        <th key={i} className="p-3">
-                          {h}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
-                    {currentBlock.rows.map((row, rIdx) => (
-                      <tr key={rIdx} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                        {row.map((cell, cIdx) => (
-                          <td key={cIdx} className="p-3 text-slate-600 dark:text-slate-300">
-                            {cell}
-                          </td>
+              <div className="space-y-3.5">
+                {lesson.blocks.map((block: Block, bIdx: number) => (
+                  <div
+                    key={bIdx}
+                    className="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 bg-slate-50/70 dark:bg-slate-900/40"
+                  >
+                    {block.type === 'pixie' && (
+                      <div className="flex items-start gap-3">
+                        <PixieMascot mood="happy" size={42} className="shrink-0" />
+                        <div className="text-xs sm:text-sm text-slate-800 dark:text-slate-100 font-medium leading-relaxed">
+                          {block.text}
+                        </div>
+                      </div>
+                    )}
+                    {block.type === 'text' && (
+                      <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-100 font-medium leading-relaxed">
+                        {block.text}
+                      </p>
+                    )}
+                    {block.type === 'analogy' && (
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-heading font-bold text-xs sm:text-sm">
+                          <Sparkles size={15} />
+                          <span>{block.title}</span>
+                        </div>
+                        <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
+                          {block.text}
+                        </p>
+                      </div>
+                    )}
+                    {block.type === 'compare' && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                        <div className="p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200">
+                          <h5 className="font-bold text-xs text-slate-700 mb-1">{block.left.title}</h5>
+                          <ul className="text-xs space-y-1 text-slate-500">
+                            {block.left.points.map((pt, i) => (
+                              <li key={i}>• {pt}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="p-3 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800">
+                          <h5 className="font-bold text-xs text-indigo-700 dark:text-indigo-300 mb-1">
+                            {block.right.title}
+                          </h5>
+                          <ul className="text-xs space-y-1 text-indigo-900 dark:text-indigo-200">
+                            {block.right.points.map((pt, i) => (
+                              <li key={i}>✓ {pt}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )}
+                    {block.type === 'steps' && (
+                      <div className="space-y-1.5">
+                        <h5 className="font-bold text-xs text-slate-700 dark:text-slate-200 mb-1">
+                          {block.title}
+                        </h5>
+                        {block.items.map((item, i) => (
+                          <div key={i} className="flex items-center gap-2 text-xs font-semibold">
+                            <span className="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] shrink-0">
+                              {i + 1}
+                            </span>
+                            <span>{item}</span>
+                          </div>
                         ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                      </div>
+                    )}
+                    {block.type === 'tip' && (
+                      <div className="flex items-start gap-2 text-xs sm:text-sm text-emerald-900 dark:text-emerald-200 font-medium">
+                        <CheckCircle2 size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                        <span>
+                          <strong>Pro Tip:</strong> {block.text}
+                        </span>
+                      </div>
+                    )}
+                    {block.type === 'warning' && (
+                      <div className="flex items-start gap-2 text-xs sm:text-sm text-rose-900 dark:text-rose-200 font-medium">
+                        <XCircle size={16} className="text-rose-600 shrink-0 mt-0.5" />
+                        <span>
+                          <strong>Warning:</strong> {block.text}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-            )}
+            </div>
 
-            {currentBlock.type === 'tip' && (
-              <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-800 rounded-2xl p-4 flex items-start gap-3">
-                <CheckCircle2 size={22} className="text-emerald-600 shrink-0 mt-0.5" />
-                <div className="text-sm sm:text-base text-emerald-900 dark:text-emerald-200 font-medium">
-                  <span className="font-bold">Pro Tip: </span>
-                  {currentBlock.text}
-                </div>
-              </div>
-            )}
-
-            {currentBlock.type === 'warning' && (
-              <div className="bg-rose-50 dark:bg-rose-950/30 border border-rose-300 dark:border-rose-800 rounded-2xl p-4 flex items-start gap-3">
-                <XCircle size={22} className="text-rose-600 shrink-0 mt-0.5" />
-                <div className="text-sm sm:text-base text-rose-900 dark:text-rose-200 font-medium">
-                  <span className="font-bold">Warning: </span>
-                  {currentBlock.text}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Navigation Controls */}
-          <div className="flex items-center justify-between pt-2">
-            <button
-              onClick={handlePrevBlock}
-              disabled={currentBlockIndex === 0}
-              className="py-2.5 px-4 rounded-xl border border-slate-300 dark:border-slate-700 text-sm font-semibold disabled:opacity-30 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            >
-              Previous
-            </button>
-
-            <span className="text-xs text-slate-400">
-              {currentBlockIndex + 1} / {lesson.blocks.length}
-            </span>
-
-            <button
-              onClick={handleNextBlock}
-              className="py-2.5 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold font-heading text-sm flex items-center gap-1.5 shadow-md shadow-indigo-500/20 active:scale-98 transition-all"
-            >
-              <span>{currentBlockIndex === lesson.blocks.length - 1 ? 'Start Quiz' : 'Next'}</span>
-              <ArrowRight size={16} />
-            </button>
+            {/* Direct CTA to Quiz */}
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setMode('quiz');
+                  setCurrentQuizIndex(0);
+                  setSelectedAnswer(null);
+                  setIsAnswerSubmitted(false);
+                  setAttemptCount(1);
+                  setFailedQuestionIndices(new Set());
+                }}
+                className="w-full py-4 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-heading font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-600/25 flex items-center justify-center gap-2 transition-all active:scale-98"
+              >
+                <span>🚀 I Have Studied — Start Quiz & Win XP ➔</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -505,17 +496,21 @@ export default function LessonPlayerPage() {
       {mode === 'quiz' && currentQuestion && (
         <div className="space-y-6 animate-fadeIn">
           <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-card border border-slate-200 dark:border-slate-700">
+            {/* Header info */}
             <div className="flex items-center justify-between text-xs font-bold text-indigo-600 uppercase tracking-wider mb-3">
-              <span>Quiz Question {currentQuizIndex + 1} of {lesson.quiz.length}</span>
+              <span>
+                Quiz Question {currentQuizIndex + 1} of {lesson.quiz.length}
+              </span>
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setIsVisualPeekOpen(true)}
-                  className="flex items-center gap-1 text-[11px] font-bold text-indigo-600 bg-indigo-50 dark:bg-indigo-950 px-2.5 py-1 rounded-full hover:bg-indigo-100 dark:hover:bg-indigo-900 transition-colors capitalize tracking-normal"
+                <span
+                  className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
+                    attemptCount === 1
+                      ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300'
+                      : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
+                  }`}
                 >
-                  <Eye size={13} />
-                  <span>Peek Visual Guide</span>
-                </button>
+                  Attempt {attemptCount} of 2
+                </span>
                 <span className="text-slate-400">Score: {score}</span>
               </div>
             </div>
@@ -533,12 +528,15 @@ export default function LessonPlayerPage() {
 
                   if (isAnswerSubmitted) {
                     if (idx === currentQuestion.answer) {
-                      btnColor = 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200';
+                      btnColor =
+                        'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200';
                     } else if (isSelected) {
-                      btnColor = 'border-rose-500 bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200';
+                      btnColor =
+                        'border-rose-500 bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200';
                     }
                   } else if (isSelected) {
-                    btnColor = 'border-indigo-600 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-900 dark:text-indigo-200';
+                    btnColor =
+                      'border-indigo-600 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-900 dark:text-indigo-200';
                   }
 
                   return (
@@ -570,9 +568,11 @@ export default function LessonPlayerPage() {
 
                   if (isAnswerSubmitted) {
                     if (val === currentQuestion.answer) {
-                      btnColor = 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900';
+                      btnColor =
+                        'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900';
                     } else if (isSelected) {
-                      btnColor = 'border-rose-500 bg-rose-50 dark:bg-rose-950/40 text-rose-900';
+                      btnColor =
+                        'border-rose-500 bg-rose-50 dark:bg-rose-950/40 text-rose-900';
                     }
                   } else if (isSelected) {
                     btnColor = 'border-indigo-600 bg-indigo-50 text-indigo-900';
@@ -600,14 +600,18 @@ export default function LessonPlayerPage() {
                 </p>
                 {userOrder.map((itemOriginalIndex, displayPos) => {
                   const itemText = currentQuestion.items![itemOriginalIndex];
-                  let cardStyle = 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800';
+                  let cardStyle =
+                    'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800';
 
                   if (isAnswerSubmitted) {
-                    const correctAtPos = (currentQuestion.answer as number[])[displayPos] === itemOriginalIndex;
+                    const correctAtPos =
+                      (currentQuestion.answer as number[])[displayPos] === itemOriginalIndex;
                     if (correctAtPos) {
-                      cardStyle = 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200';
+                      cardStyle =
+                        'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200';
                     } else {
-                      cardStyle = 'border-rose-400 bg-rose-50 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200';
+                      cardStyle =
+                        'border-rose-400 bg-rose-50 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200';
                     }
                   }
 
@@ -653,15 +657,36 @@ export default function LessonPlayerPage() {
               </div>
             )}
 
-            {/* Explanation / Hint Box */}
+            {/* Attempt 2 Chance Banner */}
+            {attemptCount === 2 && !isAnswerSubmitted && (
+              <div className="mt-5 p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex items-start gap-2.5 animate-fadeIn">
+                <AlertTriangle size={18} className="text-amber-600 shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-heading font-extrabold block mb-0.5">
+                    First attempt was incorrect!
+                  </span>
+                  <span>
+                    You have 1 attempt remaining to correct your answer. Review the hint below, adjust your choice, and click Check Answer!
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Explanation / Result Box */}
             {isAnswerSubmitted && (
-              <div className={`mt-6 p-4 rounded-2xl text-sm leading-relaxed ${
-                isAnswerCorrect
-                  ? 'bg-emerald-50 text-emerald-900 border border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-200'
-                  : 'bg-amber-50 text-amber-900 border border-amber-200 dark:bg-amber-950/30 dark:text-amber-200'
-              }`}>
+              <div
+                className={`mt-6 p-4 rounded-2xl text-sm leading-relaxed ${
+                  isAnswerCorrect
+                    ? 'bg-emerald-50 text-emerald-900 border border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-200'
+                    : 'bg-rose-50 text-rose-900 border border-rose-200 dark:bg-rose-950/30 dark:text-rose-200'
+                }`}
+              >
                 <div className="font-bold mb-1">
-                  {isAnswerCorrect ? '🎉 Correct!' : '💡 Learning Moment:'}
+                  {isAnswerCorrect
+                    ? attemptCount === 1
+                      ? '🎉 Correct on First Try!'
+                      : '✅ Correct on Second Chance!'
+                    : '❌ 2 Attempts Used — Correct Answer & Explanation:'}
                 </div>
                 <p>{currentQuestion.explain}</p>
               </div>
@@ -693,9 +718,9 @@ export default function LessonPlayerPage() {
               <button
                 disabled={selectedAnswer === null}
                 onClick={handleQuizSubmit}
-                className="py-3 px-8 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 text-white font-heading font-bold text-sm shadow-md transition-all"
+                className="py-3 px-8 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 text-white font-heading font-bold text-sm shadow-md transition-all active:scale-98"
               >
-                Check Answer
+                {attemptCount === 1 ? 'Check Answer' : 'Check Attempt 2 of 2 ➔'}
               </button>
             ) : (
               <button
@@ -710,16 +735,54 @@ export default function LessonPlayerPage() {
         </div>
       )}
 
-      {/* Mode: RESULT */}
+      {/* Mode: MASTERY FAILED (30% Error Threshold Rule) */}
+      {mode === 'mastery_failed' && (
+        <div className="space-y-6 text-center animate-fadeIn">
+          <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-card border-2 border-rose-200 dark:border-rose-900/60">
+            <PixieMascot mood="thinking" size={84} className="mx-auto mb-4" />
+            <div className="inline-block px-3 py-1 rounded-full bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 font-extrabold text-xs uppercase tracking-wider mb-2">
+              Mastery Standard: 70%+ Required
+            </div>
+            <h2 className="font-heading font-extrabold text-2xl text-slate-800 dark:text-slate-100">
+              Lesson Mastery Not Met
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-sm mt-2 max-w-md mx-auto leading-relaxed">
+              You had <span className="font-extrabold text-rose-600">{failedQuestionIndices.size} incorrect</span> out of {lesson.quiz.length} questions ({Math.round((failedQuestionIndices.size / lesson.quiz.length) * 100)}% error rate).
+            </p>
+            <div className="my-6 p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-xs text-rose-900 dark:text-rose-200 max-w-md mx-auto text-left leading-relaxed">
+              💡 <strong>AdQuest Mastery Rule:</strong> Performance media buying requires high precision. When more than 30% of answers are missed after 2 attempts, you must review the study guide and restart this lesson from scratch to ensure solid fundamentals!
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+              <button
+                onClick={handleRestartFromScratch}
+                className="py-3.5 px-8 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-heading font-extrabold text-sm shadow-lg shadow-indigo-600/25 flex items-center justify-center gap-2"
+              >
+                <RotateCcw size={16} />
+                <span>Restart Lesson from Scratch</span>
+              </button>
+
+              <Link
+                href="/map"
+                className="py-3.5 px-6 rounded-2xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-700 dark:text-slate-200 font-heading font-bold text-sm text-center"
+              >
+                Return to Map
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mode: RESULT (Mastery Passed) */}
       {mode === 'result' && (
         <div className="space-y-6 text-center animate-fadeIn">
           <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-card border border-slate-200 dark:border-slate-700">
             <PixieMascot mood="celebrating" size={84} className="mx-auto mb-4" />
             <h2 className="font-heading font-extrabold text-2xl text-slate-800 dark:text-slate-100">
-              Lesson Complete!
+              Lesson Mastered!
             </h2>
             <p className="text-slate-500 text-sm mt-1">
-              You scored {score} / {lesson.quiz.length} on the quiz
+              You scored {score} / {lesson.quiz.length} on the quiz (passed the 70%+ mastery standard)
             </p>
 
             {/* Rewards Card */}
@@ -758,11 +821,7 @@ export default function LessonPlayerPage() {
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
-                onClick={() => {
-                  setMode('learn');
-                  setCurrentBlockIndex(0);
-                  setScore(0);
-                }}
+                onClick={handleRestartFromScratch}
                 className="py-3 px-5 rounded-2xl border border-slate-300 dark:border-slate-700 text-sm font-semibold flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800"
               >
                 <RotateCcw size={16} />
@@ -785,9 +844,9 @@ export default function LessonPlayerPage() {
                   {lesson.next?.startsWith('sim-')
                     ? 'Next: Practice Simulator ➔'
                     : nextConcept
-                    ? `Next: Unit ${nextConcept.unitNumber} Visual Guide ➔`
+                    ? `Next: Unit ${nextConcept.unitNumber} ➔`
                     : lesson.next
-                    ? 'Next Unit Visual Guide ➔'
+                    ? 'Next Unit ➔'
                     : 'Complete Tier ➔'}
                 </span>
                 <ArrowRight size={18} />

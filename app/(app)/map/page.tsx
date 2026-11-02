@@ -7,7 +7,6 @@ import { useGame } from '@/components/game/GameContext';
 import { createClient } from '@/lib/supabase/client';
 import { PixieMascot } from '@/components/ui/PixieMascot';
 import { RealLabModal, RealLabScenario } from '@/components/map/RealLabModal';
-import { TeachingConceptViewer } from '@/components/map/TeachingConceptViewer';
 import { ALL_TEACHING_CONCEPTS, TeachingConcept } from '@/lib/content/teaching-concepts';
 import {
   Lock,
@@ -16,9 +15,11 @@ import {
   Shield,
   Star,
   Camera,
-  BookOpen,
   Award,
   Sparkles,
+  CheckCircle2,
+  ArrowRight,
+  TrendingUp,
 } from 'lucide-react';
 
 export default function WorldMapPage() {
@@ -27,7 +28,6 @@ export default function WorldMapPage() {
   const [completedSlugs, setCompletedSlugs] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [selectedLab, setSelectedLab] = useState<RealLabScenario | null>(null);
-  const [selectedConcept, setSelectedConcept] = useState<TeachingConcept | null>(null);
   const [activeTierTab, setActiveTierTab] = useState<'rookie' | 'operator' | 'strategist'>('rookie');
   const supabase = createClient();
 
@@ -82,14 +82,14 @@ export default function WorldMapPage() {
   const rookieLessons = [
     { slug: 'meta-rookie-01-what-is-performance-marketing', title: '1. What is Performance Marketing?' },
     { slug: 'meta-rookie-02-meet-the-meta-world', title: '2. Meet the Meta World' },
-    { slug: 'meta-rookie-03-campaign-adset-ad-structure', title: '3. 3-Level Structure' },
-    { slug: 'meta-rookie-04-campaign-objectives', title: '4. Campaign Objectives' },
-    { slug: 'meta-rookie-05-metrics-101', title: '5. Metrics 101' },
-    { slug: 'meta-rookie-06-audiences-basics', title: '6. Audiences Basics' },
-    { slug: 'meta-rookie-07-budget-basics', title: '7. Budget Basics & Learning' },
-    { slug: 'meta-rookie-08-creative-basics', title: '8. Creative Basics' },
-    { slug: 'meta-rookie-09-how-ad-auction-works', title: '9. How the Ad Auction Works' },
-    { slug: 'meta-rookie-10-launch-checklist-first-results', title: '10. Launch Checklist' },
+    { slug: 'meta-rookie-03-campaign-adset-ad-structure', title: '3. 3-Level Campaign Structure' },
+    { slug: 'meta-rookie-04-campaign-objectives', title: '4. The 6 Campaign Objectives' },
+    { slug: 'meta-rookie-05-metrics-101', title: '5. Metrics 101: ROAS, CPA & CTR' },
+    { slug: 'meta-rookie-06-audiences-basics', title: '6. Audience Targeting Basics' },
+    { slug: 'meta-rookie-07-budget-basics', title: '7. Budget Basics & Learning Phase' },
+    { slug: 'meta-rookie-08-creative-basics', title: '8. Creative Anatomy & 3s Hook' },
+    { slug: 'meta-rookie-09-how-ad-auction-works', title: '9. Total Value Ad Auction' },
+    { slug: 'meta-rookie-10-launch-checklist-first-results', title: '10. Launch Day Pre-Flight Checklist' },
   ];
 
   const rookieSims = [
@@ -195,23 +195,37 @@ export default function WorldMapPage() {
     },
   };
 
+  // STRICT TIER GATING LOGIC:
+  // Tier 2 (Operator) requires conquering Boss 1 (Launch Day Pre-Flight)
+  const isOperatorTierUnlocked = completedSlugs.has('boss-rookie-launch-day');
+  // Tier 3 (Strategist) requires conquering Boss 2 (Expensive Leads Autopsy)
+  const isStrategistTierUnlocked = completedSlugs.has('boss-operator-expensive-leads');
+
+  // Progressive unlocking within Tier 1: Rookie
   const isRookieLessonUnlocked = (idx: number) => {
     if (idx === 0) return true;
     return completedSlugs.has(rookieLessons[idx - 1].slug);
   };
-  const areRookieSimsUnlocked = completedSlugs.has(rookieLessons[rookieLessons.length - 1].slug) || completedSlugs.has('meta-rookie-01-what-is-performance-marketing');
+  const areRookieSimsUnlocked = completedSlugs.has(rookieLessons[rookieLessons.length - 1].slug);
+  const isRookieBossUnlocked = completedSlugs.has('sim-rookie-02-fix-narrow-audience') || completedSlugs.has('real-lab-rookie');
 
+  // Progressive unlocking within Tier 2: Operator
   const isOperatorLessonUnlocked = (idx: number) => {
+    if (!isOperatorTierUnlocked) return false;
     if (idx === 0) return true;
     return completedSlugs.has(operatorLessons[idx - 1].slug);
   };
-  const areOperatorSimsUnlocked = completedSlugs.has(operatorLessons[operatorLessons.length - 1].slug) || completedSlugs.has('meta-operator-01-custom-audiences');
+  const areOperatorSimsUnlocked = isOperatorTierUnlocked && completedSlugs.has(operatorLessons[operatorLessons.length - 1].slug);
+  const isOperatorBossUnlocked = isOperatorTierUnlocked && (completedSlugs.has('sim-operator-03-tracking-fix') || completedSlugs.has('real-lab-operator'));
 
+  // Progressive unlocking within Tier 3: Strategist
   const isStrategistLessonUnlocked = (idx: number) => {
+    if (!isStrategistTierUnlocked) return false;
     if (idx === 0) return true;
     return completedSlugs.has(strategistLessons[idx - 1].slug);
   };
-  const areStrategistSimsUnlocked = completedSlugs.has(strategistLessons[strategistLessons.length - 1].slug) || completedSlugs.has('meta-strategist-01-funnel-architecture');
+  const areStrategistSimsUnlocked = isStrategistTierUnlocked && completedSlugs.has(strategistLessons[strategistLessons.length - 1].slug);
+  const isStrategistBossUnlocked = isStrategistTierUnlocked && (completedSlugs.has('sim-strategist-02-account-audit') || completedSlugs.has('real-lab-strategist'));
 
   const handleLabCompleted = (labId: string) => {
     setCompletedSlugs((prev) => {
@@ -221,13 +235,8 @@ export default function WorldMapPage() {
     });
   };
 
-  const handleProceedToLesson = (lessonSlug: string) => {
-    setSelectedConcept(null);
-    router.push(`/lesson/${lessonSlug}`);
-  };
-
-  // Helper to render dual column units tree for any tier
-  const renderTierUnitsTree = (
+  // Helper to render the SINGLE LINEAR PROGRESSION FLOW for any tier
+  const renderSingleFlowTierTree = (
     lessons: { slug: string; title: string }[],
     isUnlockedFn: (idx: number) => boolean,
     sims: { slug: string; title: string; target: string }[],
@@ -235,35 +244,40 @@ export default function WorldMapPage() {
     labKey: 'real-lab-rookie' | 'real-lab-operator' | 'real-lab-strategist',
     bossSlug: string,
     bossTitle: string,
-    tierName: string
+    tierName: string,
+    isBossUnlocked: boolean
   ) => {
+    const completedLessonsCount = lessons.filter((l) => completedSlugs.has(l.slug)).length;
+    const progressPercent = Math.round((completedLessonsCount / lessons.length) * 100);
+
     return (
       <div className="space-y-6">
-        {/* Dual Flow Column Header */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-2 border-b border-slate-200 dark:border-slate-800">
-          <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
-            <BookOpen size={20} />
-            <h3 className="font-heading font-extrabold text-lg">
-              Left: 📚 Visual Teaching Map
-            </h3>
-            <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-700">
-              Visual Concept
+        {/* Tier Progress Summary Banner */}
+        <div className="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between shadow-sm">
+          <div className="flex items-center gap-3">
+            <span className="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 font-heading font-extrabold text-sm flex items-center justify-center">
+              {progressPercent}%
             </span>
+            <div>
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 block">
+                {tierName} Progress
+              </span>
+              <span className="font-heading font-bold text-sm text-slate-800 dark:text-slate-100">
+                {completedLessonsCount} of {lessons.length} Units Mastered
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
-            <Sparkles size={20} />
-            <h3 className="font-heading font-extrabold text-lg">
-              Right: 🎯 Practice & Quiz Arena
-            </h3>
-            <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700">
-              Answer & Win XP
-            </span>
+          <div className="w-32 sm:w-48 bg-slate-100 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden hidden sm:block">
+            <div
+              className="bg-indigo-600 h-full rounded-full transition-all duration-500 ease-out"
+              style={{ width: `${progressPercent}%` }}
+            />
           </div>
         </div>
 
-        {/* Paired Interactive Units */}
-        <div className="space-y-4">
+        {/* COMBINED LINEAR ROADMAP (Single Flow: Visual Guide + Lesson + Quiz) */}
+        <div className="space-y-3.5">
           {lessons.map((l, idx) => {
             const isCompleted = completedSlugs.has(l.slug);
             const isUnlocked = isUnlockedFn(idx);
@@ -272,89 +286,77 @@ export default function WorldMapPage() {
             return (
               <div
                 key={l.slug}
-                className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-3xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm hover:shadow-md transition-all items-center"
+                className={`p-4 sm:p-5 rounded-3xl border transition-all ${
+                  isCompleted
+                    ? 'bg-white dark:bg-slate-800/90 border-emerald-200 dark:border-emerald-900/60 shadow-sm'
+                    : isUnlocked
+                    ? 'bg-white dark:bg-slate-800 border-indigo-300 dark:border-indigo-700/80 shadow-md ring-2 ring-indigo-500/10'
+                    : 'bg-slate-50 dark:bg-slate-900/40 border-slate-200 dark:border-slate-800 opacity-60'
+                } flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4`}
               >
-                {/* LEFT SIDE: Teaching Concept Node */}
-                <div className="p-3.5 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <span className="w-9 h-9 rounded-xl bg-indigo-600 text-white font-heading font-extrabold text-xs flex items-center justify-center shrink-0 shadow-sm">
-                      T{idx + 1}
-                    </span>
-                    <div className="min-w-0">
-                      <span className="text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 block">
-                        Visual Guide #{idx + 1}
-                      </span>
-                      <h4 className="font-heading font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-100 truncate">
-                        {concept?.title || l.title}
-                      </h4>
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => concept && setSelectedConcept(concept)}
-                    className="py-1.5 px-3 rounded-xl bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 font-heading font-bold text-xs border border-indigo-200 dark:border-slate-700 hover:bg-indigo-50 shadow-xs flex items-center gap-1 shrink-0 transition-colors"
+                {/* Left Side: Unit Index, Title & Concept Highlights */}
+                <div className="flex items-start sm:items-center gap-3.5 min-w-0">
+                  <span
+                    className={`w-11 h-11 rounded-2xl font-heading font-extrabold text-sm flex items-center justify-center shrink-0 shadow-sm ${
+                      isCompleted
+                        ? 'bg-emerald-500 text-white'
+                        : isUnlocked
+                        ? 'bg-indigo-600 text-white animate-pulse'
+                        : 'bg-slate-200 dark:bg-slate-700 text-slate-400'
+                    }`}
                   >
-                    <BookOpen size={13} />
-                    <span>Learn 📖</span>
-                  </button>
+                    {isCompleted ? '✓' : `U${idx + 1}`}
+                  </span>
+
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+                        Unit {idx + 1}
+                      </span>
+                      <span className="text-[10px] font-bold text-slate-400">•</span>
+                      <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400">
+                        Study Guide & Quiz
+                      </span>
+                    </div>
+
+                    <h4 className="font-heading font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 truncate mt-0.5">
+                      {l.title.replace(/^\d+\.\s*/, '')}
+                    </h4>
+
+                    <p className="text-xs text-slate-500 dark:text-slate-400 truncate mt-0.5 max-w-md">
+                      {concept?.subtitle || 'Interactive Strategy & Performance Architecture'}
+                    </p>
+                  </div>
                 </div>
 
-                {/* RIGHT SIDE: Lesson & Quiz Challenge Node */}
-                <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3 min-w-0">
-                    {isUnlocked ? (
-                      <Link
-                        href={`/lesson/${l.slug}`}
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-sm transition-all active:scale-95 ${
-                          isCompleted
-                            ? 'bg-emerald-500 text-white ring-2 ring-emerald-200'
-                            : 'bg-indigo-600 text-white hover:bg-indigo-700 animate-pulse'
-                        }`}
-                      >
-                        {isCompleted ? (
-                          <Star size={18} className="fill-amber-300 text-amber-300" />
-                        ) : (
-                          <Play size={16} className="fill-white translate-x-0.5" />
-                        )}
-                      </Link>
-                    ) : (
-                      <div className="w-10 h-10 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-400 flex items-center justify-center shrink-0">
-                        <Lock size={16} />
-                      </div>
-                    )}
-
-                    <div className="min-w-0">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
-                        Lesson {idx + 1} Quiz
-                      </span>
-                      <h4
-                        className={`font-heading font-bold text-xs sm:text-sm truncate ${
-                          isCompleted
-                            ? 'text-emerald-700 dark:text-emerald-400'
-                            : 'text-slate-800 dark:text-slate-100'
-                        }`}
-                      >
-                        {l.title.replace(/^\d+\.\s*/, '')}
-                      </h4>
-                    </div>
-                  </div>
-
+                {/* Right Side: Single Unified Action Button */}
+                <div className="w-full sm:w-auto shrink-0 flex items-center justify-end">
                   {isUnlocked ? (
                     <Link
                       href={`/lesson/${l.slug}`}
-                      className={`py-1.5 px-3 rounded-xl font-heading font-bold text-xs flex items-center gap-1 shrink-0 transition-colors ${
+                      className={`w-full sm:w-auto py-2.5 px-5 rounded-2xl font-heading font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all active:scale-98 ${
                         isCompleted
-                          ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
-                          : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs'
+                          ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
+                          : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25'
                       }`}
                     >
-                      <span>{isCompleted ? 'Review ✓' : 'Start Quiz ➔'}</span>
+                      {isCompleted ? (
+                        <>
+                          <Star size={15} className="fill-emerald-500 text-emerald-500" />
+                          <span>Review Unit ➔</span>
+                        </>
+                      ) : (
+                        <>
+                          <Play size={14} className="fill-white" />
+                          <span>Start Unit ➔</span>
+                        </>
+                      )}
                     </Link>
                   ) : (
-                    <span className="text-[11px] text-slate-400 font-semibold shrink-0">
-                      Locked
-                    </span>
+                    <div className="w-full sm:w-auto py-2.5 px-4 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 text-xs font-bold flex items-center justify-center gap-1.5 border border-slate-200 dark:border-slate-700">
+                      <Lock size={13} />
+                      <span>Locked</span>
+                    </div>
                   )}
                 </div>
               </div>
@@ -362,7 +364,7 @@ export default function WorldMapPage() {
           })}
         </div>
 
-        {/* SIMULATORS, REAL LAB & BOSS BATTLE ROW */}
+        {/* CAPSTONE SIMULATORS, REAL LAB & BOSS BATTLE ROW */}
         <div className="p-6 rounded-3xl bg-gradient-to-br from-amber-50 to-indigo-50/40 dark:from-slate-800 dark:to-slate-900 border-2 border-dashed border-amber-300 dark:border-slate-700 space-y-4">
           <div className="flex items-center justify-between">
             <span className="font-heading font-extrabold text-sm uppercase tracking-wider text-amber-800 dark:text-amber-300 flex items-center gap-2">
@@ -370,26 +372,26 @@ export default function WorldMapPage() {
               <span>Capstone Simulators & Real-World Labs</span>
             </span>
             <span className="text-xs font-bold text-slate-500">
-              Tier Mastery Hub
+              {completedLessonsCount === lessons.length ? 'Unlocked 🎉' : 'Complete All Units to Unlock'}
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {sims.map((sim, sIdx) => {
+            {sims.map((sim) => {
               const isSimPassed = completedSlugs.has(sim.slug);
               return (
                 <Link
                   key={sim.slug}
-                  href={`/sim/${sim.slug}`}
+                  href={areSimsUnlocked ? `/sim/${sim.slug}` : '#'}
                   className={`p-4 rounded-2xl border text-center flex flex-col items-center justify-center transition-all ${
                     isSimPassed
                       ? 'border-emerald-300 bg-white dark:bg-slate-800 text-emerald-800 dark:text-emerald-300 shadow-sm'
                       : areSimsUnlocked
                       ? 'border-amber-300 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:border-amber-500'
-                      : 'border-slate-200 bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
+                      : 'border-slate-200 bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed opacity-60'
                   }`}
                 >
-                  <Flag size={20} className="mb-1 text-amber-500" />
+                  <Flag size={20} className={isSimPassed ? 'text-emerald-500 mb-1' : 'text-amber-500 mb-1'} />
                   <span className="font-heading font-bold text-xs">{sim.title}</span>
                   <span className="text-[10px] text-slate-400 mt-0.5">{sim.target}</span>
                 </Link>
@@ -399,11 +401,14 @@ export default function WorldMapPage() {
             {/* Real Lab */}
             <button
               type="button"
-              onClick={() => setSelectedLab(realLabs[labKey])}
+              disabled={!areSimsUnlocked}
+              onClick={() => areSimsUnlocked && setSelectedLab(realLabs[labKey])}
               className={`p-4 rounded-2xl border text-center flex flex-col items-center justify-center transition-all ${
                 completedSlugs.has(labKey)
                   ? 'border-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200'
-                  : 'border-indigo-300 bg-white dark:bg-slate-800 hover:border-indigo-500 text-slate-800 dark:text-slate-100'
+                  : areSimsUnlocked
+                  ? 'border-indigo-300 bg-white dark:bg-slate-800 hover:border-indigo-500 text-slate-800 dark:text-slate-100'
+                  : 'border-slate-200 bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed opacity-60'
               }`}
             >
               <Camera size={20} className="mb-1 text-indigo-600" />
@@ -414,21 +419,25 @@ export default function WorldMapPage() {
             </button>
           </div>
 
-          {/* Boss Battle CTA */}
+          {/* Boss Battle Action Button */}
           <div className="pt-2">
             <Link
-              href={`/boss/${bossSlug}`}
+              href={isBossUnlocked ? `/boss/${bossSlug}` : '#'}
               className={`w-full py-4 px-6 rounded-2xl text-white font-heading font-extrabold text-sm sm:text-base shadow-xl flex items-center justify-center gap-3 transition-all ${
                 completedSlugs.has(bossSlug)
                   ? 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20'
-                  : 'bg-gradient-to-r from-rose-600 to-indigo-600 hover:from-rose-700 hover:to-indigo-700 shadow-rose-500/20 animate-pulse'
+                  : isBossUnlocked
+                  ? 'bg-gradient-to-r from-rose-600 to-indigo-600 hover:from-rose-700 hover:to-indigo-700 shadow-rose-500/20 animate-pulse'
+                  : 'bg-slate-400 dark:bg-slate-700 cursor-not-allowed opacity-60'
               }`}
             >
               <Shield size={24} className="fill-white" />
               <span>
                 {completedSlugs.has(bossSlug)
-                  ? `${bossTitle} Conquered! Replay Battle or View Certificate 🏆`
-                  : `Conquer ${bossTitle} & Claim Your ${tierName} E-Certificate ⚔️`}
+                  ? `${bossTitle} Conquered! View Certificate 🏆`
+                  : isBossUnlocked
+                  ? `Conquer ${bossTitle} & Claim Your ${tierName} E-Certificate ⚔️`
+                  : `Complete All Simulators to Unlock ${bossTitle} 🔒`}
               </span>
               <Award size={20} />
             </Link>
@@ -444,19 +453,19 @@ export default function WorldMapPage() {
       <div className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-amber-600 rounded-3xl p-6 text-white shadow-card flex items-center justify-between">
         <div>
           <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wider block">
-            Campaign Journey
+            Campaign Roadmap
           </span>
           <h2 className="font-heading font-extrabold text-2xl sm:text-3xl mt-0.5">
-            Meta Ads Universe
+            Meta Ads Learning Pathway
           </h2>
           <p className="text-xs sm:text-sm text-indigo-100 mt-1 max-w-md">
-            The dual learning path: Master concepts visually on the left ➔ test your skills in lessons, real-world labs & boss battles on the right!
+            Complete each unit's visual study guide & quiz step-by-step. Clear all units, pass the simulators, and defeat the Boss to unlock the next Tier!
           </p>
         </div>
         <PixieMascot mood="happy" size={76} className="shrink-0 hidden sm:block" />
       </div>
 
-      {/* Tier Switcher Tabs */}
+      {/* Tier Switcher Tabs (With Lock Indicators) */}
       <div className="grid grid-cols-3 gap-2 p-1.5 bg-slate-100 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
         <button
           onClick={() => setActiveTierTab('rookie')}
@@ -467,6 +476,9 @@ export default function WorldMapPage() {
           }`}
         >
           <span>Tier 1: Rookie</span>
+          {completedSlugs.has('boss-rookie-launch-day') && (
+            <span className="text-emerald-500 font-bold text-xs">✓</span>
+          )}
         </button>
 
         <button
@@ -478,6 +490,10 @@ export default function WorldMapPage() {
           }`}
         >
           <span>Tier 2: Operator</span>
+          {!isOperatorTierUnlocked && <Lock size={13} className="text-slate-400" />}
+          {completedSlugs.has('boss-operator-expensive-leads') && (
+            <span className="text-emerald-500 font-bold text-xs">✓</span>
+          )}
         </button>
 
         <button
@@ -489,12 +505,16 @@ export default function WorldMapPage() {
           }`}
         >
           <span>Tier 3: Strategist</span>
+          {!isStrategistTierUnlocked && <Lock size={13} className="text-slate-400" />}
+          {completedSlugs.has('boss-strategist-scale-or-kill') && (
+            <span className="text-emerald-500 font-bold text-xs">✓</span>
+          )}
         </button>
       </div>
 
-      {/* TIER 1: ROOKIE FULL TREE */}
+      {/* TIER 1: ROOKIE (Always available as starting point) */}
       {activeTierTab === 'rookie' &&
-        renderTierUnitsTree(
+        renderSingleFlowTierTree(
           rookieLessons,
           isRookieLessonUnlocked,
           rookieSims,
@@ -502,34 +522,111 @@ export default function WorldMapPage() {
           'real-lab-rookie',
           'boss-rookie-launch-day',
           'Boss 1: Launch Day Pre-Flight',
-          'Tier 1 (Rookie)'
+          'Tier 1 (Rookie)',
+          isRookieBossUnlocked
         )}
 
-      {/* TIER 2: OPERATOR FULL TREE */}
-      {activeTierTab === 'operator' &&
-        renderTierUnitsTree(
-          operatorLessons,
-          isOperatorLessonUnlocked,
-          operatorSims,
-          areOperatorSimsUnlocked,
-          'real-lab-operator',
-          'boss-operator-expensive-leads',
-          'Boss 2: Expensive Leads Autopsy',
-          'Tier 2 (Operator)'
-        )}
+      {/* TIER 2: OPERATOR (Strictly Locked until Boss 1 is conquered) */}
+      {activeTierTab === 'operator' && (
+        <>
+          {!isOperatorTierUnlocked ? (
+            <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-slate-800 border-2 border-dashed border-amber-300 dark:border-amber-800/60 text-center space-y-5 animate-fadeIn">
+              <div className="w-16 h-16 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 mx-auto flex items-center justify-center shadow-inner">
+                <Lock size={32} />
+              </div>
+              <div>
+                <span className="text-xs font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                  Locked Stage
+                </span>
+                <h3 className="font-heading font-extrabold text-2xl text-slate-800 dark:text-slate-100 mt-1">
+                  Tier 2: Operator is Locked
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mt-2 leading-relaxed">
+                  You must complete all 10 Rookie lessons and defeat <strong>Boss 1: Launch Day Pre-Flight</strong> to unlock Custom Audiences, Lookalikes, Meta Pixel & CAPI tracking!
+                </p>
+              </div>
 
-      {/* TIER 3: STRATEGIST FULL TREE */}
-      {activeTierTab === 'strategist' &&
-        renderTierUnitsTree(
-          strategistLessons,
-          isStrategistLessonUnlocked,
-          strategistSims,
-          areStrategistSimsUnlocked,
-          'real-lab-strategist',
-          'boss-strategist-scale-or-kill',
-          'Boss 3: Scale or Kill Decision',
-          'Tier 3 (Strategist)'
-        )}
+              <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                <button
+                  onClick={() => setActiveTierTab('rookie')}
+                  className="py-3.5 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-heading font-bold text-sm shadow-md"
+                >
+                  ← Return to Tier 1: Rookie Pathway
+                </button>
+                <Link
+                  href="/boss/boss-rookie-launch-day"
+                  className="py-3.5 px-6 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-heading font-bold text-sm shadow-md flex items-center justify-center gap-2"
+                >
+                  <span>Battle Boss 1 (Launch Day) ⚔️</span>
+                </Link>
+              </div>
+            </div>
+          ) : (
+            renderSingleFlowTierTree(
+              operatorLessons,
+              isOperatorLessonUnlocked,
+              operatorSims,
+              areOperatorSimsUnlocked,
+              'real-lab-operator',
+              'boss-operator-expensive-leads',
+              'Boss 2: Expensive Leads Autopsy',
+              'Tier 2 (Operator)',
+              isOperatorBossUnlocked
+            )
+          )}
+        </>
+      )}
+
+      {/* TIER 3: STRATEGIST (Strictly Locked until Boss 2 is conquered) */}
+      {activeTierTab === 'strategist' && (
+        <>
+          {!isStrategistTierUnlocked ? (
+            <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-slate-800 border-2 border-dashed border-purple-300 dark:border-purple-800/60 text-center space-y-5 animate-fadeIn">
+              <div className="w-16 h-16 rounded-full bg-purple-100 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 mx-auto flex items-center justify-center shadow-inner">
+                <Lock size={32} />
+              </div>
+              <div>
+                <span className="text-xs font-extrabold uppercase tracking-wider text-purple-600 dark:text-purple-400">
+                  Locked Stage
+                </span>
+                <h3 className="font-heading font-extrabold text-2xl text-slate-800 dark:text-slate-100 mt-1">
+                  Tier 3: Strategist is Locked
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mt-2 leading-relaxed">
+                  You must complete Tier 2: Operator and defeat <strong>Boss 2: Expensive Leads Autopsy</strong> to unlock Full-Funnel Architecture, Safe 20% Scaling & Advantage+ Shopping!
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                <button
+                  onClick={() => setActiveTierTab('operator')}
+                  className="py-3.5 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-heading font-bold text-sm shadow-md"
+                >
+                  ← Return to Tier 2: Operator
+                </button>
+                <Link
+                  href="/boss/boss-operator-expensive-leads"
+                  className="py-3.5 px-6 rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-heading font-bold text-sm shadow-md flex items-center justify-center gap-2"
+                >
+                  <span>Battle Boss 2 (Expensive Leads) ⚔️</span>
+                </Link>
+              </div>
+            </div>
+          ) : (
+            renderSingleFlowTierTree(
+              strategistLessons,
+              isStrategistLessonUnlocked,
+              strategistSims,
+              areStrategistSimsUnlocked,
+              'real-lab-strategist',
+              'boss-strategist-scale-or-kill',
+              'Boss 3: Scale or Kill Decision',
+              'Tier 3 (Strategist)',
+              isStrategistBossUnlocked
+            )
+          )}
+        </>
+      )}
 
       {/* Real Lab Modal */}
       {selectedLab && (
@@ -538,16 +635,6 @@ export default function WorldMapPage() {
           isOpen={!!selectedLab}
           onClose={() => setSelectedLab(null)}
           onComplete={handleLabCompleted}
-        />
-      )}
-
-      {/* Teaching Concept Viewer */}
-      {selectedConcept && (
-        <TeachingConceptViewer
-          concept={selectedConcept}
-          isOpen={!!selectedConcept}
-          onClose={() => setSelectedConcept(null)}
-          onProceedToLesson={handleProceedToLesson}
         />
       )}
     </div>

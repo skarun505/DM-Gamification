@@ -41,10 +41,11 @@ export function getWorlds(): WorldMap[] {
 }
 
 export function getLessonBySlug(slug: string): Lesson | null {
+  const normalizedSlug = decodeURIComponent(slug).toLowerCase().trim().replace(/[\s_]+/g, '-');
   // Search meta tiers: rookie, operator, strategist
   const tiers = ['rookie', 'operator', 'strategist'];
   for (const tier of tiers) {
-    const filePath = path.join(CONTENT_DIR, 'meta', tier, `${slug}.json`);
+    const filePath = path.join(CONTENT_DIR, 'meta', tier, `${normalizedSlug}.json`);
     if (fs.existsSync(filePath)) {
       const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
       return LessonSchema.parse(data);
@@ -84,13 +85,15 @@ export function getDailyQuestions(): any[] {
 }
 
 export function getSimScenario(slug: string): SimScenario | null {
-  const filePath = path.join(CONTENT_DIR, 'sim', `${slug}.json`);
+  const normalizedSlug = decodeURIComponent(slug).toLowerCase().trim().replace(/[\s_]+/g, '-');
+  const filePath = path.join(CONTENT_DIR, 'sim', `${normalizedSlug}.json`);
   if (!fs.existsSync(filePath)) return null;
   return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 }
 
 export function getBossBattle(slug: string): BossBattle | null {
-  const filePath = path.join(CONTENT_DIR, 'boss', `${slug}.json`);
+  const normalizedSlug = decodeURIComponent(slug).toLowerCase().trim().replace(/[\s_]+/g, '-');
+  const filePath = path.join(CONTENT_DIR, 'boss', `${normalizedSlug}.json`);
   if (!fs.existsSync(filePath)) return null;
   const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   return BossBattleSchema.parse(data);

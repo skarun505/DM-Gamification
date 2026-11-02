@@ -202,3 +202,4 @@ export function FormulaCalculatorModal({ isOpen, onClose }: FormulaCalculatorMod
     </div>
   );
 }
+

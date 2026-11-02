@@ -38,7 +38,8 @@ import {
 
 export default function SimPage() {
   const params = useParams();
-  const slug = params?.slug as string;
+  const rawSlug = (params?.slug as string) || '';
+  const slug = rawSlug ? decodeURIComponent(rawSlug).toLowerCase().trim().replace(/[\s_]+/g, '-') : '';
   const router = useRouter();
   const { profile, awardLocalXP, showBadgeToast } = useGame();
   const supabase = createClient();

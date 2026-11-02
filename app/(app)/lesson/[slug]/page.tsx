@@ -33,7 +33,8 @@ import { saveMistakeToNotebook } from '@/lib/storage/mistake-notebook';
 
 export default function LessonPlayerPage() {
   const params = useParams();
-  const slug = params?.slug as string;
+  const rawSlug = (params?.slug as string) || '';
+  const slug = rawSlug ? decodeURIComponent(rawSlug).toLowerCase().trim().replace(/[\s_]+/g, '-') : '';
   const router = useRouter();
   const { profile, awardLocalXP, showBadgeToast } = useGame();
   const supabase = createClient();
@@ -77,9 +78,11 @@ export default function LessonPlayerPage() {
     }
   }, [currentQuizIndex, lesson]);
 
-  const handleMoveOrderItem = (fromIndex: number, toIndex: number) => {
-    if (isAnswerSubmitted || toIndex < 0 || toIndex >= userOrder.length) return;
-    const next = [...userOrder];
+  const handleMoveOrderItem = (fromIndex: number, toIndex: number, baseOrder?: number[]) => {
+    if (isAnswerSubmitted) return;
+    const current = userOrder.length > 0 ? userOrder : (baseOrder || []);
+    if (toIndex < 0 || toIndex >= current.length) return;
+    const next = [...current];
     const [moved] = next.splice(fromIndex, 1);
     next.splice(toIndex, 0, moved);
     setUserOrder(next);
@@ -166,11 +169,16 @@ export default function LessonPlayerPage() {
     if (currentQuestion.type === 'tf') {
       correct = selectedAnswer === currentQuestion.answer;
     } else if (currentQuestion.type === 'order') {
+      const itemsList = currentQuestion.items || [];
+      const activeOrder =
+        userOrder.length === itemsList.length
+          ? userOrder
+          : Array.from({ length: itemsList.length }, (_, i) => i).reverse();
       const targetAns = currentQuestion.answer as number[];
       correct =
-        Array.isArray(userOrder) &&
-        userOrder.length === targetAns.length &&
-        userOrder.every((val, idx) => val === targetAns[idx]);
+        Array.isArray(activeOrder) &&
+        activeOrder.length === targetAns.length &&
+        activeOrder.every((val, idx) => val === targetAns[idx]);
     } else {
       correct = selectedAnswer === currentQuestion.answer;
     }
@@ -627,69 +635,77 @@ export default function LessonPlayerPage() {
             )}
 
             {/* Order / Sequence Question */}
-            {currentQuestion.type === 'order' && currentQuestion.items && (
-              <div className="space-y-3">
-                <p className="text-xs text-slate-500 font-semibold mb-2">
-                  Use the arrows (↑ / ↓) to arrange the steps into the correct chronological order from first to last:
-                </p>
-                {userOrder.map((itemOriginalIndex, displayPos) => {
-                  const itemText = currentQuestion.items![itemOriginalIndex];
-                  let cardStyle =
-                    'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800';
+            {currentQuestion.type === 'order' && currentQuestion.items && (() => {
+              const itemsList = currentQuestion.items || [];
+              const activeOrder =
+                userOrder.length === itemsList.length
+                  ? userOrder
+                  : Array.from({ length: itemsList.length }, (_, i) => i).reverse();
 
-                  if (isAnswerSubmitted) {
-                    const correctAtPos =
-                      (currentQuestion.answer as number[])[displayPos] === itemOriginalIndex;
-                    if (correctAtPos) {
-                      cardStyle =
-                        'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200';
-                    } else {
-                      cardStyle =
-                        'border-rose-400 bg-rose-50 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200';
+              return (
+                <div className="space-y-3">
+                  <p className="text-xs text-slate-500 font-semibold mb-2">
+                    Use the arrows (↑ / ↓) to arrange the steps into the correct chronological order from first to last:
+                  </p>
+                  {activeOrder.map((itemOriginalIndex, displayPos) => {
+                    const itemText = itemsList[itemOriginalIndex];
+                    let cardStyle =
+                      'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800';
+
+                    if (isAnswerSubmitted) {
+                      const targetAns = (currentQuestion.answer as number[]) || [];
+                      const correctAtPos = targetAns[displayPos] === itemOriginalIndex;
+                      if (correctAtPos) {
+                        cardStyle =
+                          'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200';
+                      } else {
+                        cardStyle =
+                          'border-rose-400 bg-rose-50 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200';
+                      }
                     }
-                  }
 
-                  return (
-                    <div
-                      key={itemOriginalIndex}
-                      className={`flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border-2 transition-all ${cardStyle}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <span className="w-7 h-7 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-heading font-extrabold text-xs flex items-center justify-center shrink-0">
-                          {displayPos + 1}
-                        </span>
-                        <span className="text-sm sm:text-base font-medium text-slate-800 dark:text-slate-100">
-                          {itemText}
-                        </span>
-                      </div>
-
-                      {!isAnswerSubmitted && (
-                        <div className="flex items-center gap-1.5 shrink-0 ml-2">
-                          <button
-                            type="button"
-                            disabled={displayPos === 0}
-                            onClick={() => handleMoveOrderItem(displayPos, displayPos - 1)}
-                            className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-slate-600 dark:text-slate-200 hover:text-indigo-600 disabled:opacity-25 flex items-center justify-center transition-colors active:scale-95"
-                            title="Move up"
-                          >
-                            <ArrowUp size={16} />
-                          </button>
-                          <button
-                            type="button"
-                            disabled={displayPos === userOrder.length - 1}
-                            onClick={() => handleMoveOrderItem(displayPos, displayPos + 1)}
-                            className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-slate-600 dark:text-slate-200 hover:text-indigo-600 disabled:opacity-25 flex items-center justify-center transition-colors active:scale-95"
-                            title="Move down"
-                          >
-                            <ArrowDown size={16} />
-                          </button>
+                    return (
+                      <div
+                        key={itemOriginalIndex}
+                        className={`flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border-2 transition-all ${cardStyle}`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="w-7 h-7 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-heading font-extrabold text-xs flex items-center justify-center shrink-0">
+                            {displayPos + 1}
+                          </span>
+                          <span className="text-sm sm:text-base font-medium text-slate-800 dark:text-slate-100">
+                            {itemText}
+                          </span>
                         </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+
+                        {!isAnswerSubmitted && (
+                          <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                            <button
+                              type="button"
+                              disabled={displayPos === 0}
+                              onClick={() => handleMoveOrderItem(displayPos, displayPos - 1, activeOrder)}
+                              className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-slate-600 dark:text-slate-200 hover:text-indigo-600 disabled:opacity-25 flex items-center justify-center transition-colors active:scale-95"
+                              title="Move up"
+                            >
+                              <ArrowUp size={16} />
+                            </button>
+                            <button
+                              type="button"
+                              disabled={displayPos === activeOrder.length - 1}
+                              onClick={() => handleMoveOrderItem(displayPos, displayPos + 1, activeOrder)}
+                              className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-slate-600 dark:text-slate-200 hover:text-indigo-600 disabled:opacity-25 flex items-center justify-center transition-colors active:scale-95"
+                              title="Move down"
+                            >
+                              <ArrowDown size={16} />
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })()}
 
             {/* Attempt 2 Chance Banner */}
             {attemptCount === 2 && !isAnswerSubmitted && (
@@ -750,7 +766,7 @@ export default function LessonPlayerPage() {
           <div className="flex justify-end">
             {!isAnswerSubmitted ? (
               <button
-                disabled={selectedAnswer === null}
+                disabled={currentQuestion.type === 'order' ? false : selectedAnswer === null}
                 onClick={handleQuizSubmit}
                 className="py-3 px-8 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 text-white font-heading font-bold text-sm shadow-md transition-all active:scale-98"
               >

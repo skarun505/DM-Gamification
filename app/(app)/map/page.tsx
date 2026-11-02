@@ -7,7 +7,8 @@ import { useGame } from '@/components/game/GameContext';
 import { createClient } from '@/lib/supabase/client';
 import { PixieMascot } from '@/components/ui/PixieMascot';
 import { RealLabModal, RealLabScenario } from '@/components/map/RealLabModal';
-import { TeachingConceptViewer, TeachingConcept } from '@/components/map/TeachingConceptViewer';
+import { TeachingConceptViewer } from '@/components/map/TeachingConceptViewer';
+import { ALL_TEACHING_CONCEPTS, TeachingConcept } from '@/lib/content/teaching-concepts';
 import {
   Lock,
   CheckCircle2,
@@ -80,128 +81,7 @@ export default function WorldMapPage() {
   }, [profile?.id]);
 
   // Teaching concepts bank
-  const teachingConcepts: Record<string, TeachingConcept> = {
-    'meta-rookie-01-what-is-performance-marketing': {
-      id: 'tc-r-01',
-      lessonSlug: 'meta-rookie-01-what-is-performance-marketing',
-      unitNumber: 1,
-      title: 'The Marketing Funnel & Paid Ads Power',
-      subtitle: 'Chronological customer journey & paid vs organic reach',
-      tier: 'rookie',
-      keyTakeaway: 'Performance marketing tracks exact measurable returns. Funnel stages always flow chronologically: Ad View ➔ Link Click ➔ Form Submission ➔ Customer Purchase.',
-      visualType: 'funnel',
-      visualData: {},
-      quizAnswerTeaser: 'In the quiz, arrange the funnel stages in chronological order: 1. See ad on Instagram ➔ 2. Click to view salon menu ➔ 3. Fill appointment form ➔ 4. Visit salon for service.',
-    },
-    'meta-rookie-02-meet-the-meta-world': {
-      id: 'tc-r-02',
-      lessonSlug: 'meta-rookie-02-meet-the-meta-world',
-      unitNumber: 2,
-      title: 'Meta Ecosystem Command Center',
-      subtitle: 'Business Portfolio vs Ads Manager vs Personal Profiles',
-      tier: 'rookie',
-      keyTakeaway: 'Meta Business Portfolio connects and secures all pixels, pages, Instagram handles, and credit cards in one central hub.',
-      visualType: 'hierarchy',
-      visualData: {},
-      quizAnswerTeaser: 'Always run ads through a Business Portfolio, never by boosting posts on personal profile accounts.',
-    },
-    'meta-rookie-03-campaign-adset-ad-structure': {
-      id: 'tc-r-03',
-      lessonSlug: 'meta-rookie-03-campaign-adset-ad-structure',
-      unitNumber: 3,
-      title: 'The 3-Level Campaign Architecture',
-      subtitle: 'Campaign (Objective) ➔ Ad Set (Audience/Budget) ➔ Ad (Creative)',
-      tier: 'rookie',
-      keyTakeaway: 'Campaign Level = Objective. Ad Set Level = Audience Targeting, Daily Budget & Placements. Ad Level = Video Creative & Copy.',
-      visualType: 'hierarchy',
-      visualData: {},
-      quizAnswerTeaser: 'Remember: Budget and Audience are set at the Ad Set level (or Campaign level with CBO). Creative lives at the Ad level.',
-    },
-    'meta-rookie-04-campaign-objectives': {
-      id: 'tc-r-04',
-      lessonSlug: 'meta-rookie-04-campaign-objectives',
-      unitNumber: 4,
-      title: 'The 6 Core Campaign Objectives',
-      subtitle: 'Matching business goals to Meta algorithm optimization',
-      tier: 'rookie',
-      keyTakeaway: 'Meta gives you exactly what you ask for. If you pick Traffic, you get cheap clickers. If you want inquiries, choose Leads. If you want orders, pick Sales.',
-      visualType: 'hierarchy',
-      visualData: {},
-      quizAnswerTeaser: 'For booking appointments or inquiries, always choose the Leads objective, NOT Traffic.',
-    },
-    'meta-rookie-05-metrics-101': {
-      id: 'tc-r-05',
-      lessonSlug: 'meta-rookie-05-metrics-101',
-      unitNumber: 5,
-      title: 'The Media Buying Math Laboratory',
-      subtitle: 'CTR, CPL, CPC, ROAS and CPM calculations',
-      tier: 'rookie',
-      keyTakeaway: 'CPL = Spend ÷ Leads. CTR = (Clicks ÷ Impressions) × 100. ROAS = Revenue ÷ Spend.',
-      visualType: 'metrics',
-      visualData: {},
-      quizAnswerTeaser: 'If you spend ₹3,000 and get 60 leads, your Cost Per Lead is ₹3,000 / 60 = ₹50 CPL.',
-    },
-    'meta-rookie-06-audiences-basics': {
-      id: 'tc-r-06',
-      lessonSlug: 'meta-rookie-06-audiences-basics',
-      unitNumber: 6,
-      title: 'Audience Targeting & Reach Pools',
-      subtitle: 'Broad vs Interests vs Demographics',
-      tier: 'rookie',
-      keyTakeaway: 'Narrow interest stacking spikes CPM. Modern Meta algorithms perform best with broader audiences where ad creative does the targeting.',
-      visualType: 'audiences',
-      visualData: {},
-      quizAnswerTeaser: 'Hyper-narrow audiences raise auction bids and fatigue rapidly. Keep reach pools balanced.',
-    },
-    'meta-rookie-07-budget-basics': {
-      id: 'tc-r-07',
-      lessonSlug: 'meta-rookie-07-budget-basics',
-      unitNumber: 7,
-      title: 'Budget Pacing & Learning Phase',
-      subtitle: 'The 50 conversion events rule of thumb',
-      tier: 'rookie',
-      keyTakeaway: 'Meta machine learning requires approximately 50 conversion events per ad set within 7 days to exit the Learning Phase.',
-      visualType: 'scaling',
-      visualData: {},
-      quizAnswerTeaser: 'Start daily budget at 3x-5x your target CPL so the algorithm gathers enough daily conversions to optimize.',
-    },
-    'meta-rookie-08-creative-basics': {
-      id: 'tc-r-08',
-      lessonSlug: 'meta-rookie-08-creative-basics',
-      unitNumber: 8,
-      title: 'Creative Hooks & Mobile Formats',
-      subtitle: 'The 3-second hook rule for Instagram Reels',
-      tier: 'rookie',
-      keyTakeaway: 'Users scroll fast. 80% of attention is won or lost in the first 3 seconds. Use vertical 9:16 video formats with bold on-screen subtitles.',
-      visualType: 'funnel',
-      visualData: {},
-      quizAnswerTeaser: 'The 3-second hook is the #1 lever for stopping feed scrolling and reducing CPM.',
-    },
-    'meta-rookie-09-how-ad-auction-works': {
-      id: 'tc-r-09',
-      lessonSlug: 'meta-rookie-09-how-ad-auction-works',
-      unitNumber: 9,
-      title: 'The Total Value Ad Auction',
-      subtitle: 'Total Value = Bid × Estimated Action Rate + Ad Quality',
-      tier: 'rookie',
-      keyTakeaway: 'The highest monetary bidder does NOT always win. High Ad Quality and user relevance give you discounts in the auction.',
-      visualType: 'auction',
-      visualData: {},
-      quizAnswerTeaser: 'Meta rewards high-engagement ads with lower CPMs, allowing smart marketers to beat big spenders.',
-    },
-    'meta-rookie-10-launch-checklist-first-results': {
-      id: 'tc-r-10',
-      lessonSlug: 'meta-rookie-10-launch-checklist-first-results',
-      unitNumber: 10,
-      title: 'Launch Day Checklist & Pre-Flight Protocol',
-      subtitle: 'UTM tracking, pixel verification & early diagnostics',
-      tier: 'rookie',
-      keyTakeaway: 'Never launch blind. Verify pixel events with Meta Pixel Helper, ensure UTM parameters are tagged, and check mobile landing page speed.',
-      visualType: 'funnel',
-      visualData: {},
-      quizAnswerTeaser: 'Check tracking health first before scaling budget. Give campaigns at least 48 hours before judging performance.',
-    },
-  };
+  const teachingConcepts: Record<string, TeachingConcept> = ALL_TEACHING_CONCEPTS;
 
   // Lessons list
   const rookieLessons = [

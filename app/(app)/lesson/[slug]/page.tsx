@@ -23,7 +23,10 @@ import {
   RotateCcw,
   BookOpen,
   MessageCircle,
+  Eye,
 } from 'lucide-react';
+import { ALL_TEACHING_CONCEPTS, TeachingConcept } from '@/lib/content/teaching-concepts';
+import { VisualGuideCard } from '@/components/teaching/VisualGuideCard';
 
 export default function LessonPlayerPage() {
   const params = useParams();
@@ -35,7 +38,8 @@ export default function LessonPlayerPage() {
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
-  const [mode, setMode] = useState<'learn' | 'quiz' | 'result'>('learn');
+  const [mode, setMode] = useState<'visual' | 'learn' | 'quiz' | 'result'>('visual');
+  const [isVisualPeekOpen, setIsVisualPeekOpen] = useState(false);
 
   // Quiz state
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
@@ -78,10 +82,18 @@ export default function LessonPlayerPage() {
     async function load() {
       if (!slug) return;
       try {
+        setLoading(true);
         const res = await fetch(`/api/content/lesson?slug=${slug}`);
         if (res.ok) {
           const data = await res.json();
           setLesson(data);
+          setMode('visual');
+          setCurrentBlockIndex(0);
+          setCurrentQuizIndex(0);
+          setSelectedAnswer(null);
+          setIsAnswerSubmitted(false);
+          setIsVisualPeekOpen(false);
+          setScore(0);
         }
       } catch (err) {
         console.error('Failed to load lesson:', err);
@@ -131,10 +143,28 @@ export default function LessonPlayerPage() {
     );
   }
 
+  const activeConcept: TeachingConcept = (slug && ALL_TEACHING_CONCEPTS[slug]) || {
+    id: `tc-${slug || 'default'}`,
+    lessonSlug: slug || '',
+    unitNumber: 1,
+    title: lesson.title,
+    subtitle: 'Visual Strategy & Practical Framework',
+    tier: 'rookie',
+    keyTakeaway: 'Master the fundamental ad structures, audience rules, and tracking events before allocating live ad spend.',
+    visualType: 'funnel',
+    quizAnswerTeaser: 'Pay close attention to campaign objectives and hierarchy rules in the quiz!',
+  };
+
+  const nextConcept = lesson.next && ALL_TEACHING_CONCEPTS[lesson.next];
+
   const currentBlock: Block = lesson.blocks[currentBlockIndex];
   const progressPercent =
-    mode === 'learn'
-      ? Math.round(((currentBlockIndex + 1) / lesson.blocks.length) * 100)
+    mode === 'visual'
+      ? 20
+      : mode === 'learn'
+      ? 20 + Math.round(((currentBlockIndex + 1) / lesson.blocks.length) * 40)
+      : mode === 'quiz'
+      ? 60 + Math.round(((currentQuizIndex + 1) / lesson.quiz.length) * 40)
       : 100;
 
   const currentQuestion: QuizQuestion | undefined = lesson.quiz[currentQuizIndex];
@@ -262,16 +292,29 @@ export default function LessonPlayerPage() {
             <ArrowLeft size={16} />
             <span>Map</span>
           </Link>
-          <div className="text-center font-heading text-sm text-slate-800 dark:text-slate-100">
+          <div className="text-center font-heading text-sm text-slate-800 dark:text-slate-100 truncate px-2 max-w-[200px] sm:max-w-xs">
             {lesson.title}
           </div>
-          <Link
-            href={`/tutor?lesson=${lesson.slug}`}
-            className="flex items-center gap-1 text-indigo-600 hover:text-indigo-700 bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded-full text-xs font-bold"
-          >
-            <MessageCircle size={14} />
-            <span>Ask Pixie</span>
-          </Link>
+          <div className="flex items-center gap-2">
+            {mode !== 'visual' && (
+              <button
+                type="button"
+                onClick={() => setMode('visual')}
+                className="flex items-center gap-1 text-indigo-600 hover:text-indigo-700 bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded-full text-xs font-bold transition-colors"
+                title="View Visual Guide"
+              >
+                <Eye size={13} />
+                <span>Visual Guide</span>
+              </button>
+            )}
+            <Link
+              href={`/tutor?lesson=${lesson.slug}`}
+              className="flex items-center gap-1 text-indigo-600 hover:text-indigo-700 bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded-full text-xs font-bold"
+            >
+              <MessageCircle size={14} />
+              <span>Ask Pixie</span>
+            </Link>
+          </div>
         </div>
 
         {/* Bar */}
@@ -282,6 +325,23 @@ export default function LessonPlayerPage() {
           />
         </div>
       </div>
+
+      {/* Mode: VISUAL GUIDE */}
+      {mode === 'visual' && (
+        <VisualGuideCard
+          concept={activeConcept}
+          onProceedToQuiz={() => {
+            setMode('quiz');
+            setCurrentQuizIndex(0);
+            setSelectedAnswer(null);
+            setIsAnswerSubmitted(false);
+          }}
+          onProceedToLearn={() => {
+            setMode('learn');
+            setCurrentBlockIndex(0);
+          }}
+        />
+      )}
 
       {/* Mode: LEARN */}
       {mode === 'learn' && (
@@ -447,7 +507,17 @@ export default function LessonPlayerPage() {
           <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-card border border-slate-200 dark:border-slate-700">
             <div className="flex items-center justify-between text-xs font-bold text-indigo-600 uppercase tracking-wider mb-3">
               <span>Quiz Question {currentQuizIndex + 1} of {lesson.quiz.length}</span>
-              <span className="text-slate-400">Score: {score}</span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsVisualPeekOpen(true)}
+                  className="flex items-center gap-1 text-[11px] font-bold text-indigo-600 bg-indigo-50 dark:bg-indigo-950 px-2.5 py-1 rounded-full hover:bg-indigo-100 dark:hover:bg-indigo-900 transition-colors capitalize tracking-normal"
+                >
+                  <Eye size={13} />
+                  <span>Peek Visual Guide</span>
+                </button>
+                <span className="text-slate-400">Score: {score}</span>
+              </div>
             </div>
 
             <h3 className="font-heading font-bold text-lg sm:text-xl text-slate-800 dark:text-slate-100 mb-6">
@@ -711,10 +781,32 @@ export default function LessonPlayerPage() {
                 }}
                 className="py-3 px-8 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-heading font-bold text-base shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2"
               >
-                <span>Continue Next</span>
+                <span>
+                  {lesson.next?.startsWith('sim-')
+                    ? 'Next: Practice Simulator ➔'
+                    : nextConcept
+                    ? `Next: Unit ${nextConcept.unitNumber} Visual Guide ➔`
+                    : lesson.next
+                    ? 'Next Unit Visual Guide ➔'
+                    : 'Complete Tier ➔'}
+                </span>
                 <ArrowRight size={18} />
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Visual Guide Peek Modal */}
+      {isVisualPeekOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/80 backdrop-blur-sm overflow-y-auto animate-fadeIn">
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-3xl p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 my-auto">
+            <VisualGuideCard
+              concept={activeConcept}
+              isPeekModal={true}
+              onClosePeek={() => setIsVisualPeekOpen(false)}
+              onProceedToQuiz={() => setIsVisualPeekOpen(false)}
+            />
           </div>
         </div>
       )}

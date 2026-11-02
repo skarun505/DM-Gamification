@@ -1,0 +1,72 @@
+[
+  {
+    "id": "hr-1",
+    "question": "Tell me about yourself and why you chose performance marketing.",
+    "level": "Fresher / Junior",
+    "starTip": "Structure: Background → Why Performance Marketing → What projects you've built → What you bring to this agency.",
+    "sampleAnswer": "I transitioned into performance marketing because I love the marriage between creative psychology and cold data. Rather than guessing what looks nice, performance marketing lets me test video hooks, analyze auction metrics like CTR and CPM, and prove exact revenue return. Through rigorous hands-on projects, I have simulated lead and e-commerce campaigns for local salons and brands, optimizing budgets and diagnostics. I'm excited to bring this analytical curiosity and rapid testing mindset to your team."
+  },
+  {
+    "id": "hr-2",
+    "question": "Tell me about a mistake you made while running an ad campaign and what you learned.",
+    "level": "Fresher / Junior",
+    "starTip": "Situation: A campaign issue → Task: Diagnose → Action: Fixed root cause → Result: Better SOP for future.",
+    "sampleAnswer": "In a recent simulated lead campaign, I noticed CPL suddenly jumped by 200%. My initial instinct was to edit the video copy. However, following systematic diagnostics, I realized the form had too many complex fields and the audience frequency had reached 4.5. Instead of making random edits, I expanded the audience targeting and simplified the form fields. Within 48 hours, CPL dropped back under target. It taught me to always diagnose tracking and frequency before tampering with creative."
+  },
+  {
+    "id": "hr-3",
+    "question": "How do you handle an unhappy client whose ad costs have increased?",
+    "level": "Junior / Mid",
+    "starTip": "Empathy first → Data breakdown → Clear next action plan → Follow-up timeline.",
+    "sampleAnswer": "I acknowledge their concern immediately because ad spend is real money. I open the data breakdown and explain the root cause in plain English: for example, showing that CPM increased due to festive auction competition, or CTR dipped due to ad fatigue. I then present a concrete 3-step action plan: pausing fatigued creatives, launching two fresh video angles, and testing a tighter offer. I give them a specific update date within 48 hours to review the recovery."
+  },
+  {
+    "id": "hr-4",
+    "question": "How do you work under tight deadlines during major sales like Diwali or Big Billion Days?",
+    "level": "Junior / Mid",
+    "starTip": "Preparation → Pre-flight checks → Prioritization under pressure.",
+    "sampleAnswer": "During high-stakes festive sales, last-minute edits are dangerous because ad reviews can take hours. I prepare all creative variations, UTM parameters, and catalog assets 7 days in advance. I get pre-approvals and schedule campaigns early. During the live sale, I monitor pacing and ROAS in shifts, making incremental adjustments without triggering learning resets."
+  },
+  {
+    "id": "hr-5",
+    "question": "How do you stay updated with rapid changes in Meta's advertising platform?",
+    "level": "All Levels",
+    "starTip": "Official documentation → Active testing → Industry peer communities.",
+    "sampleAnswer": "I rely on the official Meta Business Help Center and Meta for Business release notes rather than second-hand gossip. I also follow top performance marketing practitioners who share public case studies, and I constantly run small test ad sets to observe firsthand how features like Advantage+ and Conversions API behave."
+  },
+  {
+    "id": "hr-6",
+    "question": "What are your greatest strengths and weaknesses in media buying?",
+    "level": "Fresher / Junior",
+    "starTip": "Strength: Data discipline / Creative analysis. Weakness: Genuine area of growth with an active learning plan.",
+    "sampleAnswer": "My greatest strength is my diagnostic discipline: I don't panic when numbers fluctuate; I methodically trace the funnel from CPM to CTR to CVR to find leaks. My weakness has been that I used to get too attached to a specific creative I personally liked. I overcame this by enforcing strict metric kill-criteria: if an ad doesn't hit target CTR within 3 days, data wins and I pause it."
+  },
+  {
+    "id": "hr-7",
+    "question": "A client wants a 10x ROAS in their first two weeks. How do you respond?",
+    "level": "Junior / Mid",
+    "starTip": "Educate without arguing → Align realistic benchmarks → Propose testing roadmap.",
+    "sampleAnswer": "I thank them for their ambition, but gently ground the discussion in e-commerce unit economics. A 10x ROAS requires either massive organic brand equity or an unusually high average order value. I show them industry benchmarks of 2.5x to 4x for cold traffic, explain the machine learning ramp-up, and propose establishing a profitable 3x baseline in month one before testing higher margin bundles."
+  },
+  {
+    "id": "hr-8",
+    "question": "Tell me about a time you used data to change someone's mind.",
+    "level": "Junior",
+    "starTip": "Situation → Conflicting opinion → Objective data proof → Positive outcome.",
+    "sampleAnswer": "A stakeholder was convinced that a glossy, highly produced 60-second studio video would convert best for a gym. I suggested running a 50/50 split test against a raw 15-second mobile phone transformation Reel. After 5 days of equal spend, the phone-shot Reel delivered a 2.3% CTR and ₹85 CPL, compared to the studio ad's 0.8% CTR and ₹240 CPL. The data spoke for itself, and we reallocated 80% of budget to UGC formats."
+  },
+  {
+    "id": "hr-9",
+    "question": "Where do you see yourself in 3 years in the performance marketing industry?",
+    "level": "Fresher / Junior",
+    "starTip": "Growth from execution mastery → Strategic media buying & client leadership.",
+    "sampleAnswer": "In 3 years, I see myself growing from a meticulous junior media buyer into a Senior Performance Strategist managing full-funnel multi-lakh budgets. I want to master omnichannel attribution across Meta and Google, build repeatable creative testing frameworks, and mentor younger media buyers entering the agency."
+  },
+  {
+    "id": "hr-10",
+    "question": "Why should our agency hire you over candidates with more conventional experience?",
+    "level": "Fresher / Junior",
+    "starTip": "Fresh modern platform knowledge + Hunger + Practical hands-on simulator skills.",
+    "sampleAnswer": "Many candidates have outdated knowledge focused on old interest-stacking hacks from 5 years ago. I have been trained on modern Meta advertising: creative-first targeting, Conversions API, Advantage+ automation, and disciplined diagnostic frameworks. I don't have bad habits to unlearn, I am hungry to deliver measurable ROAS, and I am ready to contribute from day one."
+  }
+]

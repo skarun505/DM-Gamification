@@ -1,0 +1,70 @@
+{
+  "slug": "meta-rookie-08-creative-basics",
+  "world": "meta",
+  "tier": "rookie",
+  "order": 8,
+  "title": "Creative Basics & Formats",
+  "minutes": 5,
+  "objectives": [
+    "Identify the 3 major ad formats: Single Image, Video, and Carousel",
+    "Master the 3-second hook rule to stop viewers scrolling",
+    "Respect the Instagram Reels and Stories safe-zones"
+  ],
+  "glossary": ["hook", "call-to-action", "user-generated-content", "carousel-ad", "reels-safe-zone"],
+  "blocks": [
+    { "type": "pixie", "text": "Your creative is the most powerful targeting tool you have! A great ad makes the right people stop." },
+    { "type": "steps", "title": "The 3 Big Ad Formats", "items": ["1. Single Image: High-contrast photos, product shots, or infographics (1:1 square)", "2. Short-Form Video: 15-30 second Reels showcasing problem, solution, and offer (9:16 vertical)", "3. Carousel: 2-10 swipeable cards, perfect for catalogs or multi-step stories"] },
+    { "type": "analogy", "title": "The Speeding Train Analogy", "text": "A user scrolling Instagram is like a speeding express train. If your first 3 seconds don't wave a bright red flag (a bold hook), the train will zoom right past you." },
+    { "type": "tip", "text": "Reels Safe Zone: Keep text and important logos away from the top 15% and bottom 20% where captions, username, and like buttons appear." },
+    { "type": "warning", "text": "Do not make corporate, television-style polished ads. On mobile, authentic videos shot on a phone feel real and outperform fancy productions!" }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "Why is the first 3 seconds of a video ad considered the most crucial part?",
+      "options": [
+        "Meta charges 90% of the cost during the first 3 seconds",
+        "It stops the user from scrolling past in their feed",
+        "It is the only part with sound enabled",
+        "Videos are legally required to end in 3 seconds"
+      ],
+      "answer": 1,
+      "hint": "What prevents a user from immediately swiping to the next post?",
+      "explain": "The first 3 seconds contains the 'Hook'. If it doesn't grab attention immediately, the user scrolls away."
+    },
+    {
+      "id": "q2",
+      "q": "Which ad format allows a boutique to show 5 different saree designs in one swipeable post?",
+      "options": ["Single static image", "Carousel ad", "Canvas ad", "Text-only post"],
+      "answer": 1,
+      "hint": "Think of an ad that lets you swipe left and right through cards.",
+      "explain": "Carousel ads display 2 to 10 swipeable cards, each with its own image, title, and link."
+    },
+    {
+      "id": "q3",
+      "q": "What is the 'Reels Safe Zone' rule for vertical 9:16 video ads?",
+      "options": [
+        "Keep videos under 5 seconds",
+        "Avoid placing important text at the very top and bottom where platform UI elements overlap",
+        "Only use black and white text",
+        "Never use human voices"
+      ],
+      "answer": 1,
+      "hint": "Remember Instagram's like button, caption, and music track overlay.",
+      "explain": "Keeping important text in the central 70% ensures icons, captions, and buttons don't block your message."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: Raw, authentic user-generated videos (UGC) shot on a phone often convert better than glossy studio ads.",
+      "type": "tf",
+      "answer": true,
+      "hint": "What feels more natural and trustworthy on social feeds?",
+      "explain": "True! Authentic UGC looks like native friend content rather than an obnoxious sales pitch, boosting CTR."
+    }
+  ],
+  "recap": [
+    "Hook viewers in the first 3 seconds with a visual or question that stops the scroll.",
+    "Respect Reels safe zones and test phone-shot authentic creative alongside clean images."
+  ],
+  "next": "meta-rookie-09-how-ad-auction-works"
+}

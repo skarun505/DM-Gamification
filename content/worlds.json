@@ -1,0 +1,82 @@
+[
+  {
+    "id": "meta",
+    "name": "Meta Ads Universe",
+    "description": "Master Facebook, Instagram & WhatsApp ads from zero to advanced scale.",
+    "locked": false,
+    "tiers": [
+      {
+        "id": "rookie",
+        "name": "Tier 1: Rookie",
+        "description": "Foundations, metrics, 3-level structure, auction mechanics & your first campaign.",
+        "lessons": [
+          "meta-rookie-01-what-is-performance-marketing",
+          "meta-rookie-02-meet-the-meta-world",
+          "meta-rookie-03-campaign-adset-ad-structure",
+          "meta-rookie-04-campaign-objectives",
+          "meta-rookie-05-metrics-101",
+          "meta-rookie-06-audiences-basics",
+          "meta-rookie-07-budget-basics",
+          "meta-rookie-08-creative-basics",
+          "meta-rookie-09-how-ad-auction-works",
+          "meta-rookie-10-launch-checklist-first-results"
+        ],
+        "sims": [
+          "sim-rookie-01-salon-leads",
+          "sim-rookie-02-fix-narrow-audience"
+        ],
+        "boss": "boss-rookie-launch-day"
+      },
+      {
+        "id": "operator",
+        "name": "Tier 2: Operator",
+        "description": "Custom & Lookalike audiences, Pixel & CAPI, lead funnels, bidding, creative testing & diagnostics.",
+        "lessons": [
+          "meta-operator-01-custom-audiences",
+          "meta-operator-02-lookalike-audiences",
+          "meta-operator-03-meta-pixel-and-events",
+          "meta-operator-04-conversions-api-events-manager",
+          "meta-operator-05-getting-leads-forms-vs-web-vs-whatsapp",
+          "meta-operator-06-bidding-and-cost-controls",
+          "meta-operator-07-learning-phase-optimization",
+          "meta-operator-08-creative-testing-framework",
+          "meta-operator-09-retargeting-funnels",
+          "meta-operator-10-reporting-and-breakdowns"
+        ],
+        "sims": [
+          "sim-operator-01-budget-split",
+          "sim-operator-02-creative-ab-test",
+          "sim-operator-03-tracking-fix"
+        ],
+        "boss": "boss-operator-expensive-leads"
+      },
+      {
+        "id": "strategist",
+        "name": "Tier 3: Strategist",
+        "description": "Full-funnel architecture, safe 20% scaling, Advantage+, attribution, account audits & policies.",
+        "lessons": [
+          "meta-strategist-01-funnel-architecture",
+          "meta-strategist-02-scaling-safely",
+          "meta-strategist-03-advantage-plus-campaigns",
+          "meta-strategist-04-attribution-and-incrementality",
+          "meta-strategist-05-creative-strategy-at-scale",
+          "meta-strategist-06-account-structure-and-audits",
+          "meta-strategist-07-client-reporting-communication",
+          "meta-strategist-08-policies-rejections-account-health"
+        ],
+        "sims": [
+          "sim-strategist-01-scale-budget",
+          "sim-strategist-02-account-audit"
+        ],
+        "boss": "boss-strategist-scale-or-kill"
+      }
+    ]
+  },
+  {
+    "id": "google",
+    "name": "Google Ads Realm",
+    "description": "Search, Performance Max, YouTube, GA4, and intent-based marketing. Coming soon!",
+    "locked": true,
+    "tiers": []
+  }
+]

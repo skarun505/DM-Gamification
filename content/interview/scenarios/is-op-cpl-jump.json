@@ -1,0 +1,61 @@
+{
+  "slug": "is-op-cpl-jump",
+  "tier": "operator",
+  "title": "CPL Jumped from ₹150 to ₹400 Overnight",
+  "lessonSlug": "meta-operator-10-reporting-breakdowns",
+  "story": "You manage Meta ads for a premier coaching institute in Kota. Yesterday, your Cost Per Lead was ₹150 with a ₹3,000 daily spend. Today, CPL jumped to ₹400 with the exact same spend. Your client WhatsApped you in panic: 'Are our ads broken? Should we pause immediately?'",
+  "data": {
+    "table": [
+      ["Metric", "Yesterday", "Today"],
+      ["Daily Spend", "₹3,000", "₹3,000"],
+      ["CPM", "₹160", "₹172"],
+      ["CTR (Link)", "1.4%", "1.35%"],
+      ["Impressions", "18,750", "17,440"],
+      ["Clicks", "262", "235"],
+      ["Leads Captured", "20", "7.5"]
+    ]
+  },
+  "steps": [
+    {
+      "prompt": "Comparing yesterday and today's metrics, what do you check FIRST before touching creatives?",
+      "options": [
+        "Change the video creative and headlines immediately",
+        "Check technical tracking & landing page: Is the lead form or pixel loading slowly or failing to submit?",
+        "Double the daily budget to ₹6,000 to force more delivery",
+        "Delete the campaign and recreate it from scratch"
+      ],
+      "answer": 1,
+      "explain": "Notice that CPM and CTR barely changed (CTR was 1.4% vs 1.35%), meaning viewers are still clicking at the same rate and auction cost is stable. The conversion dropped downstream, pointing to tracking, server, or form failure."
+    },
+    {
+      "prompt": "You test the lead form on mobile and discover the landing page hosting server was crashing on peak traffic, causing 60% of visitors to bounce before the form rendered. What is your immediate technical action?",
+      "options": [
+        "Ignore it and hope the server fixes itself",
+        "Alert the client's web team immediately to upgrade server capacity, and temporarily switch the ad destination to a native Meta Instant Form to capture leads without website downtime",
+        "Pause all advertising for 1 month",
+        "Change the ad objective to Brand Awareness"
+      ],
+      "answer": 1,
+      "explain": "Switching immediately to an in-app Meta Instant Form bypasses the broken external web host, allowing you to capture high-volume leads while the client's web team resolves the server bottleneck."
+    },
+    {
+      "prompt": "The server is fixed and your temporary Instant Form captured 18 leads at ₹120 CPL. How do you respond to the client's panic WhatsApp?",
+      "options": [
+        "Do not reply and hope they forget about it",
+        "Use the Client-Talk formula: Explain that click interest remained high, the web host had a temporary latency spike, and you averted budget waste by routing traffic to an instant form while monitoring stability",
+        "Blame Meta's algorithm and demand more fees",
+        "Send a 40-page technical error log without commentary"
+      ],
+      "answer": 1,
+      "explain": "The Client-Talk formula: Explain what happened calmly with data, describe your immediate solution, and provide next steps and reassurance."
+    }
+  ],
+  "finalQuestion": "In under 100 words, write the exact message you will send to the coaching centre founder explaining the situation and the resolution.",
+  "keyPoints": [
+    "Compared CPM and CTR first to isolate that creative interest was stable",
+    "Identified external landing page server latency as the root cause",
+    "Switched temporarily to an in-app Instant Form to protect client budget",
+    "Communicated calmly with next update timeline"
+  ],
+  "modelAnswer": "Hi Sir, I analyzed the data immediately: our ad engagement was completely healthy (CTR steady at 1.4%), but our website server experienced high traffic latency this morning causing form drop-offs. To protect your budget, I temporarily routed traffic to an in-app Meta Instant Form which has already generated 18 leads at ₹120 CPL. The web server is now upgraded and stable. I will monitor pacing closely and share a full recovery update tomorrow at 10 AM."
+}

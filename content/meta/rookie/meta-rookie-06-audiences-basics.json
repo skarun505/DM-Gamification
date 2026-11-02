@@ -1,0 +1,66 @@
+{
+  "slug": "meta-rookie-06-audiences-basics",
+  "world": "meta",
+  "tier": "rookie",
+  "order": 6,
+  "title": "Audiences Basics",
+  "minutes": 4,
+  "objectives": [
+    "Understand Core Audience targeting: location, age, gender, and interests",
+    "Read Meta's Audience Definition meter (narrow vs balanced vs broad)",
+    "Learn why modern Meta algorithms thrive on broader audiences"
+  ],
+  "glossary": ["broad-targeting", "detailed-targeting", "frequency"],
+  "blocks": [
+    { "type": "pixie", "text": "Targeting is choosing who gets to see your offer. Let's make sure your rupees reach the right eyeballs!" },
+    { "type": "text", "text": "At the Ad Set level, you define your audience using Location, Demographics (Age/Gender), and Detailed Targeting (Interests and Behaviors)." },
+    { "type": "steps", "title": "The 4 Core Audience Levers", "items": ["1. Location: Country, state, city, or postal code radius (e.g., 5km from your salon)", "2. Age Range: Match your real buyers (e.g., 25-45 for home buyers)", "3. Gender: All, Men, or Women", "4. Detailed Targeting: Interests (Yoga, Startups, Fashion) or Broad"] },
+    { "type": "analogy", "title": "The Megaphone Analogy", "text": "Targeting 5,000 people is like shouting into a tiny room. You will run out of listeners in 2 days. Targeting a balanced pool of 500,000 gives Meta room to breathe and find buyers." },
+    { "type": "tip", "text": "Meta's AI is smarter than ever. Often, broad targeting (leaving interests open) lets the algorithm find cheaper leads than stacking 15 interests." },
+    { "type": "warning", "text": "Avoid hyper-narrow audiences (< 50,000). Your ad frequency will spike, and your CPM will double or triple!" }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What happens when your target audience size is too narrow (e.g. 15,000 people)?",
+      "options": ["Ad spend is refunded", "CPM increases significantly and frequency fatigues quickly", "Conversions are guaranteed", "Meta shows your ad for free"],
+      "answer": 1,
+      "hint": "What happens when you shout at the same tiny group of people repeatedly?",
+      "explain": "A tiny audience leads to fast audience fatigue, high frequency, and expensive auction CPM penalties."
+    },
+    {
+      "id": "q2",
+      "q": "A bridal makeup artist in Hyderabad should target which audience demographic?",
+      "options": ["Men aged 18-22 across all India", "Women aged 22-35 living in Hyderabad", "All seniors aged 65+", "Gamers in Chennai"],
+      "answer": 1,
+      "hint": "Who realistically books bridal makeup in Hyderabad?",
+      "explain": "Local service businesses should tightly target the relevant gender, age group, and local city radius."
+    },
+    {
+      "id": "q3",
+      "q": "What is 'Broad Targeting' in modern Meta advertising?",
+      "options": [
+        "Showing ads to people on other continents",
+        "Targeting based on location and age without restricting interests, letting Meta AI find the best buyers",
+        "Targeting every interest simultaneously",
+        "Running ads without an image"
+      ],
+      "answer": 1,
+      "hint": "Think of trusting Meta's algorithm to analyze who engages with your creative.",
+      "explain": "Broad targeting sets location and demographic bounds, allowing Meta's creative-driven AI to find active buyers."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: Stacking 20 different interests together is always better than testing broad audiences.",
+      "type": "tf",
+      "answer": false,
+      "hint": "Modern Meta ads rely heavily on creative targeting.",
+      "explain": "False! Over-constraining with 20 interests restricts Meta's auction efficiency and raises CPMs."
+    }
+  ],
+  "recap": [
+    "Core targeting controls Location, Age, Gender, and Interests at the Ad Set level.",
+    "Avoid narrow audiences (< 50k). Healthy balanced audiences give Meta room to optimize."
+  ],
+  "next": "meta-rookie-07-budget-basics"
+}

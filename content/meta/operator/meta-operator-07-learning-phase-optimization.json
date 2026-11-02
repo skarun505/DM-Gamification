@@ -1,0 +1,67 @@
+{
+  "slug": "meta-operator-07-learning-phase-optimization",
+  "world": "meta",
+  "tier": "operator",
+  "order": 7,
+  "title": "Learning Phase & Optimization",
+  "minutes": 5,
+  "objectives": [
+    "Master the 50 conversions/week rule to stabilize campaign delivery",
+    "Identify which edits trigger a Learning Phase reset",
+    "Fix 'Learning Limited' status through campaign consolidation"
+  ],
+  "glossary": ["learning-phase", "learning-limited", "cbo", "abo"],
+  "blocks": [
+    { "type": "pixie", "text": "Meta's AI needs data to work its magic. When you feed it enough conversions, your costs drop like a rock!" },
+    { "type": "text", "text": "Whenever you launch or significantly edit an ad set, it enters the 'Learning Phase'. During this time, Meta explores who is most receptive to your ad." },
+    { "type": "steps", "title": "The Golden 50 Rule", "items": ["1. An ad set needs roughly 50 optimization events per 7 days to exit learning", "2. Once exited ('Active'), daily costs stabilize and CPMs drop by 10-15%", "3. If an ad set gets fewer than 50 events, it enters 'Learning Limited'"] },
+    { "type": "analogy", "title": "The Apprentice Chef Analogy", "text": "If a student chef only bakes 2 cakes a week, they never get consistent. If they bake 50 cakes in a week, they master the recipe! Give Meta enough volume to become an expert." },
+    { "type": "warning", "text": "What Resets Learning: Changing targeting, swapping ad creatives, changing campaign objective, or increasing budget by more than 20% in one go!" },
+    { "type": "tip", "text": "How to Fix Learning Limited: Consolidate! Combine 5 tiny ad sets into 1 unified ad set so all budget and conversions pool together to hit the 50 mark." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "Approximately how many conversion events within 7 days does an ad set need to exit the Learning Phase?",
+      "options": ["5 events", "10 events", "≈ 50 events", "500 events"],
+      "answer": 2,
+      "explain": "Meta's machine learning model requires roughly 50 conversion events in 7 days to calibrate stable bidding."
+    },
+    {
+      "id": "q2",
+      "q": "Which of the following actions WILL trigger a complete Learning Phase reset on an ad set?",
+      "options": [
+        "Changing the ad account timezone",
+        "Changing the audience targeting or adding a brand new creative",
+        "Renaming the ad set without changing any settings",
+        "Viewing the reporting dashboard on your phone"
+      ],
+      "answer": 1,
+      "explain": "Substantial changes to targeting, creative assets, or bid strategy force the algorithm to start learning anew."
+    },
+    {
+      "id": "q3",
+      "q": "What is the best architectural fix if your account has 6 ad sets all stuck in 'Learning Limited'?",
+      "options": [
+        "Delete the entire ad account",
+        "Consolidate the fragmented ad sets into 1 or 2 robust ad sets to combine budget and conversion volume",
+        "Lower the budget on all ad sets to ₹10/day",
+        "Change the objective to Brand Awareness"
+      ],
+      "answer": 1,
+      "explain": "Consolidation pools budget and signal density, easily surpassing the 50 conversions/week threshold."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: An ad set with 'Learning Limited' status stops delivering completely.",
+      "type": "tf",
+      "answer": false,
+      "explain": "False. It continues delivering, but costs will be higher and day-to-day performance more volatile."
+    }
+  ],
+  "recap": [
+    "Aim for ~50 conversions per week per ad set to exit the learning phase.",
+    "Avoid making large sudden edits. Consolidate fragmented ad sets to overcome Learning Limited."
+  ],
+  "next": "meta-operator-08-creative-testing-framework"
+}

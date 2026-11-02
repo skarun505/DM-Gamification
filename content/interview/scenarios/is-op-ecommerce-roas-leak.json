@@ -1,0 +1,48 @@
+{
+  "slug": "is-op-ecommerce-roas-leak",
+  "tier": "operator",
+  "title": "E-Commerce Boutique: ROAS 1.2 vs Target 3.0",
+  "lessonSlug": "meta-operator-10-reporting-breakdowns",
+  "story": "A D2C apparel brand selling ethnic kurtas is spending ₹20,000/day. Their ROAS is 1.2x (unprofitable), while their target breakeven is 3.0x. You are brought in to identify where the money is leaking.",
+  "data": {
+    "table": [
+      ["Funnel Metric", "Current Brand Data", "Industry Benchmark"],
+      ["CPM", "₹140", "₹130 - ₹170 (Good)"],
+      ["CTR (Link)", "2.3%", "1.2% - 1.8% (Excellent Hook)"],
+      ["CPC", "₹6.10", "₹8 - ₹12 (Cheap clicks)"],
+      ["Website Add-to-Cart %", "8.5%", "7% - 10% (Good interest)"],
+      ["Cart-to-Purchase CVR", "1.1%", "6% - 10% (Severe Leak!)"]
+    ]
+  },
+  "steps": [
+    {
+      "prompt": "Analyzing the funnel metrics above, where is the primary leak occurring?",
+      "options": [
+        "In the ad creative and hook (CTR is bad)",
+        "In the ad auction CPM (inventory too expensive)",
+        "At the website checkout: Visitors are adding items to cart enthusiastically, but abandoning at checkout",
+        "Meta is not delivering impressions"
+      ],
+      "answer": 2,
+      "explain": "CTR is 2.3% (fantastic) and Add-to-Cart is 8.5% (healthy). But only 1.1% of cart additions turn into purchases, indicating checkout friction."
+    },
+    {
+      "prompt": "You inspect the checkout page on a mobile device. What common issues would cause this checkout collapse in India?",
+      "options": [
+        "High unexpected shipping fees added at final step, lack of Cash-on-Delivery (COD) or UPI checkout options, and slow loading payment gateway",
+        "The logo is too colorful",
+        "The font size is 14px instead of 16px",
+        "The brand's Instagram handle has no blue checkmark"
+      ],
+      "answer": 0,
+      "explain": "In Indian e-commerce, unexpected delivery charges at the last step, missing Cash on Delivery, or broken UPI gateways cause 80%+ of checkout drop-offs."
+    }
+  ],
+  "finalQuestion": "In under 80 words, state the 3 recommendations you will give the brand founder to reach 3.0x ROAS.",
+  "keyPoints": [
+    "Fix checkout friction: Add 1-click UPI and Cash on Delivery (COD)",
+    "Remove unexpected shipping charges at checkout or offer free shipping over ₹999",
+    "Deploy a dedicated 0-7 day Cart Abandoner retargeting sequence"
+  ],
+  "modelAnswer": "1. Eliminate unexpected ₹150 shipping charges at the final step by building delivery into product pricing or offering free shipping above ₹999.\n2. Enable 1-click UPI checkout and verified Cash-on-Delivery (COD) with OTP verification.\n3. Launch a dedicated 0-7 day Bottom-of-Funnel retargeting campaign on Meta with customer reviews and a 10% abandoned cart discount code."
+}

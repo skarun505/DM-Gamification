@@ -1,0 +1,65 @@
+{
+  "slug": "meta-operator-05-getting-leads-forms-vs-web-vs-whatsapp",
+  "world": "meta",
+  "tier": "operator",
+  "order": 5,
+  "title": "Lead Funnels: Forms vs WhatsApp",
+  "minutes": 5,
+  "objectives": [
+    "Compare the 3 primary lead destinations: Instant Forms, Web Landing Pages, and Click-to-WhatsApp",
+    "Identify the trade-off between lead volume (CPL) and lead intent (Quality)",
+    "Configure custom questions to eliminate accidental auto-fill leads"
+  ],
+  "glossary": ["instant-form", "click-to-whatsapp", "cpl", "speed-to-lead"],
+  "blocks": [
+    { "type": "pixie", "text": "Not all leads are created equal! A ₹30 lead who never answers the phone is worth less than a ₹150 lead who books an appointment." },
+    { "type": "table", "headers": ["Destination", "Pros", "Cons", "Best Used For"], "rows": [
+      ["Meta Instant Forms", "Lightning fast, auto-fills details, lowest CPL", "Accidental submissions if not qualified", "High-volume consumer lead gen (real estate, events)"],
+      ["Click-to-WhatsApp", "Instant direct 1-on-1 chat, very high Indian trust", "Requires manual sales team responsiveness", "Local services, clinics, custom tailoring, high-touch sales"],
+      ["Website Landing Page", "Full custom branding, long copy, deep vetting", "Drop-offs if mobile load speed > 2 seconds", "Complex B2B services, SaaS, high-ticket courses"]
+    ] },
+    { "type": "analogy", "title": "The Speed-to-Lead Clock", "text": "An internet lead is like hot chai: it gets cold in 10 minutes. If your telecaller calls within 5 minutes, close rates are 400% higher than calling the next day!" },
+    { "type": "tip", "text": "On Instant Forms, choose 'Higher Intent' instead of 'More Volume'. It adds a review confirmation screen that eliminates 90% of 'I never filled this' complaints." },
+    { "type": "warning", "text": "Never run Click-to-WhatsApp ads if your sales team only checks WhatsApp once a day. Immediate replies make or break the sale." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "Why do Meta Instant Forms typically generate lower Cost Per Lead than website landing pages?",
+      "options": [
+        "Meta gives free cash discounts",
+        "The form opens instantly inside the app without external page loading, and pre-fills user contact details",
+        "Instant forms are only shown to teenagers",
+        "Website landing pages are blocked by Meta"
+      ],
+      "answer": 1,
+      "explain": "Zero page loading friction and native auto-fill reduce drop-offs, driving high completion rates."
+    },
+    {
+      "id": "q2",
+      "q": "Which lead destination is ideal for an Indian boutique offering custom wedding sherwanis and lehengas?",
+      "options": ["A 20-page corporate PDF download", "Click-to-WhatsApp direct consultation chat", "An automated phone survey", "A brand awareness banner"],
+      "answer": 1,
+      "explain": "High-touch custom apparel requires consultative chat, sharing photos, and answering fit questions on WhatsApp."
+    },
+    {
+      "id": "q3",
+      "q": "What simple setting in Meta Instant Forms adds a review confirmation step to filter out accidental submissions?",
+      "options": ["More Volume", "Higher Intent Form", "Lead Accelerator", "Instant Checkout"],
+      "answer": 1,
+      "explain": "The 'Higher Intent' form type requires prospects to swipe a confirmation screen to verify their details."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: Calling a new lead within 5 minutes of form submission drastically improves conversion rates compared to calling 24 hours later.",
+      "type": "tf",
+      "answer": true,
+      "explain": "True! Research proves that Speed to Lead under 5 minutes generates the highest qualification and appointment booking rates."
+    }
+  ],
+  "recap": [
+    "Instant Forms maximize volume; Click-to-WhatsApp builds high-touch trust; Landing Pages provide deep qualification.",
+    "Use 'Higher Intent' review screens and prioritize sub-10-minute Speed to Lead."
+  ],
+  "next": "meta-operator-06-bidding-and-cost-controls"
+}

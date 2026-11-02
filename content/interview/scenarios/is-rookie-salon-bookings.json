@@ -1,0 +1,59 @@
+{
+  "slug": "is-rookie-salon-bookings",
+  "tier": "rookie",
+  "title": "Salon Launch: ₹30,000/Month Campaign Plan",
+  "lessonSlug": "meta-rookie-04-campaign-objectives",
+  "story": "A trendy salon in Bandra, Mumbai has a ₹30,000 monthly ad budget (₹1,000/day). Their goal is to fill weekday appointment slots for hair coloring and spa treatments. The owner is completely new to digital ads.",
+  "data": {
+    "table": [
+      ["Parameter", "Client Expectation", "Benchmark Range"],
+      ["Monthly Budget", "₹30,000", "₹1,000 / day"],
+      ["Average Service Ticket", "₹1,800", "₹1,500 - ₹2,500"],
+      ["Target Bookings", "150 appointments", "Target CPL ≤ ₹150"],
+      ["Location Radius", "Bandra + 5km", "Local drive-time"]
+    ]
+  },
+  "steps": [
+    {
+      "prompt": "Which campaign objective and destination should you propose?",
+      "options": [
+        "Awareness objective with an Instagram feed photo",
+        "Leads objective paired with Click-to-WhatsApp so local clients can chat and confirm appointment slots",
+        "Traffic objective sending users to a 10-page generic blog",
+        "App Promotion objective"
+      ],
+      "answer": 1,
+      "explain": "For high-ticket local beauty services in India, Click-to-WhatsApp allows direct consultation, timing coordination, and trust building."
+    },
+    {
+      "prompt": "How should you target the audience at the Ad Set level?",
+      "options": [
+        "All adults aged 18-65 across the entire state of Maharashtra",
+        "Women aged 21-45 within a 5 km radius of Bandra, interested in Hair Care, Beauty, or Broad",
+        "Men interested in gaming across Mumbai",
+        "Only people who have visited Paris"
+      ],
+      "answer": 1,
+      "explain": "Local salon clients rarely travel beyond 5-7 km. Targeting local women interested in hair and beauty provides a tight, high-converting audience."
+    },
+    {
+      "prompt": "Which creative strategy will yield the highest thumbstop rate and bookings?",
+      "options": [
+        "A stock photo of a salon scissors with prices in tiny font",
+        "Short-form before/after hair transformation Reels featuring local clients, paired with a 'Weekday Special: 20% Off' headline",
+        "An image of the salon's trade license certificate",
+        "A 3-minute video interviewing the salon's landlord"
+      ],
+      "answer": 1,
+      "explain": "Visual proof of hair transformations combined with an irresistible weekday incentive directly drives bookings."
+    }
+  ],
+  "finalQuestion": "In under 80 words, summarize your media plan for the salon owner, including the expected booking volume.",
+  "keyPoints": [
+    "Selected Leads via Click-to-WhatsApp for direct appointment booking",
+    "Targeted 5km local radius of women 21-45",
+    "Used before/after transformation video Reels with weekday incentive",
+    "Projected ~150-200 bookings at ₹120-150 CPL"
+  ],
+  "modelAnswer": "We will run a Leads campaign driving directly to Click-to-WhatsApp with a daily budget of ₹1,000. We will target women aged 21-45 living within 5 km of Bandra using authentic before/after transformation Reels offering a 20% weekday special. At an estimated ₹120 CPL, this budget will generate approximately 200 customer inquiries monthly, easily hitting your target of 150 booked salon appointments."
+}

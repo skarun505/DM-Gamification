@@ -1,0 +1,286 @@
+[
+  {
+    "slug": "iq-rookie-01-performance-vs-brand",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-01-what-is-performance-marketing",
+    "question": "What is the core difference between performance marketing and brand marketing?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Performance marketing pays for countable, measurable business actions (clicks, leads, sales)",
+      "Brand marketing focuses on recall, perception, and broad emotional awareness",
+      "Performance marketing calculates exact CPL and ROAS",
+      "Brand marketing takes months or years to measure, while performance is evaluated daily"
+    ],
+    "modelAnswer": "Brand marketing focuses on long-term perception and awareness, like a billboard or celebrity TV commercial where individual sales cannot be tracked. In contrast, performance marketing pays strictly for measurable outcomes: a website click, an inquiry form, or a completed purchase. We measure performance in real-time through metrics like Cost Per Lead (CPL) and Return On Ad Spend (ROAS). If an ad is not generating profitable actions, we can pause or pivot it immediately.",
+    "followUp": "Can a performance ad also help build brand awareness?",
+    "commonMistakes": ["Saying brand marketing is completely useless or free"],
+    "tip": "Always emphasize accountability and measurable ROI."
+  },
+  {
+    "slug": "iq-rookie-02-explain-the-funnel",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-01-what-is-performance-marketing",
+    "question": "Explain the marketing funnel (Top, Middle, Bottom) with an everyday example.",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Top of funnel (TOFU): Cold audience discovering the problem or brand",
+      "Middle of funnel (MOFU): Engaged audience evaluating solutions and trust signals",
+      "Bottom of funnel (BOFU): High-intent prospects ready to purchase with an offer",
+      "Clear transition from broad attention to paid conversion"
+    ],
+    "modelAnswer": "The funnel represents a customer's journey from stranger to buyer. Take a skincare brand: At the Top of Funnel (TOFU), a cold audience sees an educational Reel about preventing acne. At Middle of Funnel (MOFU), people who engaged receive ads showing dermatologist reviews and before-after testimonials to build trust. At Bottom of Funnel (BOFU), visitors who added products to cart receive a limited-time 15% discount code to close the sale. Each stage requires different ad creatives and messaging.",
+    "followUp": "What percentage of your budget would you typically allocate to the Top of Funnel?",
+    "commonMistakes": ["Trying to sell immediately to cold TOFU traffic without building any trust"],
+    "tip": "Use a clear local example like a salon or e-commerce store."
+  },
+  {
+    "slug": "iq-rookie-03-core-metrics-comparison",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-05-metrics-101",
+    "question": "What is the difference between CPM, CPC, CPL, and ROAS?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "CPM = Cost per 1,000 impressions (auction inventory cost)",
+      "CPC = Cost per click (engagement cost)",
+      "CPL = Cost per lead or inquiry (acquisition cost)",
+      "ROAS = Revenue divided by ad spend (profit multiplier)"
+    ],
+    "modelAnswer": "CPM is Cost Per Mille: what you pay to show your ad 1,000 times in the auction. CPC is Cost Per Click: what you pay when someone clicks your link. CPL is Cost Per Lead: spend divided by customer inquiries received. Finally, ROAS is Return On Ad Spend: revenue generated divided by ad spend. For example, if I spend ₹2,000 to get 40 leads, CPL is ₹50. If those leads generate ₹10,000 in sales, ROAS is 5.0x.",
+    "followUp": "If your CPC is very low but CPL is extremely high, where is the problem?",
+    "commonMistakes": ["Confusing ROAS with pure profit percentage"],
+    "tip": "Always state the definition, formula, and a ₹ numerical example."
+  },
+  {
+    "slug": "iq-rookie-04-campaign-structure",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-03-campaign-adset-ad-structure",
+    "question": "Explain Meta's 3-level campaign structure and what is controlled at each level.",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Campaign Level: Objective (Leads, Sales, Traffic, Awareness)",
+      "Ad Set Level: Audience, Placements, Schedule, Budget (if ABO)",
+      "Ad Level: Creative, Copy, Headline, Destination URL, CTA",
+      "One campaign can contain multiple ad sets; one ad set holds multiple ads"
+    ],
+    "modelAnswer": "Meta organizes all advertising into 3 tiers: Campaign, Ad Set, and Ad. At the Campaign level, you choose the primary business objective, such as Leads or Sales. At the Ad Set level, you define targeting: who sees the ad (demographics, location, interests), where it shows (Reels, Feeds), and the daily budget. At the Ad level, you configure the creative assets: the video or image, caption, headline, Call-to-Action button, and website link.",
+    "followUp": "Where do you set up pixel tracking and conversion events?",
+    "commonMistakes": ["Thinking creative copy is set at the Ad Set level"],
+    "tip": "Use the Blueprint (Campaign) → Room (Ad Set) → Furniture (Ad) analogy."
+  },
+  {
+    "slug": "iq-rookie-05-choose-objective-leadgen",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-04-campaign-objectives",
+    "question": "How do you choose a campaign objective for a local service business like a dental clinic or salon?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Choose 'Leads' objective",
+      "Optimizes for contact inquiries rather than empty clicks",
+      "Can use Instant Forms or Click-to-WhatsApp",
+      "Avoid 'Traffic' or 'Engagement' for lead generation"
+    ],
+    "modelAnswer": "For a local service business like a dental clinic or salon, I always select the 'Leads' objective. If you choose 'Traffic', Meta optimizes to find people who click links cheaply but rarely book. The 'Leads' objective trains the algorithm on people who actually submit contact forms or initiate a WhatsApp chat. In India, pairing the Leads objective with Click-to-WhatsApp or Instant Forms delivers the highest conversion rate because customers love chatting before booking.",
+    "followUp": "When would you prefer Click-to-WhatsApp over an on-page form?",
+    "commonMistakes": ["Recommending Traffic because clicks appear cheaper"],
+    "tip": "Explain that Meta delivers what you optimize for."
+  },
+  {
+    "slug": "iq-rookie-06-ctr-what-is-good",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-05-metrics-101",
+    "question": "What is CTR, and what is considered a good CTR on Meta ads?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "CTR = (Clicks ÷ Impressions) × 100",
+      "Measures creative hook appeal and relevance to audience",
+      "Typical benchmark in India on mobile feeds is 1.2% to 2.5%",
+      "Low CTR requires testing fresh hooks or new angles"
+    ],
+    "modelAnswer": "CTR is Click-Through Rate: clicks divided by impressions multiplied by 100. It measures how effectively the ad creative stops the scroll and compels viewers to act. In India, a healthy benchmark for cold feed and Reels traffic is typically 1.2% to 2.5%. If CTR drops below 1%, it indicates the first 3 seconds of the video or the visual hook is failing, and I would test new creative angles. If CTR is over 3% but conversions are zero, the issue lies on the landing page.",
+    "followUp": "Your CTR is 3.5% but leads are zero. What do you check first?",
+    "commonMistakes": ["Giving a flat number without industry context"],
+    "tip": "Connect CTR to creative hooks and landing page diagnosis."
+  },
+  {
+    "slug": "iq-rookie-07-reach-vs-impressions-vs-frequency",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-05-metrics-101",
+    "question": "Explain the relationship between Reach, Impressions, and Frequency.",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Reach = Count of unique people who saw the ad",
+      "Impressions = Total count of times ad was displayed",
+      "Frequency = Impressions ÷ Reach",
+      "High frequency on cold audiences causes ad fatigue and rising CPM"
+    ],
+    "modelAnswer": "Reach counts unique individual users who viewed your ad at least once. Impressions counts total views, including repeat views by the same person. Frequency is simply Impressions divided by Reach: the average number of times each person saw your ad. For instance, if 5,000 unique people see an ad a total of 10,000 times, frequency is 2.0. On cold prospecting campaigns, keeping frequency below 3.0 prevents ad fatigue; on warm retargeting, higher frequency is acceptable.",
+    "followUp": "What physical actions do you take when frequency reaches 5.0 on cold traffic?",
+    "commonMistakes": ["Thinking reach and impressions are the same thing"],
+    "tip": "Memorize the formula: Frequency = Impressions ÷ Reach."
+  },
+  {
+    "slug": "iq-rookie-08-decide-starting-budget",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-07-budget-basics",
+    "question": "How do you decide a starting daily budget for a brand new Meta campaign?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Rule of thumb: 3x to 5x target Cost Per Result (CPL / CPA) per ad set",
+      "Ensures sufficient daily conversion data for machine learning",
+      "For local businesses in India: typically ₹300 to ₹600/day per ad set",
+      "Avoid spreading ₹200 across 5 different ad sets"
+    ],
+    "modelAnswer": "I calculate the starting daily budget using the 3x to 5x target CPL rule. If our target cost per lead is ₹100, the ad set needs at least ₹300 to ₹500 per day. This gives the algorithm enough budget to capture 3 to 5 conversion signals daily. Spreading a tiny budget like ₹300 across multiple ad sets starves the algorithm. I prefer consolidating budget into one or two strong ad sets so Meta exits the learning phase quickly.",
+    "followUp": "What happens if you only give Meta ₹50 a day when target CPL is ₹150?",
+    "commonMistakes": ["Suggesting a random budget like ₹10,000 without calculating target CPL"],
+    "tip": "Show you understand budget math relative to expected results."
+  },
+  {
+    "slug": "iq-rookie-09-what-makes-a-good-creative",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-08-creative-basics",
+    "question": "What makes a high-converting ad creative on Meta today?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "3-second hook that calls out the target customer's pain point",
+      "Authentic mobile-shot format (UGC/Reels) over corporate polish",
+      "Clear, simple value proposition and social proof",
+      "Direct Call-To-Action (CTA) telling the user what to do next"
+    ],
+    "modelAnswer": "A winning Meta creative has three key components: a scroll-stopping hook, relatable body content, and a clear call to action. In the first 3 seconds, the hook must address a specific audience problem or curiosity. On mobile feeds, authentic user-generated content (UGC) shot on a smartphone outperforms glossy studio TV commercials because it feels native. The body must demonstrate value or social proof quickly, and the ad must conclude with a direct CTA telling the viewer exactly what to do next.",
+    "followUp": "How do you script the first 3 seconds of a video ad for a fitness app?",
+    "commonMistakes": ["Believing that expensive video cameras guarantee high conversions"],
+    "tip": "Emphasize mobile-first psychology and the 3-second hook."
+  },
+  {
+    "slug": "iq-rookie-10-learning-phase",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-07-budget-basics",
+    "question": "What is Meta's Learning Phase, and what causes 'Learning Limited'?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Initial optimization window where Meta tests who is most likely to convert",
+      "Requires approximately 50 conversions per ad set in a 7-day period",
+      "Learning Limited occurs when conversion volume is insufficient (< 50)",
+      "Learning Limited leads to higher and more volatile CPMs"
+    ],
+    "modelAnswer": "The Learning Phase is the period after launching an ad set when Meta's machine learning algorithm explores the audience to discover who is most likely to convert. To exit this phase and stabilize costs, an ad set typically needs about 50 conversions within a 7-day window. If the budget is too small or the audience is too restrictive to generate 50 results, the status changes to 'Learning Limited'. This causes costs to fluctuate and CPMs to increase by 10-15%.",
+    "followUp": "How would you help an ad set exit Learning Limited?",
+    "commonMistakes": ["Thinking Learning Limited means the ad has stopped delivering"],
+    "tip": "Remember the 50 conversions per week rule of thumb."
+  },
+  {
+    "slug": "iq-rookie-11-organic-vs-paid",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-01-what-is-performance-marketing",
+    "question": "When should a business invest in paid performance ads versus relying on organic social media?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Organic builds long-term community and credibility, but has slow, unpredictable reach",
+      "Paid ads provide immediate, targeted, and scalable customer acquisition",
+      "Best strategy is synergistic: organic for retention/social proof, paid for predictable leads",
+      "Paid ads allow precise geographic and demographic targeting"
+    ],
+    "modelAnswer": "Organic social media is ideal for nurturing existing followers, showcasing brand culture, and building social proof, but organic reach today is typically under 5%. Paid performance advertising is necessary when a business needs predictable, scalable revenue on demand. For example, if a clinic opens a new branch, relying on organic posts won't fill appointment slots next week; a paid lead campaign targeting residents within 5 km delivers immediate bookings.",
+    "followUp": "How can organic content inform paid ad creative strategy?",
+    "commonMistakes": ["Saying organic is dead or paid is the only thing that matters"],
+    "tip": "Explain that paid buys speed, scale, and predictability."
+  },
+  {
+    "slug": "iq-rookie-12-lead-forms-vs-landing-pages",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-04-campaign-objectives",
+    "question": "Compare Meta Instant Forms (Lead Ads) versus an external website Landing Page.",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Instant Forms open inside Meta apps instantly with auto-filled details (fast, cheap CPL)",
+      "Landing pages allow custom branding, long-form copy, and deeper qualification",
+      "Instant forms can produce lower-intent leads if not qualified with custom questions",
+      "Landing pages filter out accidental clickers but suffer from page load drop-offs"
+    ],
+    "modelAnswer": "Meta Instant Forms load instantly inside Facebook or Instagram without redirecting the user, pre-filling their name and phone number. This delivers a frictionless experience and lower Cost Per Lead (CPL). However, because it is so easy, lead quality can sometimes be lower. Website landing pages require users to leave the app, which increases drop-off if the site is slow, but visitors who take the time to read your copy and fill out a web form generally have higher buying intent.",
+    "followUp": "How do you improve lead quality on an Instant Form without hurting volume too much?",
+    "commonMistakes": ["Claiming landing pages are always superior to instant forms"],
+    "tip": "Balance CPL (volume) against lead intent (quality)."
+  },
+  {
+    "slug": "iq-rookie-13-ad-rejections-policy",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-02-meet-the-meta-world",
+    "question": "Why might a Meta ad get disapproved, and how do you resolve it?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Common causes: Sensational health claims, personal attributes, before/after body shots, misleading financial promises",
+      "Check the specific policy violation in Account Quality / Events Manager",
+      "Edit creative or copy to comply with guidelines",
+      "Request a manual human review if the automated algorithm made an error"
+    ],
+    "modelAnswer": "Ads are rejected when they violate Meta's Advertising Standards. The most frequent violations include sensational before-and-after body photos in fitness, unrealistic financial promises like 'get rich overnight', or directly calling out personal attributes like 'Are you suffering from hair loss?'. When an ad is rejected, I review the rejection note in Meta Account Quality. If it was flagged by an automated bot in error, I request a manual human review. If it genuinely violated policy, I modify the copy or visual to focus on the positive customer transformation.",
+    "followUp": "What is the danger of repeatedly having ads rejected in the same ad account?",
+    "commonMistakes": ["Panicking and duplicating the exact rejected ad without changes"],
+    "tip": "Frame rejections as routine compliance tasks with calm appeal steps."
+  },
+  {
+    "slug": "iq-rookie-14-setup-ad-account-checklist",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-02-meet-the-meta-world",
+    "question": "What key assets do you need to set up a brand new Meta Ad Account for an Indian business?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "Meta Business Portfolio (Business Manager) with 2-Factor Authentication",
+      "Facebook Business Page and linked Instagram Professional Profile",
+      "Ad Account with currency set to INR (₹) and timezone to Asia/Kolkata",
+      "Verified payment method (credit card / Netbanking) and valid 18% GST number"
+    ],
+    "modelAnswer": "To set up a professional Meta ad presence in India, you need four core assets: First, a Meta Business Portfolio with two-factor authentication enabled for security. Second, an active Facebook Business Page linked to an Instagram Professional account. Third, a dedicated Ad Account configured with Indian Rupee (INR) currency and Asia/Kolkata timezone (which cannot be changed later). Finally, a valid business payment method and the company's 18% GSTIN to ensure official tax invoices and input tax credits.",
+    "followUp": "Why is setting the timezone correctly on day 1 so important?",
+    "commonMistakes": ["Forgetting to add GST details, losing 18% input credit"],
+    "tip": "Highlight the INR currency and Indian GST billing requirements."
+  },
+  {
+    "slug": "iq-rookie-15-kpis-ecommerce-vs-leadgen",
+    "tier": "rookie",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-rookie-05-metrics-101",
+    "question": "Which KPIs matter most for an e-commerce brand versus a local lead generation client?",
+    "levelTag": "Fresher",
+    "keyPoints": [
+      "E-commerce KPIs: ROAS, Cost Per Purchase (CPA), Average Order Value (AOV), Website CVR",
+      "Lead Generation KPIs: Cost Per Lead (CPL), Lead Form Completion Rate, Cost Per Qualified Lead (CPQL), Speed to Lead",
+      "E-commerce directly tracks rupee transactions; Lead gen tracks prospect inquiries into sales pipeline"
+    ],
+    "modelAnswer": "For an e-commerce brand, the primary north-star KPIs are ROAS (Return On Ad Spend), CPA (Cost Per Acquisition), and AOV (Average Order Value). We track the exact purchase transaction on the website. For a local lead generation client (like a salon or real estate agency), the transaction happens offline. Therefore, the critical KPIs are CPL (Cost Per Lead), Form Conversion Rate, and downstream metrics like Cost Per Qualified Lead and booking show-up rate.",
+    "followUp": "If an e-commerce client has great CTR but terrible ROAS, what are the three things you examine?",
+    "commonMistakes": ["Evaluating lead generation businesses on ROAS when sales occur offline"],
+    "tip": "Distinguish between online immediate transactions and offline sales pipelines."
+  }
+]

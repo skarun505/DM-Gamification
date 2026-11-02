@@ -1,0 +1,46 @@
+{
+  "slug": "is-strat-meta-vs-shopify",
+  "tier": "strategist",
+  "title": "Attribution Puzzle: 'Meta Shows 12 Sales, Shopify Shows 20'",
+  "lessonSlug": "meta-strategist-04-attribution-and-incrementality",
+  "story": "A brand owner notices a discrepancy on Tuesday: Meta Ads Manager claims 12 purchases, but Shopify reports 20 total orders for the day. The owner asks: 'Did Meta only bring 12 sales, or is tracking broken? Where did the other 8 orders come from?'",
+  "data": {
+    "table": [
+      ["Platform", "Orders Reported", "Reported Revenue", "Attribution Window"],
+      ["Meta Ads Manager", "12", "₹36,000", "7-Day Click / 1-Day View"],
+      ["Shopify Total Orders", "20", "₹58,000", "Direct Store Backend"],
+      ["Google Analytics 4", "7 via Paid Social", "₹21,000", "Last-Click Session Model"]
+    ]
+  },
+  "steps": [
+    {
+      "prompt": "How do you explain the difference between Shopify total sales and Meta reported sales?",
+      "options": [
+        "Shopify counts ALL business channels (organic search, returning customers, email, direct, referrals), whereas Meta only tracks orders directly touched by your ad campaigns",
+        "Meta's servers crashed and lost 8 orders",
+        "Shopify is duplicating orders fraudulently",
+        "All 8 extra orders are bot traffic"
+      ],
+      "answer": 0,
+      "explain": "Shopify is the store ledger recording every sale regardless of origin. Meta only attributes sales to users who saw or clicked an ad within its attribution window."
+    },
+    {
+      "prompt": "Why does GA4 report only 7 orders from Paid Social while Meta claims 12?",
+      "options": [
+        "Meta includes 1-day view-through conversions and cross-device journeys that last-click browser cookies in GA4 attribute to direct or organic search",
+        "GA4 does not work on iPhones",
+        "Meta charges for views without recording clicks",
+        "GA4 is inaccurate and should be deleted"
+      ],
+      "answer": 0,
+      "explain": "Customers often discover a product on an Instagram ad on their phone, and later purchase on desktop via direct or Google search. Meta matches the user identity; GA4 credits the last touch."
+    }
+  ],
+  "finalQuestion": "What metric will you advise the CEO to look at to judge true blended business health?",
+  "keyPoints": [
+    "Advise focusing on Blended MER (Marketing Efficiency Ratio)",
+    "Explain total store revenue divided by total paid ad spend across all channels",
+    "Monitor branded search correlation alongside Meta spend"
+  ],
+  "modelAnswer": "I advise the CEO to anchor on Marketing Efficiency Ratio (MER): Total Shopify Revenue divided by Total Ad Spend. While in-platform dashboards suffer from attribution overlap and cookie loss, MER measures pure commercial reality. If scaling Meta spend increases total store MER profitably, the channel is working regardless of whether individual orders are credited to Meta, GA4, or Direct."
+}

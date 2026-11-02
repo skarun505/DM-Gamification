@@ -1,0 +1,47 @@
+{
+  "slug": "is-op-realestate-cheap-leads",
+  "tier": "operator",
+  "title": "Real Estate: Cheap Leads But Zero Call Pickups",
+  "lessonSlug": "meta-operator-05-getting-leads-forms-vs-web-vs-whatsapp",
+  "story": "A real estate builder in Noida is running lead ads for 2BHK luxury apartments starting at ₹75 Lakhs. Leads are coming in cheap at ₹90 each, but the sales director is furious: '85% of these leads say they never filled any form or hang up immediately!'",
+  "data": {
+    "table": [
+      ["Parameter", "Current Campaign", "Recommended Fix"],
+      ["Form Type", "More Volume (Default)", "Higher Intent with Review Screen"],
+      ["Price Mentioned", "Hidden in caption", "Bold in video hook and headline"],
+      ["Qualifying Questions", "None (Name + Phone auto-fill)", "Budget range + Timeline to buy"],
+      ["Speed to Lead", "Called 24-48 hours later", "Called within 10 minutes"]
+    ]
+  },
+  "steps": [
+    {
+      "prompt": "What caused so many people to claim they 'never filled any form'?",
+      "options": [
+        "Hackers attacked the ad account",
+        "The 'More Volume' instant form auto-filled their profile details and submitted on an accidental click without clear price disclosure",
+        "Meta created fake profiles",
+        "The ad showed on TV"
+      ],
+      "answer": 1,
+      "explain": "Default auto-fill forms allow users to submit in two accidental taps without even reading what property was advertised."
+    },
+    {
+      "prompt": "What changes must you implement immediately in Ads Manager?",
+      "options": [
+        "Delete the builder's Facebook page",
+        "Put '₹75 Lakhs Onwards' prominently in the headline, switch to 'Higher Intent' form, and add mandatory custom dropdowns: 'Budget: ₹75L-₹1Cr' and 'Buying Timeline'",
+        "Lower the price to ₹5 Lakhs",
+        "Run ads only in the USA"
+      ],
+      "answer": 1,
+      "explain": "Placing price front-and-center filters out window shoppers who cannot afford ₹75 Lakhs, while mandatory dropdowns ensure intentional submission."
+    }
+  ],
+  "finalQuestion": "CPL will likely rise from ₹90 to ₹350 after this change. How will you explain this to the builder?",
+  "keyPoints": [
+    "Explain that ₹90 leads were costing sales team wasted hours calling fake prospects",
+    "Cost per Site Visit and qualified buyer cost is what actually determines ROI",
+    "Fewer, higher-intent leads produce more actual property sales"
+  ],
+  "modelAnswer": "I explain that paying ₹90 for leads who hang up wastes your sales team's payroll and morale. By adding price transparency and qualifying questions, CPL will rise to ₹350, but 70% of those leads will answer calls and schedule site visits. 10 qualified site visits at ₹350 CPL generate far more booked apartments than 100 accidental clicks at ₹90."
+}

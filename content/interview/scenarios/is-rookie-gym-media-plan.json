@@ -1,0 +1,47 @@
+{
+  "slug": "is-rookie-gym-media-plan",
+  "tier": "rookie",
+  "title": "Gym Media Plan: 1-Page Take-Home Assignment",
+  "lessonSlug": "meta-rookie-07-budget-basics",
+  "story": "As part of an agency interview, you are asked to draft a 1-page media plan for a new gym branch in Whitefield, Bengaluru with a ₹45,000 launch budget over 30 days.",
+  "data": {
+    "table": [
+      ["Component", "Proposed Choice", "Rationale"],
+      ["Total Budget", "₹45,000", "₹1,500 / day across 30 days"],
+      ["Objective", "Leads (Instant Forms)", "Zero latency, pre-filled contact details"],
+      ["Audience Radius", "Whitefield + 6 km", "Commute catchment area"],
+      ["Core Offer", "Free 3-Day VIP Workout Pass", "Low friction trial offer"]
+    ]
+  },
+  "steps": [
+    {
+      "prompt": "How should you divide the ₹1,500 daily budget across ad sets?",
+      "options": [
+        "Create 15 ad sets with ₹100 each",
+        "Run 2 consolidated ad sets: Ad Set 1 (Broad 21-45, 6km radius) at ₹1,000/day, and Ad Set 2 (Fitness & Gym interests) at ₹500/day",
+        "Put all ₹1,500 into a Brand Awareness post",
+        "Spend the entire ₹45,000 in the first 48 hours"
+      ],
+      "answer": 1,
+      "explain": "Consolidating budget into 2 robust ad sets ensures each set generates 3-5 leads daily to exit the learning phase smoothly."
+    },
+    {
+      "prompt": "What 3 creative variations should you prepare for the launch?",
+      "options": [
+        "3 identical photos with different background colors",
+        "Variant A: Real member transformation video; Variant B: Fast-paced gym facility tour Reel; Variant C: Carousel of trainer credentials and equipment",
+        "3 text-only memes",
+        "Stock photos of bodybuilders from foreign countries"
+      ],
+      "answer": 1,
+      "explain": "Testing 3 distinct angles (social proof, facility tour, trainer expertise) helps identify which psychological trigger hooks local members."
+    }
+  ],
+  "finalQuestion": "Write a 3-bullet summary describing your review and optimization schedule across the 30-day campaign.",
+  "keyPoints": [
+    "Day 1-2: Confirm delivery and spend pacing without touching settings",
+    "Day 3-5: Evaluate CTR and CPL across creatives, pausing low performers",
+    "Weekly: Refresh creatives and increase budget 15-20% on winning ad sets"
+  ],
+  "modelAnswer": "• Days 1-2: Audit delivery pacing, ensure pixel and CRM lead notifications trigger within 60 seconds without altering settings.\n• Days 3-5: Evaluate Outbound CTR and cost per trial pass; pause creatives with CTR under 1.0% and reallocate spend to the top transformation Reel.\n• Days 7-30: Scale winning ad sets by 15-20% weekly while monitoring lead show-up rates with the gym front desk."
+}

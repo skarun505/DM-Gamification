@@ -1,0 +1,76 @@
+{
+  "slug": "meta-rookie-09-how-ad-auction-works",
+  "world": "meta",
+  "tier": "rookie",
+  "order": 9,
+  "title": "How the Ad Auction Works",
+  "minutes": 4,
+  "objectives": [
+    "Understand the Total Auction Value formula",
+    "Discover why higher ad quality lowers your advertising costs",
+    "Learn why the biggest bank account doesn't always win on Meta"
+  ],
+  "glossary": ["ad-auction", "estimated-action-rate", "ad-quality", "lowest-cost-bidding"],
+  "blocks": [
+    { "type": "pixie", "text": "Every time an Instagram user opens their feed, Meta runs an auction in 1/100th of a second!" },
+    { "type": "text", "text": "Who wins that feed slot? Not just the person willing to pay the most money. Meta protects its users from boring, spammy ads." },
+    { "type": "analogy", "title": "The Total Value Formula", "text": "Total Value = (Bid Amount) × (Estimated Action Rate) + (Ad Quality & Relevance Score). If your creative is beloved by users, your required bid drops dramatically!" },
+    { "type": "compare", "left": { "title": "Brand A (Boring Ad)", "points": ["High bid: ₹10 per click", "Low engagement & clickbait reports", "Total Value: Low → Costs stay very high"] }, "right": { "title": "Brand B (Engaging Ad)", "points": ["Low bid: ₹4 per click", "High watch-time and genuine comments", "Total Value: High → Meta rewards with cheap CPM!"] } },
+    { "type": "tip", "text": "You can beat giant corporate competitors with deep pockets simply by having a better, more relatable ad creative." },
+    { "type": "warning", "text": "Misleading hooks, sensational health claims, or hiding prices will tank your Ad Quality score and inflate costs." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What is the core formula Meta uses to determine who wins the ad auction?",
+      "options": [
+        "Highest Cash Bid wins automatically",
+        "Total Value = Bid × Estimated Action Rate + Ad Quality",
+        "Account Age × Number of Followers",
+        "Random draw with equal chances"
+      ],
+      "answer": 1,
+      "hint": "Remember the 3 factors: money, predicted user action, and user experience score.",
+      "explain": "Meta multiplies your bid by the likelihood of action, plus the quality score of your creative."
+    },
+    {
+      "id": "q2",
+      "q": "How can a small local business with a ₹500/day budget beat a large brand in the auction?",
+      "options": [
+        "By hacking Meta's algorithm",
+        "By creating high-engagement ads with high relevance and click-through rates",
+        "By filing legal complaints",
+        "By posting ads only at 3:00 AM"
+      ],
+      "answer": 1,
+      "hint": "High ad quality and predicted actions lower the required monetary bid.",
+      "explain": "High creative relevance earns lower CPMs, allowing smaller budgets to win high-value impressions."
+    },
+    {
+      "id": "q3",
+      "q": "True or False: Using clickbait headlines like 'You won't believe this shocking secret!' improves your ad quality score.",
+      "type": "tf",
+      "answer": false,
+      "hint": "Does Meta like sensational clickbait that frustrates users?",
+      "explain": "False. Meta actively penalizes clickbait and withheld information, increasing your advertising costs."
+    },
+    {
+      "id": "q4",
+      "q": "What does 'Estimated Action Rate' represent in the auction?",
+      "options": [
+        "How fast your website server loads",
+        "Meta's prediction of how likely this specific user is to complete your campaign goal",
+        "The number of emojis in your caption",
+        "The battery life of the user's phone"
+      ],
+      "answer": 1,
+      "hint": "Prediction based on past behavior of the person viewing the ad.",
+      "explain": "Meta predicts whether a user is genuinely interested in your type of offer before placing the ad."
+    }
+  ],
+  "recap": [
+    "Total Auction Value balances Bid, Estimated Action Rate, and Ad Quality.",
+    "A better creative directly lowers your acquisition costs in the auction."
+  ],
+  "next": "meta-rookie-10-launch-checklist-first-results"
+}

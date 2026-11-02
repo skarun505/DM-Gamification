@@ -1,0 +1,48 @@
+{
+  "slug": "is-strat-disabled-account-sale",
+  "tier": "strategist",
+  "title": "Crisis Management: Ad Account Disabled Before Festive Sale",
+  "lessonSlug": "meta-strategist-08-policies-rejections-account-health",
+  "story": "It's October 28th, exactly 48 hours before Diwali Mega Sale kicks off. The client's primary Meta ad account is abruptly disabled with an automated notification: 'Unusual activity detected in billing'. The client is panicking.",
+  "data": {
+    "table": [
+      ["Hour", "Incident", "Action"],
+      ["Hour 0", "Account disabled by automated security bot", "Triage trigger reason in Account Quality"],
+      ["Hour 1", "Submit formal verification appeal with bank proofs", "Request priority escalation"],
+      ["Hour 2", "Activate pre-warmed backup Ad Account B", "Point backup campaigns to verified Pixel CAPI"],
+      ["Hour 24", "Primary account restored by Meta support", "Zero sale downtime achieved"]
+    ]
+  },
+  "steps": [
+    {
+      "prompt": "What is your immediate response to diagnose the restriction in the first 15 minutes?",
+      "options": [
+        "Create 10 fake personal Facebook accounts to run ads",
+        "Open Meta Account Quality to identify the exact trigger (e.g. credit card limit reached, new payment card mismatch, or policy violation) and prepare certified business bank statements and PAN",
+        "Blame the client and stop answering phone calls",
+        "File a police complaint"
+      ],
+      "answer": 1,
+      "explain": "Most sudden festive bans are automated billing fraud checks caused by rapid budget scaling. Auditing Account Quality reveals the exact verification requested."
+    },
+    {
+      "prompt": "How does an experienced agency ensure advertising doesn't stop completely during an appeal?",
+      "options": [
+        "By relying on street pamphlets",
+        "By utilizing an existing pre-warmed backup Ad Account inside the Business Portfolio, sharing the verified Pixel and product catalog",
+        "By asking customers to run ads from their personal phones",
+        "By waiting 10 days for support"
+      ],
+      "answer": 1,
+      "explain": "Agency infrastructure should always have secondary pre-warmed ad accounts sharing the same business manager and pixel assets for instant failover."
+    }
+  ],
+  "finalQuestion": "Write the communication update you send to the client 1 hour into the crisis.",
+  "keyPoints": [
+    "Acknowledge the situation calmly without passing blame",
+    "State the exact root cause identified (automated security billing check)",
+    "Confirm that formal appeal has been filed with bank statements",
+    "Confirm backup account is active and state the next check-in time"
+  ],
+  "modelAnswer": "Hi Team, we have triaged the account flag: Meta's automated security triggered a routine billing check following our recent budget scale. We have already submitted the bank authorization and business PAN in Account Quality for priority review. To ensure zero downtime for your Diwali sale, we have activated our secondary backup ad account with your top-performing creatives. Pacing is live and healthy. I will provide our next update at 2 PM."
+}

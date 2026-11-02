@@ -1,0 +1,28 @@
+{
+  "slug": "sim-rookie-01-salon-leads",
+  "title": "Salon Lead Campaign",
+  "brief": "A premium hair salon in Indiranagar, Bengaluru wants appointment bookings. You have a budget of ₹500/day for 7 days (Total ₹3,500). Pick the winning setup to get at least 25 bookings at under ₹120 per lead!",
+  "fixed": {
+    "baseCPM": 140,
+    "baseCTR": 0.014,
+    "baseCVR": 0.09,
+    "offerStrength": 1.1,
+    "landingQuality": 1.0,
+    "pixelInstalled": true,
+    "aov": 800
+  },
+  "editable": ["objective", "dailyBudget", "audience", "creative", "placements"],
+  "creativeOptions": [
+    { "id": "a", "label": "Stock photo of smiling model + long generic text", "quality": 0.7 },
+    { "id": "b", "label": "Before/After hair transformation Reel + 20% off offer", "quality": 1.4 },
+    { "id": "c", "label": "Salon logo with address only", "quality": 0.55 }
+  ],
+  "pass": {
+    "all": [
+      { "metric": "CPL", "op": "<=", "value": 120 },
+      { "metric": "conversions", "op": ">=", "value": 25 }
+    ]
+  },
+  "hintIds": ["sim-rookie-01-salon-leads"],
+  "xp": 50
+}

@@ -1,0 +1,75 @@
+{
+  "slug": "meta-rookie-10-launch-checklist-first-results",
+  "world": "meta",
+  "tier": "rookie",
+  "order": 10,
+  "title": "Launch Checklist & Reading Results",
+  "minutes": 5,
+  "objectives": [
+    "Run through the pre-flight checklist before hitting the Publish button",
+    "Know what metrics to check on Day 1, Day 3, and Day 7",
+    "Master the golden rule of what NOT to touch during learning"
+  ],
+  "glossary": ["breakdown-reporting", "learning-phase", "cpl", "ctr"],
+  "blocks": [
+    { "type": "pixie", "text": "Congratulations on reaching Lesson 10! You are ready to launch your first live campaign." },
+    { "type": "steps", "title": "The 5-Point Pre-Flight Launch Checklist", "items": ["1. Objective Matches Goal (Leads for forms/WhatsApp, Sales for e-commerce)", "2. Destination URL & Tracking tested (Lead form opens, Pixel fires)", "3. Budget set appropriately (3x-5x target CPL daily)", "4. Spelling, pricing, and phone numbers verified in ad text", "5. Correct payment method & GST details active"] },
+    { "type": "table", "headers": ["Day", "What to Look At", "Action to Take"], "rows": [
+      ["Day 1", "Delivery & Impressions", "Confirm budget is spending; DO NOT judge results yet!"],
+      ["Day 3", "CTR (Hook appeal) & CPM", "If CTR > 1.2%, creative is working. Check if first leads arrived."],
+      ["Day 7", "Cost Per Result (CPL / CPA) & Volume", "Calculate actual ROI. Decide whether to scale or refresh creative."]
+    ] },
+    { "type": "tip", "text": "Check Breakdown Reporting by Placement (Reels vs Feed) and Age to see where your cheapest results originate." },
+    { "type": "warning", "text": "Do NOT turn off an ad after 3 hours because it hasn't generated a sale. Meta needs 24-48 hours to balance delivery!" }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What should you check on Day 1 after hitting Publish on your new campaign?",
+      "options": [
+        "Calculate annual revenue and quit your job",
+        "Verify that impressions are delivering and spend is pacing properly without making any edits",
+        "Delete the ad if zero leads arrived in the first 2 hours",
+        "Double the budget every 30 minutes"
+      ],
+      "answer": 1,
+      "hint": "Day 1 is only for verifying technical health and delivery.",
+      "explain": "On Day 1, simply ensure the ad is active and spending smoothly. Give the algorithm time to find prospects."
+    },
+    {
+      "id": "q2",
+      "q": "On Day 3, your CTR is healthy at 2.1%, but you have received zero leads. Where is the most likely problem?",
+      "options": [
+        "The creative hook failed to get attention",
+        "The landing page or lead form: it might be broken, too slow, or asking for too much info",
+        "Meta banned your account",
+        "Instagram deleted your profile"
+      ],
+      "answer": 1,
+      "hint": "High CTR means people are clicking eagerly, but dropping off after arriving.",
+      "explain": "A high CTR with zero conversions indicates people like the ad, but the landing page or form fails to convert them."
+    },
+    {
+      "id": "q3",
+      "q": "True or False: Checking your campaign breakdown reports by age and placement helps you identify your most profitable customer segments.",
+      "type": "tf",
+      "answer": true,
+      "hint": "Can you see results separated by Feed vs Stories, or age brackets?",
+      "explain": "True! Breakdowns reveal exactly which placements and demographics generate the cheapest results."
+    },
+    {
+      "id": "q4",
+      "q": "Order the stages of reviewing a newly launched campaign from earliest to latest.",
+      "type": "order",
+      "items": ["Check pre-flight checklist & hit Publish", "Day 1: Confirm active delivery & spend", "Day 3: Check CTR & initial leads", "Day 7: Evaluate CPL/ROAS & plan scaling"],
+      "answer": [0, 1, 2, 3],
+      "hint": "Follow the chronological timeline.",
+      "explain": "You check pre-flight items, confirm delivery on Day 1, analyze engagement on Day 3, and evaluate ROI on Day 7."
+    }
+  ],
+  "recap": [
+    "Run the 5-point pre-flight checklist before launching.",
+    "Be patient: judge delivery on Day 1, CTR on Day 3, and CPL/ROAS on Day 7."
+  ],
+  "next": "sim-rookie-01-salon-leads"
+}

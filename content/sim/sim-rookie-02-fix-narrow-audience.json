@@ -1,0 +1,28 @@
+{
+  "slug": "sim-rookie-02-fix-narrow-audience",
+  "title": "Fix the Audience Trap",
+  "brief": "A gym in Pune is running ads, but their frequency has skyrocketed and people are complaining about ad fatigue. Fix the audience size from narrow (< 100k) to balanced or broad, select an engaging creative, and achieve frequency ≤ 3.0 with at least 20 new membership leads!",
+  "fixed": {
+    "baseCPM": 150,
+    "baseCTR": 0.015,
+    "baseCVR": 0.08,
+    "offerStrength": 1.0,
+    "landingQuality": 1.0,
+    "pixelInstalled": true,
+    "aov": 2500
+  },
+  "editable": ["objective", "dailyBudget", "audience", "creative", "placements"],
+  "creativeOptions": [
+    { "id": "a", "label": "Client 60-day fat loss transformation video with coach interview", "quality": 1.35 },
+    { "id": "b", "label": "Flyer graphic with 10 bullet points of equipment", "quality": 0.75 },
+    { "id": "c", "label": "Photo of empty dumbbells", "quality": 0.6 }
+  ],
+  "pass": {
+    "all": [
+      { "metric": "frequency", "op": "<=", "value": 3.0 },
+      { "metric": "conversions", "op": ">=", "value": 20 }
+    ]
+  },
+  "hintIds": ["sim-rookie-02-fix-narrow-audience"],
+  "xp": 50
+}

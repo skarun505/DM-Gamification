@@ -1,0 +1,61 @@
+{
+  "slug": "meta-rookie-03-campaign-adset-ad-structure",
+  "world": "meta",
+  "tier": "rookie",
+  "order": 3,
+  "title": "Campaign, Ad Set, Ad Structure",
+  "minutes": 4,
+  "objectives": [
+    "Memorize the 3-level structure of every Meta advertising campaign",
+    "Identify which settings live at each level",
+    "Understand the 'Building a House' analogy"
+  ],
+  "glossary": ["campaign", "ad-set", "ad-creative"],
+  "blocks": [
+    { "type": "pixie", "text": "Every single Meta ad in the world follows a strict 3-level hierarchy. Let's master it!" },
+    { "type": "analogy", "title": "Building a House Analogy", "text": "Level 1 (Campaign) is the Blueprint: what kind of house are we building? Level 2 (Ad Set) is the Rooms: who stays in which room, and what is the budget? Level 3 (Ad) is the Furniture & Paint: what does it look like to visitors?" },
+    { "type": "steps", "title": "What Lives Where?", "items": ["Level 1: Campaign — Your business goal (e.g., Leads, Sales, Traffic)", "Level 2: Ad Set — Audience targeting, locations, placements, schedule & budget", "Level 3: Ad — Video, image, headline, text, and Call-to-Action button"] },
+    { "type": "tip", "text": "One campaign can contain multiple ad sets (e.g., Bengaluru audience vs Delhi audience), and each ad set can hold multiple ads!" },
+    { "type": "warning", "text": "Never change your objective after creating a campaign. If your goal changes, create a new campaign." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "At which level of the Meta structure do you define your target location (e.g. Pune, 10km radius)?",
+      "options": ["Campaign level", "Ad Set level", "Ad level", "Pixel Settings"],
+      "answer": 1,
+      "hint": "Who, where, and when are set at the middle level.",
+      "explain": "Ad Set controls the audience demographics, locations, placements, and budgets."
+    },
+    {
+      "id": "q2",
+      "q": "Where do you write your ad headline and upload your product video?",
+      "options": ["Campaign level", "Ad Set level", "Ad level", "Business Portfolio"],
+      "answer": 2,
+      "hint": "Think of the creative that the user actually sees.",
+      "explain": "The Ad level holds the actual creative assets: images, videos, captions, and links."
+    },
+    {
+      "id": "q3",
+      "q": "True or False: A single campaign can have multiple ad sets targeting different cities.",
+      "type": "tf",
+      "answer": true,
+      "hint": "One campaign goal can test different audiences.",
+      "explain": "True. You can test Ad Set A (Mumbai) and Ad Set B (Delhi) under the same Leads campaign."
+    },
+    {
+      "id": "q4",
+      "q": "Place the 3 structural levels in order from top to bottom.",
+      "type": "order",
+      "items": ["Campaign (Goal)", "Ad Set (Audience & Budget)", "Ad (Visual & Text)"],
+      "answer": [0, 1, 2],
+      "hint": "Blueprint → Room → Furniture.",
+      "explain": "Campaign holds Ad Sets, and Ad Sets hold Ads."
+    }
+  ],
+  "recap": [
+    "Campaign = The Objective (What you want).",
+    "Ad Set = Audience, Placements, Budget (Who and Where). Ad = Creative and Copy (What they see)."
+  ],
+  "next": "meta-rookie-04-campaign-objectives"
+}

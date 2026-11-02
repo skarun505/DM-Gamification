@@ -1,0 +1,59 @@
+{
+  "slug": "meta-operator-01-custom-audiences",
+  "world": "meta",
+  "tier": "operator",
+  "order": 1,
+  "title": "Custom Audiences",
+  "minutes": 5,
+  "objectives": [
+    "Define what a Custom Audience is and how it differs from cold targeting",
+    "Identify the 3 major data sources: Website, Customer List, and Social Engagement",
+    "Apply recency windows to segment warm leads"
+  ],
+  "glossary": ["custom-audience", "lookback-window", "retargeting"],
+  "blocks": [
+    { "type": "pixie", "text": "Welcome to Operator tier! Now we stop guessing and start marketing to people who already know your brand." },
+    { "type": "text", "text": "A Custom Audience connects people who already interacted with your business directly to Meta's ad engine." },
+    { "type": "analogy", "title": "The Regular Customer Analogy", "text": "If a regular customer walks into a sweet shop, you don't introduce yourself again. You offer them their favorite laddoos with a discount. That is a Custom Audience!" },
+    { "type": "steps", "title": "The 3 Major Custom Audience Sources", "items": ["1. Website Visitors (tracked by Meta Pixel, e.g. past 14-day cart abandoners)", "2. Customer Lists (CSV upload of phone numbers and emails of past buyers)", "3. Meta Sources (people who watched 50% of your Instagram Reel or messaged your page)"] },
+    { "type": "tip", "text": "Always segment by recency: a person who visited your site yesterday is 5x more likely to buy than someone who visited 90 days ago." },
+    { "type": "warning", "text": "Ensure your customer list matches Indian phone formats with country code (+91) to maximize match rates." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "Which of the following is an example of a Meta Custom Audience?",
+      "options": ["People living in Mumbai interested in cricket", "People who visited your website pricing page in the last 14 days", "Men aged 18-24 with Android phones", "Anyone who likes Bollywood movies"],
+      "answer": 1,
+      "hint": "Think of people who have already touched your business assets.",
+      "explain": "Custom Audiences are built from first-party data: website traffic, customer lists, or app engagement."
+    },
+    {
+      "id": "q2",
+      "q": "Why is a 7-day website visitor audience generally more profitable than a 180-day visitor audience?",
+      "options": ["Meta charges 50% less for 7-day audiences", "Recency: The purchase intent is fresh in the customer's mind", "180-day audiences only work on desktop", "Older audiences cannot be tracked"],
+      "answer": 1,
+      "explain": "Recent visitors have high brand recall and immediate intent, resulting in higher conversion rates."
+    },
+    {
+      "id": "q3",
+      "q": "True or False: You can create a Custom Audience of people who watched at least 50% of your Instagram video Reel.",
+      "type": "tf",
+      "answer": true,
+      "hint": "Meta tracks video watch time internally without needing a website pixel.",
+      "explain": "True! Video engagement audiences are free and do not rely on browser cookies."
+    },
+    {
+      "id": "q4",
+      "q": "What phone number format should you use when uploading customer lists in India for maximum match rate?",
+      "options": ["Just 10 digits without country code", "International format with country code (e.g. +91XXXXXXXXXX)", "Only landline numbers", "PIN code instead of phone number"],
+      "answer": 1,
+      "explain": "Including +91 helps Meta accurately match phone numbers to user profiles."
+    }
+  ],
+  "recap": [
+    "Custom Audiences target warm users based on website visits, customer lists, or video views.",
+    "Prioritize recency (e.g. 7-14 days) to capture high-intent buyers."
+  ],
+  "next": "meta-operator-02-lookalike-audiences"
+}

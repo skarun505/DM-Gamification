@@ -1,0 +1,72 @@
+{
+  "slug": "meta-strategist-06-account-structure-and-audits",
+  "world": "meta",
+  "tier": "strategist",
+  "order": 6,
+  "title": "Account Structure & Audits",
+  "minutes": 5,
+  "objectives": [
+    "Consolidate messy ad accounts into clean, scalable structures",
+    "Implement agency-grade standardized naming conventions",
+    "Execute the 10-Point Account Audit Checklist"
+  ],
+  "glossary": ["cbo", "abo", "learning-phase", "audience-overlap"],
+  "blocks": [
+    { "type": "pixie", "text": "A messy ad account with 50 random ad sets is bleeding money! Let's build a clean, consolidated architecture." },
+    { "type": "text", "text": "Modern Meta advertising rewards consolidation. Having 2-3 high-budget campaigns exits the learning phase 10x faster than 25 tiny fragmented ad sets." },
+    { "type": "steps", "title": "The Clean 3-Campaign Account Architecture", "items": ["1. [CBO] Scaling Campaign: Top 15-20% proven winning creative assets with Advantage+ Broad targeting", "2. [ABO] Testing Sandbox: 3-4 isolated ad sets testing new hooks and angles weekly", "3. [RETARGET] Bottom-of-Funnel: 0-14 day cart abandoners and catalog carousels"] },
+    { "type": "analogy", "title": "The Highway Analogy", "text": "A fragmented account is like a traffic jam with 30 narrow single-lane alleys. A consolidated structure is a smooth 6-lane express highway where data flows at maximum speed!" },
+    { "type": "steps", "title": "The 10-Point Audit Checklist", "items": ["1. Pixel & CAPI deduplication verified", "2. EMQ score >= 8.0 on Purchase/Lead", "3. Standardized naming conventions active", "4. No active ad sets stuck in Learning Limited", "5. Purchaser exclusions in cold campaigns", "6. No >30% audience overlap between sets", "7. Vertical video Reels formats present", "8. Pacing: 70%+ budget in cold TOFU", "9. GSTIN active on Indian billing invoices", "10. At least 1 live creative test per week"] },
+    { "type": "tip", "text": "Naming Convention: [STAGE]_[TARGETING]_[CREATIVE_CODE]_[DATE]. Example: [TOFU]_[Broad_21-45]_[Reel_HookA]_[202611]." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "Why is a consolidated account structure (2-3 campaigns) vastly superior to running 30 micro ad sets?",
+      "options": [
+        "It looks neater in screenshots",
+        "It concentrates budget and conversion data into fewer machine learning algorithms, allowing campaigns to exit learning rapidly",
+        "Meta charges 50% less fee on consolidated accounts",
+        "It eliminates the need for video ads"
+      ],
+      "answer": 1,
+      "explain": "Consolidation provides the data density (~50 weekly conversions per set) required for algorithmic optimization."
+    },
+    {
+      "id": "q2",
+      "q": "What is the primary benefit of enforcing standardized naming conventions across an agency team?",
+      "options": [
+        "Anyone on the team can audit funnel stage, targeting, and creative variation at a glance without clicking through menus",
+        "Meta automatically gives awards for good naming",
+        "It increases organic search traffic",
+        "It prevents billing credit card errors"
+      ],
+      "answer": 0,
+      "explain": "Clear naming eliminates human confusion and speeds up reporting and account audits."
+    },
+    {
+      "id": "q3",
+      "q": "Which of the following is a red flag in a 10-point account audit?",
+      "options": [
+        "EMQ score is 8.5/10",
+        "5 cold ad sets are actively competing with 70% audience overlap and zero purchaser exclusions",
+        "Running Advantage+ Shopping with 12 creatives",
+        "70% of budget allocated to Top-of-Funnel"
+      ],
+      "answer": 1,
+      "explain": "Heavy audience overlap with missing purchaser exclusions leads to wasted spend and self-competition."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: In a mature account, the creative testing sandbox should run separately from the main scaling campaign.",
+      "type": "tf",
+      "answer": true,
+      "explain": "True! An isolated testing sandbox ensures unproven creative tests never jeopardize steady scaling performance."
+    }
+  ],
+  "recap": [
+    "Consolidate fragmented campaigns into Scaling (CBO), Testing (ABO), and Retargeting.",
+    "Use structured naming conventions and run the 10-point audit to eliminate leaks."
+  ],
+  "next": "meta-strategist-07-client-reporting-communication"
+}

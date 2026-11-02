@@ -1,0 +1,105 @@
+{
+  "slug": "boss-operator-expensive-leads",
+  "tier": "operator",
+  "title": "Boss 2: Why Are Leads So Expensive?",
+  "description": "Your biggest client's CPL has ballooned from ₹85 to ₹290. The CEO is on the phone questioning your skills. Diagnose the account over 6 surgical steps to restore profitability and defeat Boss 2!",
+  "passScorePct": 70,
+  "xp": 150,
+  "coins": 30,
+  "steps": [
+    {
+      "step": 1,
+      "title": "Step 1: Check Technical Health & Events Manager",
+      "context": "Before touching any ad copy, you inspect Events Manager. The 'Lead' event shows a warning badge.",
+      "question": "What is the very first diagnostic check in Events Manager?",
+      "options": [
+        "Delete the pixel and reinstall it",
+        "Verify event match quality and test standard event firing with the Meta Pixel Helper to confirm leads are actually recording",
+        "Change the ad account billing currency to US Dollars",
+        "Ignore the warning and blame the sales team"
+      ],
+      "answer": 1,
+      "explain": "Always confirm tracking health first. If pixel events stop firing or double-fire, all dashboard metrics become untrustworthy.",
+      "hint": "Check if conversions are actually reaching Meta's servers."
+    },
+    {
+      "step": 2,
+      "title": "Step 2: Inspect Frequency & Creative Fatigue",
+      "context": "Tracking is verified healthy. You open the Ad Set dashboard and look at Frequency over the last 14 days.",
+      "tableData": [
+        ["Ad Set", "Audience Size", "Impressions", "Reach", "Frequency"],
+        ["Ad Set 1 (Cold Interests)", "85,000", "420,000", "82,000", "5.12"],
+        ["Ad Set 2 (Broad Metro)", "2,400,000", "310,000", "190,000", "1.63"]
+      ],
+      "question": "What does this frequency data reveal about Ad Set 1?",
+      "options": [
+        "Ad Set 1 is performing brilliantly because people love seeing ads 5 times",
+        "Ad Set 1 is suffering from severe creative fatigue: users have seen the same ad over 5 times, driving up CPM and tanking CTR",
+        "Frequency 5.12 means 5 people clicked the ad",
+        "Nothing is wrong"
+      ],
+      "answer": 1,
+      "explain": "A frequency over 5.0 on a cold audience means everyone has seen the ad multiple times and is now tuning it out.",
+      "hint": "What happens to people when they see the exact same ad 5 times?"
+    },
+    {
+      "step": 3,
+      "title": "Step 3: Audience Overlap Audit",
+      "context": "You check Meta's Audience Overlap tool between Ad Set 1 and a third retargeting ad set in the account.",
+      "question": "The tool shows 68% audience overlap between the two ad sets. What is the consequence?",
+      "options": [
+        "Meta gives you a 68% discount on clicks",
+        "Your own ad sets are entering the ad auction bidding against each other, unnecessarily inflating your own CPM",
+        "Leads will automatically convert on WhatsApp",
+        "Your ads will run on Google search"
+      ],
+      "answer": 1,
+      "explain": "High audience overlap causes self-competition in auctions, driving up your own CPMs.",
+      "hint": "Are your own campaigns competing for the same customers?"
+    },
+    {
+      "step": 4,
+      "title": "Step 4: Landing Page Speed & Conversion Rate",
+      "context": "You test the landing page on Google PageSpeed Insights on a 4G mobile connection. The load time is 6.8 seconds.",
+      "question": "How does a 6.8-second mobile load time impact your campaign's Cost Per Lead?",
+      "options": [
+        "It has zero impact because Meta users are very patient",
+        "Over 50% of visitors abandon the page before it loads, causing high CPC/CPM to translate into terrible conversion rates and sky-high CPL",
+        "Slow load times improve SEO rankings",
+        "Meta speeds up the page automatically"
+      ],
+      "answer": 1,
+      "explain": "Every second of mobile loading latency causes a ~20% drop in conversions. Reducing load time to 1.5s cuts drop-offs in half.",
+      "hint": "Do you wait 7 seconds for a website to open on your phone?"
+    },
+    {
+      "step": 5,
+      "title": "Step 5: The Offer & Form Friction",
+      "context": "The lead form currently requires 8 manual input fields: Full Name, Email, Phone, Company, Designation, Annual Turnover, GST Number, and City.",
+      "question": "What is the recommended optimization to remove form friction?",
+      "options": [
+        "Add 5 more questions to make it even more thorough",
+        "Streamline the form to 3 essential fields (Name, Phone, City), and ask downstream qualification questions over the sales call or WhatsApp",
+        "Remove the phone number field",
+        "Ask for their home address and Aadhaar card"
+      ],
+      "answer": 1,
+      "explain": "Friction kills form conversion. Keep initial lead capture short and gather deeper details on the phone or via WhatsApp.",
+      "hint": "Fewer mandatory fields = higher completion rate."
+    },
+    {
+      "step": 6,
+      "title": "Step 6: Executing the Recovery Plan",
+      "context": "You have identified all the leaks. What is the comprehensive recovery roadmap you execute today?",
+      "options": [
+        "Delete the entire ad account and start fresh with a new Facebook page",
+        "1. Pause fatigued Ad Set 1; 2. Consolidate overlapping audiences; 3. Compress landing page images to hit <2s load time; 4. Reduce form fields to 3 essential questions; 5. Deploy 3 fresh video hook variations.",
+        "Triple the daily budget to ₹15,000 to overpower the auction",
+        "Do nothing and tell the CEO to wait 6 months"
+      ],
+      "answer": 1,
+      "explain": "This 5-point action plan addresses tracking, creative fatigue, audience self-competition, page speed, and form conversion simultaneously.",
+      "hint": "Combine fixes across creative, audience, and landing page."
+    }
+  ]
+}

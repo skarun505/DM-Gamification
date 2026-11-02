@@ -1,0 +1,14 @@
+{
+  "world": "google",
+  "status": "locked",
+  "title": "Google Ads Realm",
+  "description": "Intent-driven advertising across Search, YouTube, Performance Max, and GA4.",
+  "upcomingLessons": [
+    "Search Ads & Intent Basics",
+    "Keywords and Match Types (Exact, Phrase, Broad)",
+    "Ad Copy, Extensions & Quality Score",
+    "Performance Max (PMax) Campaigns",
+    "YouTube Video Advertising",
+    "Google Analytics 4 (GA4) & Tag Manager"
+  ]
+}

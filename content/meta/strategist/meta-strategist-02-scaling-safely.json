@@ -1,0 +1,67 @@
+{
+  "slug": "meta-strategist-02-scaling-safely",
+  "world": "meta",
+  "tier": "strategist",
+  "order": 2,
+  "title": "Scaling Safely: Vertical vs Horizontal",
+  "minutes": 5,
+  "objectives": [
+    "Master the 20% rule for safe vertical budget scaling",
+    "Implement horizontal scaling by expanding audiences and creative angles",
+    "Know when to duplicate winning campaigns versus scaling in-place"
+  ],
+  "glossary": ["vertical-scaling", "horizontal-scaling", "learning-phase", "cbo"],
+  "blocks": [
+    { "type": "pixie", "text": "Scaling is the ultimate test of a media buyer! Here is how you multiply ad spend without blowing up your costs." },
+    { "type": "text", "text": "There are two fundamental ways to scale Meta campaigns: Vertical Scaling (budget) and Horizontal Scaling (audience and creative breadth)." },
+    { "type": "compare", "left": { "title": "Vertical Scaling", "points": ["Increase budget on an existing winning ad set", "The 20% Rule: Increase budget by max 15-20% every 48-72 hours", "Maintains machine learning stability", "Has a natural saturation ceiling"] }, "right": { "title": "Horizontal Scaling", "points": ["Scale by finding new audiences and creative angles", "Test 2% Lookalike, Broad Demographics, or new cities", "Duplicate winning ad sets into new targets", "Allows 10x-50x spend expansion"] } },
+    { "type": "analogy", "title": "The Airplane Engine Analogy", "text": "If a pilot pushes the throttle from 20% to 100% in half a second, the engine stalls. If they smoothly advance the throttle in calibrated increments, the plane soars safely into the sky!" },
+    { "type": "tip", "text": "When to Duplicate: If an ad set is performing at 4.0x ROAS with ₹1,000/day and you want to test aggressive budget jumps (e.g. ₹5,000/day), duplicate it into a separate campaign so you never risk breaking the original winner." },
+    { "type": "warning", "text": "Never double a winning ad set's budget overnight (e.g. ₹2,000 to ₹4,000). It shocks the bidding algorithm and immediately sends it back to Learning Phase." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What is the recommended maximum percentage budget increase when vertically scaling an ad set in-place?",
+      "options": ["Up to 15% to 20% every 48 to 72 hours", "300% every morning", "10x once a week", "Increase by exactly ₹1 every hour"],
+      "answer": 0,
+      "explain": "Increments under 20% keep the bidding model calibrated without resetting machine learning."
+    },
+    {
+      "id": "q2",
+      "q": "What is 'Horizontal Scaling' in Meta media buying?",
+      "options": [
+        "Making horizontal banner images wider",
+        "Expanding reach by testing new creative angles, new lookalike tiers, and broader geographic audiences",
+        "Running ads only between 9 AM and 5 PM",
+        "Decreasing your daily spend"
+      ],
+      "answer": 1,
+      "explain": "Horizontal scaling expands the total pool of addressable prospects by adding new angles and audiences."
+    },
+    {
+      "id": "q3",
+      "q": "Why is duplicating a winning ad set into a new campaign with a higher budget often safer than editing the original?",
+      "options": [
+        "It protects the original profitable baseline from breaking if the high-budget test fails to stabilize",
+        "Meta gives free bonus ad spend for duplicated ads",
+        "Duplicated ads bypass GST taxes",
+        "Duplicated ads run 5x faster"
+      ],
+      "answer": 0,
+      "explain": "Duplication preserves the steady baseline cash flow while isolating high-budget experimentation."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: If you increase budget by 200% in one click, Meta guarantees that your lead volume will triple.",
+      "type": "tf",
+      "answer": false,
+      "explain": "False! Sudden budget shocks typically degrade auction efficiency, causing CPL to double or triple instead."
+    }
+  ],
+  "recap": [
+    "Scale vertically using the 20% rule every 48-72 hours to preserve machine learning.",
+    "Scale horizontally by discovering new creative angles and expanding to broad targeting."
+  ],
+  "next": "meta-strategist-03-advantage-plus-campaigns"
+}

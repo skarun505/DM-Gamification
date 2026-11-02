@@ -1,0 +1,28 @@
+{
+  "slug": "sim-operator-02-creative-ab-test",
+  "title": "Operator Sim 2: Creative A/B Test",
+  "brief": "Run a clean creative A/B test for a coaching centre in Delhi. Find the winning creative asset that achieves an average Outbound CTR >= 1.8% and generates at least 30 inquiries under ₹110 CPL!",
+  "fixed": {
+    "baseCPM": 150,
+    "baseCTR": 0.016,
+    "baseCVR": 0.08,
+    "offerStrength": 1.1,
+    "landingQuality": 1.0,
+    "pixelInstalled": true,
+    "aov": 5000
+  },
+  "editable": ["objective", "dailyBudget", "audience", "creative", "placements"],
+  "creativeOptions": [
+    { "id": "a", "label": "Hook 1: 'Stop memorizing formulas! Here is how our AIR 14 student scored 99%'", "quality": 1.4 },
+    { "id": "b", "label": "Hook 2: 'Admissions open for batch 2026' (Traditional flyer)", "quality": 0.7 },
+    { "id": "c", "label": "Hook 3: Building photo with founder portrait", "quality": 0.55 }
+  ],
+  "pass": {
+    "all": [
+      { "metric": "CTR", "op": ">=", "value": 1.8 },
+      { "metric": "CPL", "op": "<=", "value": 110 }
+    ]
+  },
+  "hintIds": ["sim-operator-02-creative-ab-test"],
+  "xp": 50
+}

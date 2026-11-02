@@ -1,0 +1,73 @@
+{
+  "slug": "meta-rookie-04-campaign-objectives",
+  "world": "meta",
+  "tier": "rookie",
+  "order": 4,
+  "title": "Campaign Objectives",
+  "minutes": 5,
+  "objectives": [
+    "Learn Meta's 6 outcome-based campaign objectives",
+    "Select the exact objective for real business scenarios",
+    "Avoid the common rookie trap of running 'Traffic' for sales"
+  ],
+  "glossary": ["campaign", "conversion", "instant-form", "click-to-whatsapp"],
+  "blocks": [
+    { "type": "pixie", "text": "Meta gives you exactly what you ask for! Tell it the wrong goal, and you will waste your budget." },
+    { "type": "text", "text": "Meta uses Outcome-Driven Ad Experiences (ODAX) with 6 core objectives." },
+    { "type": "table", "headers": ["Objective", "Best For", "Meta's Optimization"], "rows": [
+      ["Awareness", "Reach maximum people at lowest cost", "People who remember seeing ads"],
+      ["Traffic", "Sending clicks to a website or blog", "People who click links indiscriminately"],
+      ["Engagement", "Post likes, comments, video views", "People who react and comment"],
+      ["Leads", "Forms, calls, WhatsApp inquiries", "People likely to submit contact info"],
+      ["Sales", "Purchases on an e-commerce website", "People with a habit of buying online"],
+      ["App Promotion", "Mobile app installs and registrations", "People who download apps"]
+    ] },
+    { "type": "analogy", "title": "The Window Shopper Trap", "text": "If you ask a shop assistant for 'traffic', they will invite teenagers who just want to look at pretty dresses. If you ask for 'buyers', they will invite people carrying credit cards." },
+    { "type": "tip", "text": "For local Indian businesses (salons, real estate, gyms, clinics), 'Leads' via Instant Forms or Click-to-WhatsApp is the top revenue generator." },
+    { "type": "warning", "text": "Never choose 'Traffic' when you want sales. Traffic gets you cheap accidental clickers, not paying customers." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "An online clothing boutique wants customers to buy sarees on their website. Which objective should they pick?",
+      "options": ["Traffic", "Engagement", "Sales", "Awareness"],
+      "answer": 2,
+      "hint": "Pick the objective that directly matches the money transaction.",
+      "explain": "The 'Sales' objective instructs Meta's algorithm to hunt for users who actually complete online checkouts."
+    },
+    {
+      "id": "q2",
+      "q": "A dentist in Jaipur wants local patients to book consultation calls. What is the ideal objective?",
+      "options": ["App Promotion", "Leads", "Awareness", "Video Views"],
+      "answer": 1,
+      "hint": "The dentist needs patient names and phone numbers.",
+      "explain": "'Leads' objective optimizes for contact inquiries via Instant Forms or direct WhatsApp conversations."
+    },
+    {
+      "id": "q3",
+      "q": "Why is choosing the 'Traffic' objective usually a mistake if your real goal is purchases?",
+      "options": [
+        "Meta charges 10x more for traffic ads",
+        "Meta will find cheap clickers who rarely buy anything",
+        "Traffic ads cannot contain images",
+        "Traffic ads only show on desktop"
+      ],
+      "answer": 1,
+      "hint": "Meta gives you what you ask for: clicks, not buyers.",
+      "explain": "Traffic optimizes purely for link clicks. Many clickers leave within 2 seconds without ever purchasing."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: If you change your mind about your objective after launch, you can simply edit the campaign objective dropdown.",
+      "type": "tf",
+      "answer": false,
+      "hint": "Can you change the blueprint once the house foundation is laid?",
+      "explain": "False. Once a campaign is created, the objective cannot be edited. You must create a new campaign."
+    }
+  ],
+  "recap": [
+    "Meta delivers exactly what you ask for: Awareness, Traffic, Engagement, Leads, Sales, or App Promotion.",
+    "For revenue, use 'Leads' for service businesses and 'Sales' for e-commerce stores."
+  ],
+  "next": "meta-rookie-05-metrics-101"
+}

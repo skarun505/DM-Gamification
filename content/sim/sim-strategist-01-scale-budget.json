@@ -1,0 +1,28 @@
+{
+  "slug": "sim-strategist-01-scale-budget",
+  "title": "Strategist Sim 1: Scaling Safely to ₹5k/Day",
+  "brief": "A direct-to-consumer Ayurvedic skincare brand in Mumbai wants to scale daily spend to ₹5,000/day for 7 days (Total ₹35,000). Set up your campaign parameters with broad reach, auto-placements, and high-performing dynamic creatives to achieve at least 70 purchases while maintaining an overall ROAS of at least 3.0x!",
+  "fixed": {
+    "baseCPM": 180,
+    "baseCTR": 0.022,
+    "baseCVR": 0.065,
+    "offerStrength": 1.25,
+    "landingQuality": 1.2,
+    "pixelInstalled": true,
+    "aov": 1500
+  },
+  "editable": ["objective", "dailyBudget", "audience", "creative", "placements"],
+  "creativeOptions": [
+    { "id": "a", "label": "Single static product shot with 10% coupon code", "quality": 0.8 },
+    { "id": "b", "label": "Advantage+ dynamic creative stack: 3 video hooks + problem-solution UGC + founder trust note", "quality": 1.4 },
+    { "id": "c", "label": "Glamour aesthetic reel with no clear product benefit or price", "quality": 0.6 }
+  ],
+  "pass": {
+    "all": [
+      { "metric": "ROAS", "op": ">=", "value": 3.0 },
+      { "metric": "conversions", "op": ">=", "value": 70 }
+    ]
+  },
+  "hintIds": ["sim-strategist-01-scale-budget"],
+  "xp": 75
+}

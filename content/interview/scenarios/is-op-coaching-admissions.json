@@ -1,0 +1,47 @@
+{
+  "slug": "is-op-coaching-admissions",
+  "tier": "operator",
+  "title": "Coaching Institute: 20-Day Admissions Blitz",
+  "lessonSlug": "meta-operator-05-getting-leads-forms-vs-web-vs-whatsapp",
+  "story": "A prominent coaching institute has a ₹1,00,000 budget for their 20-day JEE/NEET admissions window. They need at least 400 qualified student and parent inquiries before registrations close.",
+  "data": {
+    "table": [
+      ["Metric", "Target", "Current Baseline"],
+      ["Spend / Day", "₹5,000", "₹5,000"],
+      ["Duration", "20 Days", "Peak admission season"],
+      ["Target Leads", "400 Total", "20 leads / day required"],
+      ["Target CPL", "₹250", "Market average ₹220-₹280"]
+    ]
+  },
+  "steps": [
+    {
+      "prompt": "Who is the primary decision-maker you should target on Meta for high-ticket coaching admissions?",
+      "options": [
+        "Students aged 13-15 only",
+        "Both parents (aged 38-55) focusing on faculty and results, and high-school students (16-18) focusing on clarity and mentorship",
+        "College graduates aged 25-30",
+        "Kindergarten teachers"
+      ],
+      "answer": 1,
+      "explain": "In Indian education, parents pay the fees and care about rank history, while students care about relatable teachers and understanding concepts."
+    },
+    {
+      "prompt": "How do you ensure leads aren't random students with fake phone numbers?",
+      "options": [
+        "Use Instant Form with custom questions (Target Exam, Current Class, City) and require OTP SMS verification",
+        "Offer a free ₹500 Amazon voucher for filling the form",
+        "Remove all questions from the form",
+        "Ask for a scanned copy of passport"
+      ],
+      "answer": 0,
+      "explain": "Adding mandatory academic fields and phone verification filters out accidental clicks and validates phone numbers."
+    }
+  ],
+  "finalQuestion": "What lead follow-up protocol should you mandate to the coaching centre's telecalling team?",
+  "keyPoints": [
+    "Mandate Speed to Lead under 10 minutes",
+    "Send an automated WhatsApp confirmation brochure immediately",
+    "Log qualified status back into CRM to train Meta Custom Audiences"
+  ],
+  "modelAnswer": "I mandate a sub-10-minute Speed to Lead: our telecalling team must call the parent while the ad is fresh in their mind. Simultaneously, an automated WhatsApp integration sends our JEE rank-holder brochure and sample mock test link within 30 seconds. Finally, telecallers mark qualified leads in CRM so we can feed offline conversions back to Meta for algorithmic optimization."
+}

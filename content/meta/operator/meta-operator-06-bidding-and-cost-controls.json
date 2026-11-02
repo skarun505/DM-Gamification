@@ -1,0 +1,56 @@
+{
+  "slug": "meta-operator-06-bidding-and-cost-controls",
+  "world": "meta",
+  "tier": "operator",
+  "order": 6,
+  "title": "Bidding & Cost Controls",
+  "minutes": 5,
+  "objectives": [
+    "Differentiate Lowest Cost (Highest Volume), Cost Cap, and Bid Cap bidding",
+    "Understand how bidding strategy protects profit margins when scaling",
+    "Diagnose why an ad set with a Cost Cap might stop spending"
+  ],
+  "glossary": ["lowest-cost-bidding", "cost-cap", "bid-cap", "ad-auction"],
+  "blocks": [
+    { "type": "pixie", "text": "Bidding controls how aggressively Meta enters ad auctions on your behalf. Let's make sure you never overpay!" },
+    { "type": "compare", "left": { "title": "Lowest Cost (Highest Volume)", "points": ["Default strategy for all accounts", "Spends 100% of your daily budget", "Gets maximum results at current market auction prices", "Best for testing new creatives"] }, "right": { "title": "Cost Cap Bidding", "points": ["You set an average target cost ceiling (e.g. ₹120 CPL)", "Meta only bids when it predicts it can meet your cap", "Protects profit margins strictly", "May underspend if your cap is unrealistically low"] } },
+    { "type": "analogy", "title": "The Fruit Market Analogy", "text": "Lowest Cost says: 'Here is ₹500, buy as many apples as possible today, whatever the market rate is.' Cost Cap says: 'Only buy apples if they cost ₹20 or less on average. If prices are high today, keep my money in my pocket!'" },
+    { "type": "steps", "title": "When to Use Which Strategy", "items": ["1. Creative Testing & New Campaigns: Lowest Cost (ensures fast data)", "2. Mature Scaling with Strict Margins: Cost Cap (protects profitability)", "3. Flash Sales & Time-Sensitive Events: Bid Cap (forces aggressive auction wins)"] },
+    { "type": "warning", "text": "If you set a Cost Cap of ₹30 when the industry average is ₹120, Meta will fail to win any auctions, and your campaign will spend ₹0!" }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What happens if you set a Cost Cap that is significantly lower than current auction market prices?",
+      "options": ["Meta automatically gives you cheaper leads", "The ad set will fail to spend budget and will stop delivering impressions", "Meta charges your bank account extra penalty fees", "Your CTR will double"],
+      "answer": 1,
+      "explain": "Because the algorithm is forbidden from bidding above your cap, it will lose auctions and your budget will sit unspent."
+    },
+    {
+      "id": "q2",
+      "q": "Which bidding strategy is recommended when testing fresh creative hooks in a brand new ad set?",
+      "options": ["Bid Cap", "Lowest Cost (Highest Volume)", "Target Cost Cap of ₹5", "Manual CPA Bidding"],
+      "answer": 1,
+      "explain": "Lowest Cost ensures complete, consistent delivery so you gather unbiased performance data across variants."
+    },
+    {
+      "id": "q3",
+      "q": "What is the primary commercial benefit of using Cost Cap bidding when scaling budgets?",
+      "options": ["It guarantees zero ad fatigue", "It protects profit margins by refusing to buy leads or sales that exceed your target cost ceiling", "It increases video duration", "It removes tax from invoices"],
+      "answer": 1,
+      "explain": "Cost Cap prevents runaway acquisition costs, ensuring scale only happens at profitable unit economics."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: Bid Cap sets a ceiling on the average cost per lead over 7 days.",
+      "type": "tf",
+      "answer": false,
+      "explain": "False! Cost Cap controls the average cost; Bid Cap sets an absolute limit on every single auction bid."
+    }
+  ],
+  "recap": [
+    "Lowest Cost spends full budget for maximum volume; Cost Cap enforces an average cost ceiling.",
+    "Use Lowest Cost for testing and Cost Cap for margin protection during aggressive scaling."
+  ],
+  "next": "meta-operator-07-learning-phase-optimization"
+}

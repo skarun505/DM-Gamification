@@ -1,0 +1,109 @@
+{
+  "slug": "boss-rookie-launch-day",
+  "tier": "rookie",
+  "title": "Boss Battle: Launch Day!",
+  "description": "It's your first day managing performance ads for 'FitZone Gym'. You have ₹15,000 to acquire new members. Make the right strategic decisions across 6 critical steps to defeat the Boss and graduate to Operator status!",
+  "passScorePct": 70,
+  "xp": 150,
+  "coins": 30,
+  "steps": [
+    {
+      "step": 1,
+      "title": "Step 1: Choose the Campaign Objective",
+      "context": "FitZone wants local residents to book a free personal training trial session and tour the facility.",
+      "question": "Which Meta campaign objective will you select?",
+      "options": [
+        "Awareness (Reach as many screens as cheaply as possible)",
+        "Traffic (Get maximum link clicks to the homepage)",
+        "Leads (Collect contact info via Instant Form or WhatsApp)",
+        "App Promotion (Drive gym workout app downloads)"
+      ],
+      "answer": 2,
+      "explain": "For service businesses, the 'Leads' objective optimizes for prospects ready to submit their contact info or message to book a trial.",
+      "hint": "What is the concrete action you want the gym visitor to take?"
+    },
+    {
+      "step": 2,
+      "title": "Step 2: Define Audience Targeting",
+      "context": "FitZone is located in Koramangala, Bengaluru. People will not travel 25 km across city traffic to work out.",
+      "question": "Which audience setup should you choose?",
+      "options": [
+        "All adults aged 18-65 across entire state of Karnataka",
+        "Adults aged 21-45 living within a 5 km radius of the gym, interested in Fitness or Broad",
+        "Only people interested in Olympic powerlifting aged 18-20 (Audience size: 4,000)",
+        "Anyone in India who has ever visited a sports stadium"
+      ],
+      "answer": 1,
+      "explain": "Gyms are hyper-local. A 5 km radius targeting active adults gives a balanced pool of realistic gym-goers.",
+      "hint": "Local gyms depend on people who live or work nearby."
+    },
+    {
+      "step": 3,
+      "title": "Step 3: Budget Configuration",
+      "context": "Your target Cost Per Trial Booking (CPL) is ₹100. You have ₹15,000 total for the month.",
+      "question": "How should you pace your starting daily budget?",
+      "options": [
+        "₹50 per day (so the money lasts 300 days)",
+        "₹500 per day (5x target CPL, giving the algorithm enough daily conversion data to learn)",
+        "Spend all ₹15,000 on Saturday between 2 PM and 4 PM",
+        "₹10 per day on 50 different campaigns"
+      ],
+      "answer": 1,
+      "explain": "A ₹500 daily budget (5x target CPL) gives Meta's algorithm enough room to capture 4-5 leads daily and optimize smoothly.",
+      "hint": "Remember the 3x-5x target CPL rule of thumb."
+    },
+    {
+      "step": 4,
+      "title": "Step 4: Select the Winning Creative",
+      "context": "You have 4 creative options ready to test. Which visual will grab the highest engagement?",
+      "options": [
+        "Stock photo of a fitness model from California with a lengthy paragraph about health",
+        "Gym brand logo with operating hours in tiny font",
+        "15-second mobile Reel: Member's real 3-month weight loss transformation + 'Claim Free 3-Day Pass' headline",
+        "Black and white flyer listing 20 gym rules"
+      ],
+      "answer": 2,
+      "explain": "Real member transformations with clear local social proof and an irresistible free trial hook always outperform generic stock photos.",
+      "hint": "What stops you when you scroll Instagram Reels?"
+    },
+    {
+      "step": 5,
+      "title": "Step 5: Reading Day 3 Results",
+      "context": "It's morning of Day 3. Here is your dashboard table:",
+      "tableData": [
+        ["Metric", "Value", "Benchmark"],
+        ["Spend", "₹1,500", "₹1,500"],
+        ["Impressions", "11,500", "10,000+"],
+        ["CTR (Link)", "2.2%", "1.2% - 2.0%"],
+        ["CPM", "₹130", "₹120 - ₹160"],
+        ["Leads Received", "16", "Target 12-15"],
+        ["Average CPL", "₹93.75", "Target ≤ ₹100"]
+      ],
+      "question": "How do you evaluate these Day 3 numbers?",
+      "options": [
+        "Disaster! Pause the campaign immediately.",
+        "Healthy performance! CTR is strong (2.2%) and CPL is ₹93.75 (beating our ₹100 target).",
+        "CPM is too low, so the ad must be broken.",
+        "Change the video hook right now to see if we can get 50% CTR."
+      ],
+      "answer": 1,
+      "explain": "All key indicators are green: CTR is high, CPM is competitive, and you have beat your CPL goal with 16 booked trials!",
+      "hint": "Compare actual CPL with the target CPL."
+    },
+    {
+      "step": 6,
+      "title": "Step 6: The Strategic Move",
+      "context": "Your client calls you excited about the 16 leads, but says: 'Can we triple the daily budget right now to ₹3,000/day?'",
+      "question": "What is the correct recommendation to give the gym owner?",
+      "options": [
+        "Agree and immediately increase budget by 500% in one click.",
+        "Advise against an instant 500% jump because it resets learning. Recommend scaling vertically by 20% every 2-3 days while monitoring lead quality.",
+        "Turn off the campaign and tell the gym to rely on organic flyers.",
+        "Delete the ad and start an awareness campaign."
+      ],
+      "answer": 1,
+      "explain": "Tripling budget resets Meta's machine learning and often causes CPL to explode. Scale smoothly in 15-20% increments.",
+      "hint": "What happens to the auction algorithm if you shock it with a huge sudden budget change?"
+    }
+  ]
+}

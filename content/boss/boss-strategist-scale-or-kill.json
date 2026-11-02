@@ -1,0 +1,108 @@
+{
+  "slug": "boss-strategist-scale-or-kill",
+  "tier": "strategist",
+  "title": "Boss 3: Scale or Kill? The ₹50,000 Reallocation",
+  "description": "You are managing a ₹50,000/week budget for a high-growth brand. You have 4 live campaigns with completely different performance metrics. Evaluate the data, make the tough calls to Scale, Hold, or Kill, and defend your decisions to graduate as a Master Strategist!",
+  "passScorePct": 70,
+  "xp": 250,
+  "coins": 50,
+  "steps": [
+    {
+      "step": 1,
+      "title": "Step 1: Inspect the 4 Active Campaigns",
+      "context": "Review the last 14 days of performance across the 4 active campaigns in the account.",
+      "tableData": [
+        ["Campaign", "Spend (14d)", "Purchases", "CPA", "ROAS", "Frequency"],
+        ["Campaign A (Advantage+ Shopping)", "₹22,000", "98", "₹224", "4.2x", "1.8"],
+        ["Campaign B (Interest Stack: Skincare)", "₹12,000", "31", "₹387", "2.1x", "4.6"],
+        ["Campaign C (Lookalike 1% Buyers)", "₹10,000", "44", "₹227", "3.8x", "2.1"],
+        ["Campaign D (Cold Video Views Test)", "₹6,000", "4", "₹1,500", "0.6x", "1.4"]
+      ],
+      "question": "Based on this data, which campaign is burning cash with virtually zero bottom-line return and should be killed immediately?",
+      "options": [
+        "Campaign A",
+        "Campaign C",
+        "Campaign D (Traffic/Video views generating only 4 sales at ₹1,500 CPA and 0.6x ROAS)",
+        "Campaign B"
+      ],
+      "answer": 2,
+      "explain": "Campaign D spent ₹6,000 with a catastrophic 0.6x ROAS and ₹1,500 CPA. Optimizing for video views instead of purchases wastes precious budget.",
+      "hint": "Look at which campaign has a ROAS below 1.0x and the highest CPA."
+    },
+    {
+      "step": 2,
+      "title": "Step 2: Diagnose Campaign B (High Frequency & Stagnation)",
+      "context": "Campaign B has a 2.1x ROAS (breakeven is 2.2x) and a Frequency of 4.6 with ₹387 CPA.",
+      "question": "What is the primary disease afflicting Campaign B?",
+      "options": [
+        "Audience exhaustion and creative fatigue — high frequency (4.6) indicates the small interest pool is saturated with old creatives",
+        "The pixel has been uninstalled",
+        "The ad budget is 10 times too high",
+        "Meta is penalizing the brand for using Instagram"
+      ],
+      "answer": 0,
+      "explain": "A frequency of 4.6 on a cold interest ad set causes creative fatigue, higher CPMs, and decaying conversion rates.",
+      "hint": "Check the frequency metric. Are the same people seeing this ad over 4 times?"
+    },
+    {
+      "step": 3,
+      "title": "Step 3: Scaling Strategy for Campaign A",
+      "context": "Campaign A (Advantage+ Shopping) is your undisputed hero: 4.2x ROAS, low frequency (1.8), and stable CPA.",
+      "question": "How should you scale Campaign A's budget without shocking Meta's delivery algorithm into Learning Limited?",
+      "options": [
+        "Increase the budget by 500% in one click at midnight",
+        "Scale the budget by 15% to 20% every 48 to 72 hours, monitoring CPA stability",
+        "Pause the campaign and recreate it with a ₹1,00,000 daily budget",
+        "Lower the budget so Meta gets desperate and gives cheaper clicks"
+      ],
+      "answer": 1,
+      "explain": "Gradual vertical scaling (15-20% every 2-3 days) protects the learning algorithm from reset and maintains auction bid efficiency.",
+      "hint": "Remember the 20% safe scaling rule."
+    },
+    {
+      "step": 4,
+      "title": "Step 4: The ₹50,000 Budget Reallocation",
+      "context": "You killed Campaign D (₹6,000 freed) and pruned fatigued Ad Sets in Campaign B (₹4,000 freed). You have ₹10,000 in unlocked budget to reallocate for next week.",
+      "question": "Where is the smartest place to allocate this ₹10,000 freed capital?",
+      "options": [
+        "Put ₹7,000 into scaling Campaign A (ASC) and ₹3,000 into a fresh Creative Sandbox testing new hooks",
+        "Put all ₹10,000 into Google Display Network",
+        "Spend it all on boosting TikTok posts",
+        "Put all ₹10,000 back into Campaign D to see if it turns around"
+      ],
+      "answer": 0,
+      "explain": "Fueling your primary proven revenue engine (ASC) while reserving 20-30% for a dedicated creative testing sandbox guarantees both immediate cash flow and future creative pipeline.",
+      "hint": "Combine scaling the proven winner with continuous creative testing."
+    },
+    {
+      "step": 5,
+      "title": "Step 5: Creative Fatigue Prevention",
+      "context": "To keep Campaign A delivering at 4.2x ROAS as spend grows, you must supply it with fresh creatives.",
+      "question": "What is the best creative production cadence for a brand spending ₹50,000+ per week?",
+      "options": [
+        "Wait 6 months until the client complains",
+        "Produce and test 3 to 5 new creative variations (new hooks, angles, formats) every week in a sandbox ad set before graduating winners to ASC",
+        "Never change the ad once it works",
+        "Rely solely on AI image generators without human review"
+      ],
+      "answer": 1,
+      "explain": "High ad spend consumes audience attention fast. Testing 3-5 variations weekly ensures a continuous supply of winning assets.",
+      "hint": "Continuous creative iteration is the #1 lever for scaling."
+    },
+    {
+      "step": 6,
+      "title": "Step 6: The CEO Debrief Call",
+      "context": "The CEO asks: 'Why did you kill Campaign D? It had 45,000 video views! People were watching our brand!'",
+      "question": "How do you professionally answer in 'Client-Talk'?",
+      "options": [
+        "Say: 'You don't understand marketing, leave me alone.'",
+        "Explain: 'While video views were high, only 4 views converted into paying customers at a ₹1,500 CPA. We redirected those funds into our top-converting campaign, driving 28 additional purchases at 4.2x ROAS and higher net profit.'",
+        "Apologize and immediately put all budget back into video views",
+        "Blame Mark Zuckerberg for the algorithm changes"
+      ],
+      "answer": 1,
+      "explain": "Translating vanity metrics (video views) into business commercial realities (net profit and customer acquisition cost) demonstrates true CMO-level strategic acumen.",
+      "hint": "Focus on cash in the bank vs vanity views."
+    }
+  ]
+}

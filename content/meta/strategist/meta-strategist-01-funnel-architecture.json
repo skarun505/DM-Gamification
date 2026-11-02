@@ -1,0 +1,67 @@
+{
+  "slug": "meta-strategist-01-funnel-architecture",
+  "world": "meta",
+  "tier": "strategist",
+  "order": 1,
+  "title": "Full-Funnel Architecture",
+  "minutes": 5,
+  "objectives": [
+    "Architect an end-to-end multi-campaign marketing funnel",
+    "Allocate budget rationally across TOFU (70%), MOFU (15%), and BOFU (15%)",
+    "Align creative messaging to cold discovery, warm trust, and hot urgency"
+  ],
+  "glossary": ["top-of-funnel", "middle-of-funnel", "bottom-of-funnel", "cbo"],
+  "blocks": [
+    { "type": "pixie", "text": "Welcome to Tier 3: Strategist! Now we manage multi-lakh budgets with full-funnel precision." },
+    { "type": "text", "text": "A full-funnel account structure divides budget into cold customer acquisition (TOFU), trust nurturing (MOFU), and checkout closing (BOFU)." },
+    { "type": "table", "headers": ["Funnel Stage", "Audience Pool", "Budget Share", "Creative Format"], "rows": [
+      ["TOFU (Top of Funnel)", "Broad demographics & Lookalikes (Cold)", "70%", "High-energy video Reels, hooks, UGC problem-solving"],
+      ["MOFU (Middle of Funnel)", "30-day website visitors & social engagers", "15%", "Founder story, media features, customer reviews, unboxings"],
+      ["BOFU (Bottom of Funnel)", "0-7 day Cart Abandoners (Hot)", "15%", "Dynamic Product Ads (DPA), limited-time discounts, free shipping"]
+    ] },
+    { "type": "analogy", "title": "The Cricket Team Analogy", "text": "TOFU is your opening batsmen scoring runs. MOFU is your middle-order stabilizing the innings. BOFU is your finisher hitting boundaries in the final over! You need all three to win the match." },
+    { "type": "tip", "text": "Use Campaign Budget Optimization (Advantage Campaign Budget - CBO) on mature scaling funnels to let Meta distribute money dynamically." },
+    { "type": "warning", "text": "Never spend 50% of budget on retargeting unless you already have millions of organic monthly website visitors." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "In a balanced e-commerce funnel, what percentage of ad budget should typically be allocated to cold Top-of-Funnel acquisition?",
+      "options": ["10%", "30%", "70% to 80%", "100%"],
+      "answer": 2,
+      "explain": "Cold acquisition must receive the lion's share (70-80%) to continually introduce new prospects into the buying cycle."
+    },
+    {
+      "id": "q2",
+      "q": "What creative message is best suited for the Middle of Funnel (MOFU)?",
+      "options": [
+        "A 3-second flash sale countdown",
+        "Trust building: Founder origin story, doctor or press endorsements, and real customer reviews",
+        "A black and white image with no text",
+        "A meme completely unrelated to your product"
+      ],
+      "answer": 1,
+      "explain": "MOFU prospects already know your brand; they need trust, social proof, and reassurance to overcome hesitation."
+    },
+    {
+      "id": "q3",
+      "q": "True or False: If you stop funding Top-of-Funnel cold ads, your retargeting pool will eventually shrink and become unprofitable.",
+      "type": "tf",
+      "answer": true,
+      "explain": "True! The retargeting pool is fed by cold traffic. Without new visitors entering, retargeting quickly burns out."
+    },
+    {
+      "id": "q4",
+      "q": "Order the funnel stages from earliest customer touchpoint to final transaction.",
+      "type": "order",
+      "items": ["TOFU (Discovery & Hook)", "MOFU (Trust & Education)", "BOFU (Urgency & Checkout)", "Post-Purchase (Loyalty & Referrals)"],
+      "answer": [0, 1, 2, 3],
+      "explain": "Customers discover the brand at TOFU, build trust at MOFU, convert at BOFU, and repeat at Post-Purchase."
+    }
+  ],
+  "recap": [
+    "Structure campaigns into 70% TOFU (Cold), 15% MOFU (Warm), and 15% BOFU (Hot).",
+    "Match creative to consideration stage: Hooks for cold, Trust for warm, and Urgency for hot."
+  ],
+  "next": "meta-strategist-02-scaling-safely"
+}

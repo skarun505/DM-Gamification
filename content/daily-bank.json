@@ -1,0 +1,181 @@
+[
+  {
+    "id": "dq-1",
+    "lessonSlug": "meta-rookie-01-what-is-performance-marketing",
+    "q": "What is the primary difference between brand marketing and performance marketing?",
+    "options": [
+      "Brand marketing is always free, while performance marketing is paid",
+      "Performance marketing pays for specific, measurable results; brand marketing focuses on general awareness",
+      "Brand marketing only runs on television",
+      "There is no difference between the two"
+    ],
+    "answer": 1,
+    "explain": "Performance marketing is focused on measurable returns like clicks, leads, and sales where cost per result is strictly tracked."
+  },
+  {
+    "id": "dq-2",
+    "lessonSlug": "meta-rookie-01-what-is-performance-marketing",
+    "q": "If you spend ₹3,000 on an ad campaign and receive 60 customer inquiries, what is your Cost Per Lead (CPL)?",
+    "options": ["₹20", "₹50", "₹180", "₹500"],
+    "answer": 1,
+    "explain": "₹3,000 ÷ 60 = ₹50 CPL."
+  },
+  {
+    "id": "dq-3",
+    "lessonSlug": "meta-rookie-02-meet-the-meta-world",
+    "q": "Which Meta tool is the central command center for managing ad accounts, pixels, and team access?",
+    "options": ["WhatsApp Business", "Business Portfolio (Business Manager)", "Instagram Creator Studio", "Personal Profile Settings"],
+    "answer": 1,
+    "explain": "Meta Business Portfolio (formerly Business Manager) connects and manages all business assets securely in one place."
+  },
+  {
+    "id": "dq-4",
+    "lessonSlug": "meta-rookie-03-campaign-adset-ad-structure",
+    "q": "Where in the 3-level Meta ad structure do you choose your audience targeting and budget?",
+    "options": ["Campaign level", "Ad Set level", "Ad level", "Account Overview"],
+    "answer": 1,
+    "explain": "Campaign defines the Objective. Ad Set defines Audience, Placements, Schedule & Budget. Ad defines Creative & Copy."
+  },
+  {
+    "id": "dq-5",
+    "lessonSlug": "meta-rookie-04-campaign-objectives",
+    "q": "A bakery wants customers to book custom wedding cakes. Which campaign objective should they select?",
+    "options": ["Brand Awareness", "Traffic", "Leads", "App Promotion"],
+    "answer": 2,
+    "explain": "Leads objective optimizes for people who are likely to submit contact details or message to book an order."
+  },
+  {
+    "id": "dq-6",
+    "lessonSlug": "meta-rookie-05-metrics-101",
+    "q": "What is the formula to calculate Click-Through Rate (CTR)?",
+    "options": ["Impressions ÷ Clicks", "(Clicks ÷ Impressions) × 100", "Spend ÷ Clicks", "Conversions ÷ Clicks"],
+    "answer": 1,
+    "explain": "CTR = (Clicks ÷ Impressions) × 100. It measures the percentage of viewers who clicked after seeing the ad."
+  },
+  {
+    "id": "dq-7",
+    "lessonSlug": "meta-rookie-05-metrics-101",
+    "q": "Your ad was shown 10,000 times to 5,000 distinct individuals. What is the frequency?",
+    "options": ["0.5", "2.0", "5.0", "50%"],
+    "answer": 1,
+    "explain": "Frequency = Impressions ÷ Reach = 10,000 ÷ 5,000 = 2.0."
+  },
+  {
+    "id": "dq-8",
+    "lessonSlug": "meta-rookie-06-audiences-basics",
+    "q": "What risk arises if your target audience size is too narrow (e.g. under 30,000 people)?",
+    "options": [
+      "The ad will be disapproved by Meta",
+      "Audience fatigue happens quickly and CPM shoots up",
+      "Meta will spend double your daily budget",
+      "CTR is guaranteed to reach 10%"
+    ],
+    "answer": 1,
+    "explain": "A tiny audience gets exhausted fast, frequency spikes, and the auction charges a high CPM penalty."
+  },
+  {
+    "id": "dq-9",
+    "lessonSlug": "meta-rookie-07-budget-basics",
+    "q": "As a rule of thumb, what is a recommended minimum starting daily budget for a local lead generation campaign?",
+    "options": ["₹10 to ₹20", "At least 3x to 5x your target CPL (e.g. ₹300-₹500/day)", "₹10,000/day minimum", "₹1 per person in the city"],
+    "answer": 1,
+    "explain": "Starting with 3x-5x your target CPL gives the algorithm enough budget to generate a few conversions per day."
+  },
+  {
+    "id": "dq-10",
+    "lessonSlug": "meta-rookie-08-creative-basics",
+    "q": "Within how many seconds must a video ad grab a mobile viewer's attention to stop them from scrolling?",
+    "options": ["First 3 seconds", "First 30 seconds", "In the final conclusion", "Within 2 minutes"],
+    "answer": 0,
+    "explain": "Mobile users scroll rapidly; if the hook doesn't land in the first 3 seconds, viewers will swipe away."
+  },
+  {
+    "id": "dq-11",
+    "lessonSlug": "meta-rookie-09-how-ad-auction-works",
+    "q": "How does an ad with high user engagement and quality beat a competitor with a higher cash bid?",
+    "options": [
+      "Total Auction Value = Bid × Estimated Action Rate + Ad Quality",
+      "Competitors are disqualified after 3 clicks",
+      "Meta always favors the newest account",
+      "It doesn't; only the highest rupee bid wins"
+    ],
+    "answer": 0,
+    "explain": "Meta wants a great user experience. High quality and high predicted action rate can beat a raw high bid."
+  },
+  {
+    "id": "dq-12",
+    "lessonSlug": "meta-rookie-10-launch-checklist-first-results",
+    "q": "You launched a new campaign 12 hours ago. Leads are zero so far. What is the best immediate move?",
+    "options": [
+      "Immediately delete the campaign and restart",
+      "Double the budget to force delivery",
+      "Verify tracking works, then avoid making edits and let it run for 48-72 hours",
+      "Change the video creative every 2 hours"
+    ],
+    "answer": 2,
+    "explain": "Never panic on day 1. Constantly editing resets the learning phase. Verify tracking and allow 48-72 hours for initial delivery."
+  },
+  {
+    "id": "dq-13",
+    "lessonSlug": "meta-operator-01-custom-audiences",
+    "q": "Which of the following is an example of a Custom Audience?",
+    "options": [
+      "All people in Mumbai interested in cricket",
+      "People who visited your website's pricing page in the last 30 days",
+      "Men aged 18-24 with Android phones",
+      "People who like Bollywood movies"
+    ],
+    "answer": 1,
+    "explain": "Custom audiences are built from people who already had a relationship or touchpoint with your business."
+  },
+  {
+    "id": "dq-14",
+    "lessonSlug": "meta-operator-02-lookalike-audiences",
+    "q": "Which Lookalike audience percentage represents people closest and most similar to your seed list?",
+    "options": ["1% Lookalike", "5% Lookalike", "10% Lookalike", "50% Lookalike"],
+    "answer": 0,
+    "explain": "1% Lookalike includes the top 1% of people in the target country who most closely resemble your customer seed list."
+  },
+  {
+    "id": "dq-15",
+    "lessonSlug": "meta-operator-03-meta-pixel-and-events",
+    "q": "What happens if a boutique runs a 'Sales' objective campaign without the Meta Pixel installed?",
+    "options": [
+      "Meta automatically guesses the sales from bank accounts",
+      "The campaign records zero conversions and cannot optimize for buyers",
+      "The ad will run completely free of cost",
+      "Sales increase by 50%"
+    ],
+    "answer": 1,
+    "explain": "Without the Pixel, Meta has no feedback loop on who bought, making conversion optimization impossible."
+  },
+  {
+    "id": "dq-16",
+    "lessonSlug": "meta-operator-06-bidding-and-cost-controls",
+    "q": "What is the primary risk of setting a Cost Cap that is unrealistically low (e.g. ₹10 CPL when market average is ₹80)?",
+    "options": [
+      "Meta will ban your ad account",
+      "The campaign will fail to spend budget and won't deliver impressions",
+      "Your ad will show only on desktop",
+      "All clicks will be free"
+    ],
+    "answer": 1,
+    "explain": "If your Cost Cap is below auction prices, Meta won't win any bids, and your budget will sit unspent."
+  },
+  {
+    "id": "dq-17",
+    "lessonSlug": "meta-operator-07-learning-phase-optimization",
+    "q": "Approximately how many conversion events per ad set in a 7-day period are required to exit the Learning Phase?",
+    "options": ["5 conversions", "≈ 50 conversions", "500 conversions", "1,000 conversions"],
+    "answer": 1,
+    "explain": "Meta's machine learning model generally requires about 50 optimization events per ad set within a 7-day window."
+  },
+  {
+    "id": "dq-18",
+    "lessonSlug": "meta-strategist-02-scaling-safely",
+    "q": "When vertically scaling a winning ad set's daily budget, what is the recommended maximum increase per 48 hours?",
+    "options": ["Up to 15-20%", "300%", "10x", "Increase by exactly ₹1 every hour"],
+    "answer": 0,
+    "explain": "Increasing budget by more than 20% shocks the auction bidding algorithm and usually resets the learning phase."
+  }
+]

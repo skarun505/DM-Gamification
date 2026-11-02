@@ -1,0 +1,57 @@
+[
+  {
+    "id": "diagnose-a-drop",
+    "name": "Diagnose-a-Drop Framework",
+    "subtitle": "When CPL jumps or ROAS falls suddenly",
+    "steps": [
+      "1. Tracking: Is the Pixel, CAPI, or Lead Form working? Any broken links?",
+      "2. Audience: Did Frequency jump > 3.5? Is there audience fatigue or overlap?",
+      "3. Creative: Have CTR and hook watch-time dropped over the last 3 days?",
+      "4. Offer / Landing: Is the website slow (> 3s)? Did checkout pricing change?",
+      "5. Budget / Bids: Did a sudden budget edit reset the machine learning phase?",
+      "6. Outside Factors: Festive holiday, competitor sale, or public event?"
+    ],
+    "pixieTip": "Always compare CPM, CTR, and CVR side-by-side to pinpoint exactly where the break happened."
+  },
+  {
+    "id": "launch-plan",
+    "name": "The 8-Step Launch Plan",
+    "subtitle": "How to structure a new client or product campaign",
+    "steps": [
+      "1. Business Goal: Clear revenue or lead target (e.g., 50 bookings/month at ₹100 CPL)",
+      "2. Audience: Balanced local or broad targeting with ideal customer demographics",
+      "3. Irresistible Offer: Hook with value (free trial, bundle, or consultation)",
+      "4. Creative Mix: 2-3 vertical videos (UGC/Reel) + 1 high-contrast carousel",
+      "5. Starting Budget: 3x to 5x target CPL daily",
+      "6. Tracking Setup: Pixel + CAPI tested with Google Tag Manager or native partner",
+      "7. Review Dates: Day 1 (Delivery), Day 3 (CTR), Day 7 (CPL/ROAS)",
+      "8. Scaling Plan: Increase budget 15-20% on winning ad sets only"
+    ],
+    "pixieTip": "Keep campaigns consolidated. Having 20 tiny ad sets starves the machine learning algorithm."
+  },
+  {
+    "id": "client-talk",
+    "name": "Client-Talk Formula",
+    "subtitle": "How to explain performance to non-technical stakeholders",
+    "steps": [
+      "1. What Happened: State the core number simply ('We generated 42 leads this week at ₹95 each')",
+      "2. Why: Explain in plain terms ('Our customer testimonial Reel achieved a 2.4% CTR')",
+      "3. What I Did / Will Do: Concrete next actions ('I am scaling the winning ad set by 20%')",
+      "4. What I Need From You: Any approvals or customer feedback needed",
+      "5. Next Update: Clear date and time for the next report"
+    ],
+    "pixieTip": "Never dump acronyms like CPM and EMQ on a business owner without explaining what they mean in Rupees."
+  },
+  {
+    "id": "metric-formula",
+    "name": "The 4-Part Metric Answer Formula",
+    "subtitle": "How to answer any metric question in an interview",
+    "steps": [
+      "1. Definition: What the metric is in one plain sentence",
+      "2. Formula: How it is mathematically calculated",
+      "3. Why it matters: What business signal it reveals",
+      "4. Action: What you would physically DO in Ads Manager if it is too high or low"
+    ],
+    "pixieTip": "Interviewers love candidates who connect numbers to physical optimization actions!"
+  }
+]

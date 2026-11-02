@@ -1,0 +1,67 @@
+{
+  "slug": "meta-operator-08-creative-testing-framework",
+  "world": "meta",
+  "tier": "operator",
+  "order": 8,
+  "title": "Creative Testing Framework",
+  "minutes": 5,
+  "objectives": [
+    "Implement the scientific 'one variable at a time' testing methodology",
+    "Differentiate between Hooks, Angles, and Formats",
+    "Establish clear kill criteria and graduation pipelines for winning ads"
+  ],
+  "glossary": ["a-b-testing", "hook", "creative-angle", "ctr"],
+  "blocks": [
+    { "type": "pixie", "text": "Top performance agencies test 5-10 new creatives every single week. Here is the exact system they use!" },
+    { "type": "text", "text": "The secret to consistent ad performance is running an isolated 'Testing Sandbox' that continuously graduates winners into your scaling campaigns." },
+    { "type": "steps", "title": "The 3 Testing Dimensions", "items": ["1. Hooks (First 3 seconds): Visual scene, headline text, audio hook (Tests Attention)", "2. Angles (The core pitch): Pain point vs Desire vs Social Proof (Tests Psychology)", "3. Formats: Vertical Reel vs Static Infographic vs Carousel (Tests Placement Fit)"] },
+    { "type": "analogy", "title": "The Science Lab Analogy", "text": "If a chemist changes the heat, the chemical, AND the flask all at once, they will never know what caused the reaction. In ads, change only ONE variable so you know what drove success!" },
+    { "type": "tip", "text": "Testing Duration: Let each test ad spend at least 2x to 3x your target CPL over 3-5 days before deciding to kill or scale." },
+    { "type": "warning", "text": "Never declare a winner after ₹100 of spend! Statistical noise will trick you into killing great ads prematurely." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What is the primary rule of scientific creative A/B testing on Meta?",
+      "options": [
+        "Change the video hook, the headline, the offer, and the audience all at the same time",
+        "Change only ONE single variable at a time (e.g. Video Hook A vs Hook B) while keeping everything else identical",
+        "Test only at 2:00 AM",
+        "Spend the entire budget on a single image"
+      ],
+      "answer": 1,
+      "explain": "Isolating one variable ensures you know with mathematical certainty which element caused the lift."
+    },
+    {
+      "id": "q2",
+      "q": "What is a 'Creative Angle' in performance marketing?",
+      "options": [
+        "The degree at which you hold the camera (e.g. 45 degrees)",
+        "The underlying psychological hook or motivation used to sell (e.g. Save Time vs Save Money vs Health Benefits)",
+        "The triangular crop on a photo",
+        "The font angle on a banner"
+      ],
+      "answer": 1,
+      "explain": "An angle appeals to a distinct customer motivation, such as vanity, convenience, health, or financial savings."
+    },
+    {
+      "id": "q3",
+      "q": "How much spend should an ad variation accumulate before you judge its performance against target metrics?",
+      "options": ["₹10 is plenty", "At least 2x to 3x your target Cost Per Result (CPL / CPA) over 3-5 days", "Wait 6 months", "Only judge after ₹10 Lakhs"],
+      "answer": 1,
+      "explain": "2x-3x target CPA spend provides enough statistical confidence to determine whether an ad is a winner or failure."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: Once a creative wins in your testing sandbox, you graduate it into your main scaling campaign.",
+      "type": "tf",
+      "answer": true,
+      "explain": "True! The testing sandbox discovers proven winners; scaling campaigns scale them with high budget."
+    }
+  ],
+  "recap": [
+    "Isolate one variable at a time: test hooks, angles, and formats systematically.",
+    "Give tests 2-3x target CPA spend before killing, and graduate proven winners to scaling campaigns."
+  ],
+  "next": "meta-operator-09-retargeting-funnels"
+}

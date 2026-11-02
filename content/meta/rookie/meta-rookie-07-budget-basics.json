@@ -1,0 +1,66 @@
+{
+  "slug": "meta-rookie-07-budget-basics",
+  "world": "meta",
+  "tier": "rookie",
+  "order": 7,
+  "title": "Budget Basics & Learning",
+  "minutes": 4,
+  "objectives": [
+    "Differentiate between Daily Budget and Lifetime Budget",
+    "Calculate the recommended starting budget for a new campaign",
+    "Understand what the Learning Phase is and why it matters"
+  ],
+  "glossary": ["daily-budget", "lifetime-budget", "learning-phase", "learning-limited"],
+  "blocks": [
+    { "type": "pixie", "text": "You don't need lakhs of rupees to start! You can test profitably with ₹300 to ₹500 per day." },
+    { "type": "compare", "left": { "title": "Daily Budget", "points": ["Spends an average amount each day", "Runs continuously until you pause", "Easy to increase or decrease anytime"] }, "right": { "title": "Lifetime Budget", "points": ["Sets a total spend for a fixed date range", "Allows dayparting (run specific hours)", "Meta paces spend across the dates"] } },
+    { "type": "analogy", "title": "The Student Learning Analogy", "text": "Meta is like a new intern. During the first few days, it tests different people to see who is interested. This is called the 'Learning Phase'. Once it sees 50 conversions, it becomes an expert!" },
+    { "type": "steps", "title": "The Golden Budget Rule", "items": ["1. Estimate your target CPL (e.g. ₹100 per lead)", "2. Set daily budget to 3x-5x that target (e.g. ₹300-₹500/day)", "3. Let it run for at least 3-4 days without changing settings"] },
+    { "type": "tip", "text": "For ongoing lead generation or e-commerce, 90% of advertisers prefer Daily Budget for flexibility." },
+    { "type": "warning", "text": "Making large edits to budget or targeting resets the Learning Phase back to day 1. Be patient!" }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "If you expect a lead to cost ₹80, what is a recommended minimum starting daily budget?",
+      "options": ["₹10/day", "₹250 to ₹400/day (3x to 5x target CPL)", "₹10,000/day", "₹50,000 one-time"],
+      "answer": 1,
+      "hint": "3x to 5x target CPL gives Meta enough room to find several conversions a day.",
+      "explain": "Starting at 3x-5x your target CPL (₹250-₹400) ensures the algorithm gathers daily conversion data to optimize."
+    },
+    {
+      "id": "q2",
+      "q": "What happens when you constantly edit an ad set's audience or budget every 6 hours?",
+      "options": [
+        "Meta gives you bonus ad credits",
+        "It resets the Learning Phase, keeping performance unstable and costs high",
+        "It speeds up delivery by 10x",
+        "Nothing changes"
+      ],
+      "answer": 1,
+      "hint": "Think about interrupting an intern while they are studying.",
+      "explain": "Significant edits force Meta to reset its machine learning, keeping costs volatile and higher."
+    },
+    {
+      "id": "q3",
+      "q": "Which budget type lets you schedule ads to run only during specific hours of the day (e.g. 9 AM to 7 PM)?",
+      "options": ["Daily Budget", "Lifetime Budget", "Automatic Budget", "GST Budget"],
+      "answer": 1,
+      "hint": "Which budget requires a fixed start and end date?",
+      "explain": "Lifetime budget allows ad scheduling (dayparting) to turn ads on and off during specific business hours."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: You need a minimum budget of ₹50,000 to launch your first ad on Meta.",
+      "type": "tf",
+      "answer": false,
+      "hint": "Meta allows very small local testing budgets.",
+      "explain": "False! You can start advertising on Meta with as little as ₹100 to ₹500 per day."
+    }
+  ],
+  "recap": [
+    "Daily Budget is flexible; Lifetime Budget allows specific hour scheduling.",
+    "Start with 3x-5x your target CPL per day and avoid making hasty edits during learning."
+  ],
+  "next": "meta-rookie-08-creative-basics"
+}

@@ -1,0 +1,67 @@
+{
+  "slug": "meta-operator-04-conversions-api-events-manager",
+  "world": "meta",
+  "tier": "operator",
+  "order": 4,
+  "title": "Conversions API (CAPI) & EMQ",
+  "minutes": 5,
+  "objectives": [
+    "Explain why browser-based pixels leak up to 30% of conversion data",
+    "Understand the role of the Conversions API (CAPI) and Events Manager",
+    "Learn Event Match Quality (EMQ) and event deduplication"
+  ],
+  "glossary": ["conversions-api", "event-match-quality", "meta-pixel"],
+  "blocks": [
+    { "type": "pixie", "text": "In the modern web, browser ad-blockers and privacy updates block regular pixels. CAPI is the bulletproof solution!" },
+    { "type": "text", "text": "The Conversions API (CAPI) creates a direct server-to-server connection between your website hosting server and Meta's servers." },
+    { "type": "compare", "left": { "title": "Browser Pixel Only", "points": ["Runs in user's browser (Safari, Chrome)", "Easily blocked by ad-blockers and iOS", "Loses 15% to 30% of sales data"] }, "right": { "title": "Conversions API (CAPI)", "points": ["Runs securely on your web server", "Cannot be blocked by client ad-blockers", "Sends hashed customer data directly"] } },
+    { "type": "analogy", "title": "The Postman vs Private Courier", "text": "The browser pixel is like sending a postcard through a rainy street: it might get lost in the storm. CAPI is like a secure pneumatic tube connecting your cash register straight to Meta!" },
+    { "type": "steps", "title": "How Deduplication Works", "items": ["1. User buys a saree on your website", "2. Browser Pixel fires 'Purchase' with event_id: 'ORDER_101'", "3. Server CAPI fires 'Purchase' with identical event_id: 'ORDER_101'", "4. Meta sees matching event_id and records exactly ONE conversion!"] },
+    { "type": "tip", "text": "Event Match Quality (EMQ) scores from 0-10. Sending customer email and phone number (+91) with server events raises your EMQ to 8.0+." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What is the primary technical advantage of Conversions API (CAPI) over standard browser pixels?",
+      "options": [
+        "It makes Facebook ads 100% free of charge",
+        "It operates server-to-server, bypassing browser ad-blockers and privacy restrictions",
+        "It generates free video ads automatically",
+        "It translates ads into 50 languages"
+      ],
+      "answer": 1,
+      "explain": "Because CAPI communicates server-to-server, client-side browser blockers cannot intercept the conversion data."
+    },
+    {
+      "id": "q2",
+      "q": "What parameter is required to prevent Meta from double-counting conversions when both Pixel and CAPI fire?",
+      "options": ["event_id", "ad_account_id", "credit_card_number", "gst_number"],
+      "answer": 0,
+      "explain": "Passing identical event_id parameters allows Meta's servers to deduplicate the two signals into a single event."
+    },
+    {
+      "id": "q3",
+      "q": "What does an Event Match Quality (EMQ) score of 8.5/10 indicate in Events Manager?",
+      "options": [
+        "The ad account is about to be suspended",
+        "Excellent match rate: customer parameters like email and phone match active Meta profiles accurately",
+        "The website is loading too slowly",
+        "Zero users clicked the ad"
+      ],
+      "answer": 1,
+      "explain": "A high EMQ score indicates Meta can easily match the conversion to the specific user account who saw the ad."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: Using both the Meta Pixel and CAPI simultaneously is officially recommended by Meta.",
+      "type": "tf",
+      "answer": true,
+      "explain": "True! The redundant setup ensures maximum signal coverage and resilient attribution."
+    }
+  ],
+  "recap": [
+    "CAPI connects your website server directly to Meta, overcoming browser signal loss.",
+    "Pass event_id to deduplicate signals and aim for EMQ scores above 8.0."
+  ],
+  "next": "meta-operator-05-getting-leads-forms-vs-web-vs-whatsapp"
+}

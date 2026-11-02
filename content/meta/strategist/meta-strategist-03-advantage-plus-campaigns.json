@@ -1,0 +1,67 @@
+{
+  "slug": "meta-strategist-03-advantage-plus-campaigns",
+  "world": "meta",
+  "tier": "strategist",
+  "order": 3,
+  "title": "Advantage+ Campaigns",
+  "minutes": 5,
+  "objectives": [
+    "Understand Meta's Advantage+ suite (Advantage+ Shopping, Creative, and Placements)",
+    "Identify what machine learning automates and what the human strategist controls",
+    "Configure Existing Customer Budget Caps to protect new customer acquisition"
+  ],
+  "glossary": ["advantage-plus-shopping", "advantage-plus-creative", "first-party-data"],
+  "blocks": [
+    { "type": "pixie", "text": "Advantage+ is Meta's flagship AI automation suite. Let's see how smart media buyers use it to dominate sales!" },
+    { "type": "text", "text": "Advantage+ Shopping Campaigns (ASC) use deep learning to automate audience targeting, budget allocation, and placement delivery in a single consolidated campaign." },
+    { "type": "table", "headers": ["What Advantage+ Automates", "What YOU Still Control as Strategist"], "rows": [
+      ["Audience selection across the country", "Creative asset quality, video scripting & hooks"],
+      ["Placement distribution across Feeds & Reels", "Product offer, pricing, bundles & discounts"],
+      ["Real-time bid adjustments per user", "Existing Customer Budget Cap (e.g. max 15%)"],
+      ["Dynamic visual enhancement (brightness/3D)", "Landing page speed & checkout experience"]
+    ] },
+    { "type": "analogy", "title": "The Self-Driving Sports Car", "text": "Advantage+ is like a high-tech Tesla on autopilot. The car handles steering and speed, but YOU choose the destination and fill the tank with premium fuel (high-converting creative hooks)!" },
+    { "type": "tip", "text": "Existing Customer Cap: In account settings, upload your customer list and cap existing customer spend at 10% to 15%. This prevents Meta from taking the easy route of re-selling to loyal buyers!" },
+    { "type": "warning", "text": "Do not feed ASC only 1 or 2 static images. Advantage+ thrives when you upload at least 8 to 15 diverse creative assets (video Reels, UGC, carousels)." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What is the critical setting in Advantage+ Shopping Campaigns that ensures budget is spent finding NEW customers rather than retargeting existing buyers?",
+      "options": ["Advantage Placements toggle", "Existing Customer Budget Cap", "Manual Bid Cap", "GST billing filter"],
+      "answer": 1,
+      "explain": "Setting an Existing Customer Budget Cap (e.g. max 15%) restricts how much spend is allocated to past buyers."
+    },
+    {
+      "id": "q2",
+      "q": "With Advantage+ automating targeting and bidding, what becomes the media buyer's most important competitive lever?",
+      "options": [
+        "Typing faster in Ads Manager",
+        "Creative Strategy: Video hooks, authentic UGC angles, and compelling customer offers",
+        "Stacking 50 obscure keywords",
+        "Changing account passwords daily"
+      ],
+      "answer": 1,
+      "explain": "In automated environments, creative is the targeting: high-converting hooks and offers drive 90% of results."
+    },
+    {
+      "id": "q3",
+      "q": "What is a recommended minimum number of creative assets to upload into an Advantage+ Shopping Campaign?",
+      "options": ["Exactly 1 image", "At least 8 to 15 diverse assets (Reels, Carousels, UGC)", "1,000 text files", "0 assets"],
+      "answer": 1,
+      "explain": "Meta's AI needs variety to mix and match visuals, copy, and formats across different user preferences."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: Advantage+ campaigns completely eliminate the need for human media buyers.",
+      "type": "tf",
+      "answer": false,
+      "explain": "False! Strategists are needed more than ever to direct creative psychology, unit economics, and data architecture."
+    }
+  ],
+  "recap": [
+    "Advantage+ automates audience matching and placement distribution.",
+    "Strategists control creative quality, offers, and the Existing Customer Budget Cap."
+  ],
+  "next": "meta-strategist-04-attribution-and-incrementality"
+}

@@ -1,0 +1,28 @@
+{
+  "slug": "sim-operator-01-budget-split",
+  "title": "Operator Sim 1: Budget Allocation",
+  "brief": "An online footwear brand in Agra wants to scale their sales campaign with a budget of ₹1,200/day for 7 days. Configure targeting, placements, and creative to achieve at least 25 online sales with an average ROAS of at least 2.5x!",
+  "fixed": {
+    "baseCPM": 160,
+    "baseCTR": 0.018,
+    "baseCVR": 0.05,
+    "offerStrength": 1.15,
+    "landingQuality": 1.1,
+    "pixelInstalled": true,
+    "aov": 1400
+  },
+  "editable": ["objective", "dailyBudget", "audience", "creative", "placements"],
+  "creativeOptions": [
+    { "id": "a", "label": "Static image of shoes with price tag", "quality": 0.8 },
+    { "id": "b", "label": "Dynamic unboxing video showing comfort & genuine leather quality", "quality": 1.45 },
+    { "id": "c", "label": "Brand logo with generic festival greeting", "quality": 0.5 }
+  ],
+  "pass": {
+    "all": [
+      { "metric": "ROAS", "op": ">=", "value": 2.5 },
+      { "metric": "conversions", "op": ">=", "value": 25 }
+    ]
+  },
+  "hintIds": ["sim-operator-01-budget-split"],
+  "xp": 50
+}

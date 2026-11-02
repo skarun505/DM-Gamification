@@ -1,0 +1,62 @@
+{
+  "slug": "meta-operator-02-lookalike-audiences",
+  "world": "meta",
+  "tier": "operator",
+  "order": 2,
+  "title": "Lookalike Audiences",
+  "minutes": 5,
+  "objectives": [
+    "Explain how Meta's machine learning finds Lookalike audiences",
+    "Understand the critical importance of seed quality over seed quantity",
+    "Know when to use a 1% Lookalike versus 3% or 5%"
+  ],
+  "glossary": ["lookalike-audience", "first-party-data", "custom-audience"],
+  "blocks": [
+    { "type": "pixie", "text": "What if you could clone your best paying customers? That is exactly what Lookalikes do!" },
+    { "type": "text", "text": "A Lookalike Audience takes a source list of your top customers (called the 'seed') and finds the top 1% to 10% of people in a country who share their exact traits." },
+    { "type": "analogy", "title": "The Detective Analogy", "text": "Imagine giving a detective the fingerprints of your best 500 customers. The detective searches the country to find people with the identical behavioral fingerprint!" },
+    { "type": "compare", "left": { "title": "1% Lookalike", "points": ["Closest match to your seed list", "Highest intent and conversion rate", "Smaller audience pool (~3M to 4M in India)"] }, "right": { "title": "5% to 10% Lookalike", "points": ["Broader match with more diversity", "Lower immediate intent", "Much larger audience pool (15M-30M) for scaling"] } },
+    { "type": "tip", "text": "Garbage in, garbage out! A seed list of 300 repeat buyers will generate 10x better leads than a seed list of 5,000 free contest entrants." },
+    { "type": "warning", "text": "Never create a Lookalike from low-intent actions like random Instagram link clicks. Use Purchases or verified high-quality Leads." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "Which Lookalike audience percentage represents users who are most statistically similar to your seed customers?",
+      "options": ["1% Lookalike", "5% Lookalike", "10% Lookalike", "50% Lookalike"],
+      "answer": 0,
+      "explain": "1% contains the top 1% of users in the target country who most closely resemble your seed list."
+    },
+    {
+      "id": "q2",
+      "q": "Which of the following makes the HIGHEST quality seed list for an e-commerce store?",
+      "options": [
+        "10,000 people who entered a free Diwali giveaway",
+        "500 customers who made repeat purchases with order value > ₹2,000",
+        "Everyone who liked a meme on your Facebook page",
+        "All visitors who bounced within 3 seconds"
+      ],
+      "answer": 1,
+      "explain": "High-intent repeat buyers provide the clearest buying signals for Meta's algorithm to replicate."
+    },
+    {
+      "id": "q3",
+      "q": "True or False: A 10% Lookalike audience in India is larger in total reach than a 1% Lookalike audience.",
+      "type": "tf",
+      "answer": true,
+      "explain": "True. A 10% Lookalike covers 10% of Meta's total active user population in India."
+    },
+    {
+      "id": "q4",
+      "q": "What is the recommended minimum number of verified customer records in a seed list?",
+      "options": ["At least 100 to 1,000+ quality records", "1 person is enough", "Exactly 5,000,000 records", "0 records"],
+      "answer": 0,
+      "explain": "Meta recommends at least 100 to 1,000 high-intent customer records to identify reliable behavioral patterns."
+    }
+  ],
+  "recap": [
+    "Lookalikes find cold users who statistically match your best existing customers.",
+    "Seed quality beats quantity: 1% Lookalike gives maximum similarity; 3-5% allows broad scale."
+  ],
+  "next": "meta-operator-03-meta-pixel-and-events"
+}

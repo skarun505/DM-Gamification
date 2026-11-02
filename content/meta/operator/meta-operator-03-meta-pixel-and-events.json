@@ -1,0 +1,64 @@
+{
+  "slug": "meta-operator-03-meta-pixel-and-events",
+  "world": "meta",
+  "tier": "operator",
+  "order": 3,
+  "title": "Meta Pixel & Standard Events",
+  "minutes": 5,
+  "objectives": [
+    "Understand what the Meta Pixel does on a website",
+    "Identify Meta's standard events: ViewContent, AddToCart, InitiateCheckout, Purchase, and Lead",
+    "Verify active tracking using the free Meta Pixel Helper Chrome extension"
+  ],
+  "glossary": ["meta-pixel", "conversion", "cvr"],
+  "blocks": [
+    { "type": "pixie", "text": "The Pixel is Meta's eyes and ears on your website! Without it, Ads Manager is flying blind." },
+    { "type": "text", "text": "The Meta Pixel is a snippet of JavaScript code placed in the header of your website. It reports every action visitors take back to Meta." },
+    { "type": "table", "headers": ["Standard Event", "When it fires", "Parameters to send"], "rows": [
+      ["ViewContent", "User opens a product or service page", "content_name, value, currency"],
+      ["AddToCart", "User clicks 'Add to Bag'", "content_ids, value, currency"],
+      ["InitiateCheckout", "User proceeds to checkout screen", "value, num_items"],
+      ["Purchase", "User pays successfully (Thank You page)", "value, currency (INR), transaction_id"],
+      ["Lead", "User submits an inquiry or quote form", "content_name, status"]
+    ] },
+    { "type": "analogy", "title": "The Shop Assistant Bell", "text": "Every time a customer picks up a product, adds it to their basket, or walks to the cash counter, a little bell rings in Meta's headquarters. That bell is a Standard Event!" },
+    { "type": "tip", "text": "Install the free 'Meta Pixel Helper' extension on Google Chrome. It glows green and shows a checkmark when your Pixel events fire properly." },
+    { "type": "warning", "text": "Always pass the currency parameter as 'INR' and value with real purchase prices so Meta can accurately report your ROAS." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "Which standard event should fire when an online shopper completes payment on the order confirmation screen?",
+      "options": ["ViewContent", "AddToCart", "InitiateCheckout", "Purchase"],
+      "answer": 3,
+      "explain": "The 'Purchase' event must only fire on the final Thank You / Confirmation page when money is received."
+    },
+    {
+      "id": "q2",
+      "q": "What free tool do media buyers use on Google Chrome to test if pixel events are firing correctly on any website?",
+      "options": ["Meta Pixel Helper", "Google Tag Assistant", "WhatsApp Web", "Facebook Post Inspector"],
+      "answer": 0,
+      "explain": "Meta Pixel Helper is the official Chrome extension used to inspect and troubleshoot active pixel tags."
+    },
+    {
+      "id": "q3",
+      "q": "True or False: If you run a 'Sales' campaign without a pixel installed, Meta can still automatically calculate your ROAS.",
+      "type": "tf",
+      "answer": false,
+      "explain": "False! Without the Pixel or CAPI, Meta has zero visibility into purchases and cannot report or optimize for ROAS."
+    },
+    {
+      "id": "q4",
+      "q": "Place the standard e-commerce events in chronological order from landing to checkout.",
+      "type": "order",
+      "items": ["ViewContent", "AddToCart", "InitiateCheckout", "Purchase"],
+      "answer": [0, 1, 2, 3],
+      "explain": "A user first views content, adds to cart, starts checkout, and completes the purchase."
+    }
+  ],
+  "recap": [
+    "Meta Pixel reports website user actions (events) back to the ad auction.",
+    "Key events: ViewContent → AddToCart → InitiateCheckout → Purchase / Lead. Verify using Pixel Helper."
+  ],
+  "next": "meta-operator-04-conversions-api-events-manager"
+}

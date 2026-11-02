@@ -1,0 +1,72 @@
+{
+  "slug": "meta-strategist-04-attribution-and-incrementality",
+  "world": "meta",
+  "tier": "strategist",
+  "order": 4,
+  "title": "Attribution & Incrementality",
+  "minutes": 5,
+  "objectives": [
+    "Differentiate between in-platform attributed conversions and true incremental lift",
+    "Explain attribution window mechanics (7-day click vs 1-day view)",
+    "Design simple geo-holdout tests to prove whether ads caused actual new sales"
+  ],
+  "glossary": ["attribution-window", "view-through-conversion", "incrementality"],
+  "blocks": [
+    { "type": "pixie", "text": "Did your ad actually CAUSE that sale, or did the customer buy because they were already planning to? Let's find out!" },
+    { "type": "text", "text": "Attribution answers which ad channel gets credit for a conversion. Incrementality answers whether the purchase would have occurred without advertising." },
+    { "type": "compare", "left": { "title": "7-Day Click Attribution", "points": ["User clicks an ad", "Buys within 7 days", "Meta takes credit for the purchase", "High confidence conversion"] }, "right": { "title": "1-Day View Attribution", "points": ["User views ad on screen (no click)", "Buys within 24 hours via another path", "Meta takes credit", "Great for high-reach brands, but lower direct causality"] } },
+    { "type": "analogy", "title": "The Umbrella Salesman Analogy", "text": "If it is pouring rain outside and people run into a shop to buy umbrellas, the salesman claiming 'My ads caused all these sales!' is confusing organic demand with ad performance. Incrementality proves the difference!" },
+    { "type": "steps", "title": "How to Run a Simple Geo-Holdout Test", "items": ["1. Select two similar states in India (e.g. Gujarat and Rajasthan)", "2. Run active Meta campaigns in Gujarat (Test market)", "3. Pause Meta campaigns completely in Rajasthan (Holdout market)", "4. Measure total Shopify revenue over 3 weeks: the difference is true incremental lift!"] },
+    { "type": "tip", "text": "Monitor 'Blended MER' (Total Store Revenue ÷ Total Marketing Spend). If scaling Meta spend lifts total store revenue profitably, the ads are incremental." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What is a 'View-Through Conversion' in Meta advertising?",
+      "options": [
+        "A user who watches 100% of a video ad",
+        "A conversion recorded when someone sees an ad without clicking, but completes a purchase on the website within 24 hours",
+        "A user who views a competitor's website",
+        "A conversion on television"
+      ],
+      "answer": 1,
+      "explain": "View-through credits the ad when a purchase occurs shortly after ad exposure, capturing discovery impact."
+    },
+    {
+      "id": "q2",
+      "q": "What is the purpose of a Geo-Lift Holdout test?",
+      "options": [
+        "To test mobile 5G internet speeds",
+        "To scientifically prove whether ad spend generates incremental sales by comparing ad-exposed regions against paused regions",
+        "To translate ads into regional languages",
+        "To lower shipping fees"
+      ],
+      "answer": 1,
+      "explain": "Holding out a control region proves whether sales would happen naturally or were truly driven by the ads."
+    },
+    {
+      "id": "q3",
+      "q": "Why do Google Analytics 4 and Meta Ads Manager rarely show the exact same conversion numbers?",
+      "options": [
+        "GA4 defaults to last-click session attribution, while Meta includes 7-day click and 1-day view attribution across devices",
+        "Google and Meta are in a legal dispute",
+        "Meta does not use servers",
+        "GA4 only works on desktop"
+      ],
+      "answer": 0,
+      "explain": "Attribution models differ fundamentally: GA4 prioritizes the final click, while Meta credits the discovery touchpoint."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: If an ad channel has a 10x ROAS in its own dashboard, it is 100% guaranteed to be incremental.",
+      "type": "tf",
+      "answer": false,
+      "explain": "False! Branded search or aggressive retargeting ads often claim credit for customers who were already at checkout."
+    }
+  ],
+  "recap": [
+    "Attribution assigns credit; incrementality proves true business causality.",
+    "Use geo-holdouts and Blended MER to verify true marketing lift."
+  ],
+  "next": "meta-strategist-05-creative-strategy-at-scale"
+}

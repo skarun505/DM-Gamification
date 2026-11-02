@@ -1,0 +1,48 @@
+{
+  "resumeDoAndDonts": {
+    "dos": [
+      "Keep to exactly 1 page. Bullet points must focus on outcomes and metrics.",
+      "Highlight simulator case studies (e.g., 'Engineered ₹84 CPL salon lead campaign across 7 days').",
+      "List technical skills clearly: Meta Ads Manager, CAPI, Pixel, Events Manager, UTM Tracking, Google Analytics 4.",
+      "Include a direct link to your live AdQuest portfolio page.",
+      "State real business metrics you understand (CTR, CPM, CPL, ROAS, AOV).",
+      "Mention creative strategy: video scripting, hook formulation, UGC direction."
+    ],
+    "donts": [
+      "Do NOT claim fake experience or fabricated corporate revenue numbers you cannot explain.",
+      "Avoid vague clichés like 'hardworking digital marketer with great passion'.",
+      "Never put generic social media skills (like 'can post on Instagram') on a performance marketing resume.",
+      "Avoid 2-column cluttered graphics that break applicant tracking systems (ATS).",
+      "Don't list tools you haven't actually touched.",
+      "Never forget to spell-check technical marketing terms."
+    ]
+  },
+  "linkedInTemplates": {
+    "headline": "Performance Marketer | Meta Ads & Paid Acquisition | Focused on CPL & ROAS Optimization",
+    "about": "Performance marketer focused on paid Meta advertising. I help consumer and local businesses lower customer acquisition costs through data-driven creative testing, full-funnel architecture, and rigorous tracking setups. Experienced in campaign structuring, audience segmentation, and auction mechanics."
+  },
+  "adLibraryResearch": [
+    "1. Visit Meta Ad Library (facebook.com/ads/library) before the interview.",
+    "2. Search the hiring company or their key clients by name.",
+    "3. Review their active creatives: Are they running video Reels, carousels, or static images?",
+    "4. Check their hooks: What offer or angle are they emphasizing?",
+    "5. Click through to their landing page or lead form: Is the experience fast, clean, and mobile-friendly?",
+    "6. During the interview, mention: 'I noticed in your Ad Library that your current video ad for X has a great hook, but I think testing a customer testimonial angle could lower CPL further.'"
+  ],
+  "commonMistakes": [
+    "Quoting a magic number without context (e.g. saying '1% CTR is always good').",
+    "Saying you would scale a campaign by 5x overnight.",
+    "Ignoring tracking and attributing zero sales to 'bad creative' when the Pixel was broken.",
+    "Using technical jargon to answer questions without explaining the business impact.",
+    "Not asking clarifying questions during a case study.",
+    "Blaming Meta's algorithm rather than taking ownership of creative fatigue or poor offers.",
+    "Claiming you don't know how to do something without stating how you would find out."
+  ],
+  "questionsToAskInterviewer": [
+    "1. What is the agency's current balance between automated Advantage+ campaigns and manual ABO testing?",
+    "2. How does your creative team and media buying team collaborate on new video hook iterations?",
+    "3. What are the key KPIs that define success for a junior media buyer in the first 90 days?",
+    "4. How do you handle tracking attribution since iOS updates across your e-commerce clients?",
+    "5. What is the typical daily budget size for the accounts I would be assisting on?"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "slug": "meta-strategist-07-client-reporting-communication",
+  "world": "meta",
+  "tier": "strategist",
+  "order": 7,
+  "title": "Client Reporting & Communication",
+  "minutes": 5,
+  "objectives": [
+    "Master the 5-point Client-Talk Formula for professional updates",
+    "Translate media buying metrics into business outcomes for CEOs and founders",
+    "Set healthy client expectations to prevent knee-jerk panic pauses"
+  ],
+  "glossary": ["client-talk", "roas", "cpl"],
+  "blocks": [
+    { "type": "pixie", "text": "Being a great media buyer is only half the battle. Communicating clearly with clients is what keeps them for years!" },
+    { "type": "text", "text": "Clients don't care about ad technicalities like EMQ or bid pacing. They care about customer acquisition cost, revenue, and cash flow." },
+    { "type": "steps", "title": "The 5-Point Weekly Report Structure", "items": ["1. Executive Scorecard: Total Spend, Total Revenue, Blended ROAS / CPL, Customers Acquired", "2. What Worked: Highlight the top-performing creative angle and why it succeeded", "3. What Failed & What We Learned: Transparently explain tests that didn't hit benchmarks", "4. Next Week's Test Plan: What new hooks, offers, or audiences are launching next", "5. Client Action Items: Approvals needed or inventory warnings"] },
+    { "type": "analogy", "title": "The Doctor's Prescription", "text": "A good doctor doesn't hand you raw blood test spreadsheets with medical jargon. They say: 'Your cholesterol is down 10%. Keep taking this medication and I will see you in two weeks.' Talk like a marketing doctor!" },
+    { "type": "tip", "text": "The 24-Hour Rule: When performance dips, message the client first before they message you! Proactive communication builds immense trust." },
+    { "type": "warning", "text": "Never guarantee fixed ROAS (like 'I promise 10x every week'). Advertising operates in dynamic auctions with changing competition and consumer demand." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What should be the very first section in a weekly performance report for a company founder?",
+      "options": [
+        "A 20-page list of negative keywords",
+        "The Executive Scorecard: Total spend, net revenue, blended CAC/CPL, and total new customers acquired",
+        "A biography of the media buyer",
+        "A screenshot of Ads Manager code"
+      ],
+      "answer": 1,
+      "explain": "Founders want to see commercial business impact first before reviewing creative details."
+    },
+    {
+      "id": "q2",
+      "q": "What is the '24-Hour Proactive Rule' when an unexpected ad performance drop occurs?",
+      "options": [
+        "Delete the client's account within 24 hours",
+        "Alert the client with data and your diagnostic action plan before they notice and contact you in a panic",
+        "Wait 24 days to see if it fixes itself",
+        "Double the daily spend within 24 minutes"
+      ],
+      "answer": 1,
+      "explain": "Proactive communication demonstrates ownership and expertise, preventing client panic and retaining trust."
+    },
+    {
+      "id": "q3",
+      "q": "How should a performance marketer respond when a new client asks: 'Can you guarantee me a 10x ROAS?'",
+      "options": [
+        "Say yes unconditionally to win the client",
+        "Explain commercial unit economics, share realistic benchmarks (2.5x-4x for cold traffic), and propose a phased 90-day testing roadmap",
+        "Block the client immediately",
+        "Promise 20x ROAS"
+      ],
+      "answer": 1,
+      "explain": "Honest consultative alignment on realistic benchmarks establishes long-term credibility and avoids immediate failure."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: Using the Client-Talk formula ('What happened, Why, Action taken, Next date') reassures non-technical stakeholders.",
+      "type": "tf",
+      "answer": true,
+      "explain": "True! It provides structure, clarity, and accountability without drowning the client in confusing jargon."
+    }
+  ],
+  "recap": [
+    "Lead reports with commercial outcomes: Spend, Revenue, CPL, and CAC.",
+    "Be proactive during dips: communicate what happened, why, and your concrete fix."
+  ],
+  "next": "meta-strategist-08-policies-rejections-account-health"
+}

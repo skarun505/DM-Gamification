@@ -1,0 +1,46 @@
+{
+  "slug": "is-strat-d2c-zero-data",
+  "tier": "strategist",
+  "title": "New D2C Brand: ₹2 Lakh Budget With Zero Data",
+  "lessonSlug": "meta-strategist-01-funnel-architecture",
+  "story": "A brand new organic snacks brand in India launches with ₹2,00,000 for their first 30 days. Their Meta Pixel is completely fresh with 0 historical purchases, and they have no email list. How do you structure the launch?",
+  "data": {
+    "table": [
+      ["Phase", "Days", "Budget Share", "Focus"],
+      ["Phase 1: Creative & Hook Testing", "Days 1-10", "25% (₹50,000)", "Test 6 video hooks across 2 Broad ABO sets"],
+      ["Phase 2: Funnel Validation", "Days 11-20", "45% (₹90,000)", "Scale winning hooks to CBO + 14-day retargeting"],
+      ["Phase 3: Scaling & AOV Optimization", "Days 21-30", "30% (₹60,000)", "Advantage+ Shopping test + Bundle offers"]
+    ]
+  },
+  "steps": [
+    {
+      "prompt": "With zero pixel data, what targeting approach should you start with?",
+      "options": [
+        "Create a 1% Lookalike of 2 past orders",
+        "Target broad demographics (e.g. All Adults 22-45 in top metro cities) and let high-contrast, benefit-driven video creatives do the algorithmic filtering",
+        "Stack 45 narrow interests together",
+        "Target only people who follow foreign snack brands"
+      ],
+      "answer": 1,
+      "explain": "With no historical data, Lookalikes are ineffective. Broad demographic targeting with strong creative hooks lets Meta's algorithm discover your true buyer profile."
+    },
+    {
+      "prompt": "What is the single biggest mistake to avoid during the first 14 days of a zero-data brand?",
+      "options": [
+        "Scaling spend aggressively before finding at least one winning creative hook with a profitable conversion rate",
+        "Running video ads instead of images",
+        "Using Indian Rupee billing",
+        "Setting up the Meta Pixel"
+      ],
+      "answer": 0,
+      "explain": "Premature scaling on unproven creative burns capital. First validate product-market fit and creative resonance at modest budgets."
+    }
+  ],
+  "finalQuestion": "In under 80 words, summarize your advice to the founder on unit economics and sample bundles for month 1.",
+  "keyPoints": [
+    "Increase Average Order Value (AOV) by selling bundles over ₹800 rather than ₹150 single packs",
+    "Focus on customer repeat purchase rate for lifetime value (LTV)",
+    "Set realistic month-one ROAS target of 2.0x to 2.5x"
+  ],
+  "modelAnswer": "Do not sell single ₹150 snack packs on Meta; shipping and ad costs will make unit economics impossible. Package products into trial bundles priced at ₹799 to ₹1,199 to increase Average Order Value (AOV). In month one, target a 2.0x-2.5x ROAS to acquire trial customers profitably, and capture their emails and WhatsApp for high-margin repeat purchases."
+}

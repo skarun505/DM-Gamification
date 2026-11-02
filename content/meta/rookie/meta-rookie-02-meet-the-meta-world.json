@@ -1,0 +1,62 @@
+{
+  "slug": "meta-rookie-02-meet-the-meta-world",
+  "world": "meta",
+  "tier": "rookie",
+  "order": 2,
+  "title": "Meet the Meta World",
+  "minutes": 4,
+  "objectives": [
+    "Know the 3 major apps in Meta's advertising ecosystem",
+    "Understand the role of Facebook Page, Business Portfolio, and Ad Account",
+    "Complete the Indian ad account checklist including GST details"
+  ],
+  "glossary": ["business-portfolio", "ad-account", "gst-invoice"],
+  "blocks": [
+    { "type": "pixie", "text": "Meta connects Facebook, Instagram, and WhatsApp under one single advertising engine!" },
+    { "type": "text", "text": "Over 500 million people across India use these apps daily to connect, explore products, and chat with local businesses." },
+    { "type": "analogy", "title": "The Shopping Mall Analogy", "text": "Meta Business Portfolio is like owning a floor in a mall. Your Facebook Page and Instagram profile are your shopfronts. Your Ad Account is your billing register." },
+    { "type": "steps", "title": "The 4 Core Assets You Need", "items": ["1. Facebook Business Page (official business presence)", "2. Instagram Professional Account (linked to Page)", "3. Meta Business Portfolio (the central control room)", "4. Meta Ad Account (where budgets and campaigns live)"] },
+    { "type": "tip", "text": "Never run ads from a personal Facebook profile. Always use a dedicated Business Portfolio for security." },
+    { "type": "warning", "text": "In India, enter your 18% GST number in Ad Account settings. This lets you claim back input tax credit on your ad spends!" }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "Which tool acts as the central command room for managing Meta ad accounts, pages, and pixels?",
+      "options": ["Personal Facebook Profile", "Meta Business Portfolio (Business Manager)", "WhatsApp Personal Messenger", "Instagram Archive"],
+      "answer": 1,
+      "hint": "Think of the tool that holds all team permissions and business assets.",
+      "explain": "Meta Business Portfolio connects all assets, team members, and payment methods in one secure place."
+    },
+    {
+      "id": "q2",
+      "q": "Why should Indian business owners add their GST number to their Meta Ad Account?",
+      "options": ["To get 50% discount on ads", "To claim 18% Input Tax Credit on ad invoices", "It makes ads run 2x faster", "It is required to change ad fonts"],
+      "answer": 1,
+      "hint": "Think about business taxes and claiming back expenses.",
+      "explain": "Adding your GST number ensures Meta generates official GST invoices so you can claim back 18% tax credit."
+    },
+    {
+      "id": "q3",
+      "q": "True or False: An ad created in Meta Ads Manager can run on both Instagram and Facebook simultaneously.",
+      "type": "tf",
+      "answer": true,
+      "hint": "Meta operates both platforms from the same ads engine.",
+      "explain": "True! One Meta campaign can automatically deliver across Facebook, Instagram, Messenger, and Audience Network."
+    },
+    {
+      "id": "q4",
+      "q": "Order the hierarchy of Meta business setup from broadest container to individual ad.",
+      "type": "order",
+      "items": ["Meta Business Portfolio", "Ad Account", "Campaign", "Ad Creative"],
+      "answer": [0, 1, 2, 3],
+      "hint": "Start with the company-wide account, then billing, campaign, and finally creative.",
+      "explain": "The Business Portfolio holds the Ad Account, which runs the Campaign, which displays the Ad Creative."
+    }
+  ],
+  "recap": [
+    "Meta ads run across Facebook, Instagram, and WhatsApp from one dashboard.",
+    "Business Portfolio holds your assets, and adding GST saves 18% in tax credits."
+  ],
+  "next": "meta-rookie-03-campaign-adset-ad-structure"
+}

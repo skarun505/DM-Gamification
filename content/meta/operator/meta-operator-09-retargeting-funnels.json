@@ -1,0 +1,67 @@
+{
+  "slug": "meta-operator-09-retargeting-funnels",
+  "world": "meta",
+  "tier": "operator",
+  "order": 9,
+  "title": "Retargeting & Exclusions",
+  "minutes": 5,
+  "objectives": [
+    "Structure an e-commerce retargeting funnel with segmented recency windows",
+    "Apply strict exclusions to stop wasting budget on past purchasers",
+    "Match ad messaging to the specific stage of customer consideration"
+  ],
+  "glossary": ["retargeting", "exclusions", "top-of-funnel", "bottom-of-funnel"],
+  "blocks": [
+    { "type": "pixie", "text": "Over 95% of first-time website visitors leave without buying. Retargeting brings them back to finish the purchase!" },
+    { "type": "text", "text": "Retargeting shows customized ads specifically to people who already browsed your catalog or added items to cart." },
+    { "type": "steps", "title": "The Golden Retargeting Funnel", "items": ["Hot BOFU (0-7 Days): Cart abandoners → Address objections, offer free shipping / 10% code", "Warm MOFU (8-30 Days): Website visitors & social engagers → Showcase customer reviews, media coverage, unboxing videos", "Always Exclude: Past 30 to 180-day purchasers!"] },
+    { "type": "analogy", "title": "The Sweet Shop Customer", "text": "If a customer already bought a box of sweets and is walking out the door, you don't chase them shouting: 'Buy sweets!' You let them enjoy it, and retarget them with a festive refill offer 30 days later." },
+    { "type": "tip", "text": "In Indian e-commerce, offering Cash on Delivery (COD) with OTP confirmation or 1-click UPI checkout in retargeting ads recovers up to 40% of abandoned carts." },
+    { "type": "warning", "text": "Keep retargeting budgets modest: typically 15% to 25% of total spend. If you over-fund retargeting, frequency will skyrocket to 8+ and annoy warm leads." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "Why is it mandatory to exclude recent 30-day purchasers from cold prospecting and cart abandoner ad sets?",
+      "options": [
+        "To prevent burning ad rupees showing introductory discount ads to people who already bought",
+        "Meta bans accounts that retarget buyers",
+        "Purchasers can never buy again",
+        "It lowers page loading speed"
+      ],
+      "answer": 0,
+      "explain": "Excluding recent buyers protects your margins and prevents annoying loyal customers with irrelevant first-time buyer ads."
+    },
+    {
+      "id": "q2",
+      "q": "What ad creative angle works best for hot 0-7 day cart abandoners?",
+      "options": [
+        "A generic educational video introducing what your brand is",
+        "Overcoming checkout objections: customer testimonials, trust badges, and an exclusive limited-time coupon or free shipping offer",
+        "A black and white image of your factory",
+        "A stock photo of an airplane"
+      ],
+      "answer": 1,
+      "explain": "Cart abandoners already want the product; they just need trust reinforcement or an incentive to complete checkout."
+    },
+    {
+      "id": "q3",
+      "q": "Approximately what percentage of a brand's total ad budget should typically be allocated to warm retargeting?",
+      "options": ["90% to 100%", "15% to 25%", "Exactly 1%", "₹5 total"],
+      "answer": 1,
+      "explain": "Retargeting pools are finite. Dedicating 15-25% covers warm audiences while leaving 75-85% for cold customer acquisition."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: A 3-day cart abandoner is generally more likely to convert than a 60-day cart abandoner.",
+      "type": "tf",
+      "answer": true,
+      "explain": "True! Recency is the strongest predictor of conversion intent in retargeting funnels."
+    }
+  ],
+  "recap": [
+    "Segment retargeting by recency (0-7 hot vs 8-30 warm) and always exclude recent buyers.",
+    "Allocate 15-25% of total budget to retargeting to maintain healthy frequency without saturation."
+  ],
+  "next": "meta-operator-10-reporting-and-breakdowns"
+}

@@ -1,0 +1,211 @@
+[
+  {
+    "slug": "iq-strat-01-scale-5k-to-50k",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-02-scaling-safely",
+    "question": "How do you scale an ad account from ₹5,000 to ₹50,000 per day without breaking CPL or ROAS?",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Combine vertical scaling (15-20% daily budget increases) with horizontal scaling (new creative angles and broader audiences)",
+      "Creative velocity: Scaling spend requires producing 3-5 fresh video hooks weekly to combat fatigue",
+      "Transition from narrow interest targeting to Advantage+ Shopping or Broad targeting",
+      "Monitor blended CAC and MER (Marketing Efficiency Ratio) rather than in-platform ROAS alone"
+    ],
+    "modelAnswer": "Scaling 10x is not a matter of increasing budget on one ad set; it requires both vertical and horizontal architecture. Vertically, I increase budgets by 15-20% every 48-72 hours on winning campaigns to keep the machine learning stable. Horizontally, I expand the total addressable audience by launching broad targeting and testing 3 to 5 new creative angles every week. As spend scales, creative fatigue accelerates rapidly, so creative velocity is our real ceiling. Finally, I monitor overall Marketing Efficiency Ratio (blended revenue divided by total spend) to ensure profitable net margins.",
+    "followUp": "When scaling from ₹5k to ₹50k, what happens to your in-platform ROAS, and how do you prepare the client?",
+    "commonMistakes": ["Increasing daily budget by 10x in one single click, destroying performance"],
+    "tip": "Talk about both media buying mechanics and creative velocity."
+  },
+  {
+    "slug": "iq-strat-02-audit-in-30-mins",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-06-account-structure-and-audits",
+    "question": "How do you perform a comprehensive Meta ad account audit in 30 minutes?",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Check tracking health first (Pixel & CAPI event deduplication, EMQ scores, active purchase events)",
+      "Account structure: Check for fragmentation, budget splits, and learning limited ad sets",
+      "Audience hygiene: Look for audience overlap and missing purchaser exclusions",
+      "Creative diversity: Check ratio of videos vs images, hook variations, and creative fatigue"
+    ],
+    "modelAnswer": "I conduct a rapid 30-minute audit across 4 pillar areas: First, Tracking Health: in Events Manager, I check EMQ scores, verify CAPI deduplication, and test standard purchase events. Second, Account Architecture: I look for over-fragmentation. If there are 30 ad sets spending ₹200 each in Learning Limited, the account is bleeding efficiency. Third, Audience Hygiene: I check for purchaser exclusions and test for audience overlap between competing ad sets. Fourth, Creative Performance: I review the top 20% of spenders, check frequency and CTR trends, and audit whether the account has a repeatable testing pipeline.",
+    "followUp": "What is the very first recommendation you deliver to an account with 40 active ad sets?",
+    "commonMistakes": ["Focusing purely on ad copy and ignoring tracking and structural fragmentation"],
+    "tip": "Structure the audit into 4 clear pillars: Tracking, Structure, Audiences, Creatives."
+  },
+  {
+    "slug": "iq-strat-03-prove-incrementality",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-04-attribution-and-incrementality",
+    "question": "How do you prove to a sceptical CFO that Meta ads are genuinely incremental rather than cannibalizing existing brand search?",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Explain the difference between attributed conversions and incremental lift",
+      "Run geo-lift experiments (holdout regions with ads paused vs running)",
+      "Analyze correlated lift between Meta spend increases and branded organic search volume",
+      "Conduct Conversion Lift studies via Meta Experiments tool"
+    ],
+    "modelAnswer": "To prove incrementality, I distinguish between credited conversions and true business lift. An ad channel can easily claim credit for customers who would have bought anyway. To prove causality, I use two scientific methods: First, run a Geo-Lift experiment using Meta Experiments, pausing ads in specific representative Indian states (like Gujarat and Karnataka) while maintaining spend in control states, and measuring the difference in total store revenue. Second, I demonstrate that scaling cold Meta video spend causes an immediate, measurable surge in branded Google Search queries and direct website traffic.",
+    "followUp": "What is a holdout test and how long should it run?",
+    "commonMistakes": ["Relying solely on last-click attribution reports from Google Analytics"],
+    "tip": "Cite geo-lift testing and branded search correlation."
+  },
+  {
+    "slug": "iq-strat-04-quarterly-testing-roadmap",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-05-creative-strategy-at-scale",
+    "question": "How do you build and manage a quarterly testing roadmap for a growing brand?",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Maintain a backlog of test hypotheses prioritized by ICE (Impact, Confidence, Ease)",
+      "Dedicate 15-20% of budget permanently to the testing sandbox",
+      "Test across 3 buckets: Creative Concepts (hooks/angles), Landing Page/Offers, and New Formats",
+      "Document weekly learnings in a shared knowledge base (SOP)"
+    ],
+    "modelAnswer": "A quarterly testing roadmap prevents ad accounts from stagnating. I maintain an experimentation backlog prioritized using the ICE framework (Impact, Confidence, Ease). I divide testing into three distinct streams: Creative Angles (testing 4 new hook concepts and UGC creators weekly), Offer Experiments (testing bundles, free shipping thresholds, or buy-one-get-one offers), and Funnel Improvements (testing 1-step checkout vs multi-step forms). Every Monday, we review test results against kill criteria, graduate proven winners into our scaling CBO campaigns, and log learnings in our creative library.",
+    "followUp": "How do you prevent a testing sandbox from losing money?",
+    "commonMistakes": ["Testing random ideas without a formal hypothesis or documentation"],
+    "tip": "Use the ICE prioritization framework and clear testing streams."
+  },
+  {
+    "slug": "iq-strat-05-advantage-plus-vs-manual",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-03-advantage-plus-campaigns",
+    "question": "When should an e-commerce brand use Advantage+ Shopping Campaigns (ASC) versus manual campaign structures?",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Advantage+ Shopping (ASC): Best for accounts with strong pixel history (50+ weekly purchases) and diverse creative assets",
+      "Manual ABO/CBO: Essential for scientific creative testing, strict geographic control, or lead generation",
+      "Set existing customer budget caps on ASC to prevent over-spending on retargeting",
+      "Modern best practice is hybrid: Manual ABO for testing, ASC for automated scaling"
+    ],
+    "modelAnswer": "Advantage+ Shopping Campaigns (ASC) leverage Meta's highest machine learning automation, automatically combining prospecting and retargeting across all placements. ASC is unbeatable for scaling e-commerce brands that have substantial historical pixel data (50+ weekly orders) and a rich library of 10+ creative variations. However, manual structures remain essential: I use manual ABO campaigns as a testing laboratory where I isolate new hooks and audiences. Once a creative wins in the manual test, I feed it into the ASC scaling engine, always setting an existing customer budget cap (e.g., max 15%) so ASC doesn't just re-sell to past customers.",
+    "followUp": "Why is setting an existing customer cap in Advantage+ Shopping so critical?",
+    "commonMistakes": ["Relying 100% on ASC with zero manual creative testing"],
+    "tip": "Position ASC as the scaling engine and manual ABO as the testing lab."
+  },
+  {
+    "slug": "iq-strat-06-client-wants-10x-roas",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-07-client-reporting-communication",
+    "question": "A new client demands a 10x ROAS in their first 14 days of advertising. How do you handle this professionally?",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Acknowledge their commercial ambition with empathy and commercial reality",
+      "Explain the unit economics and realistic industry benchmarks (2.5x - 4x for cold traffic)",
+      "Explain the machine learning phase and attribution timeline",
+      "Provide a clear phased milestone roadmap to scale profitability sustainably"
+    ],
+    "modelAnswer": "I respond with consultative commercial clarity. I thank them for their ambitious target, but clearly articulate that a 10x ROAS on cold traffic across 14 days is mathematically unrealistic unless the brand has enormous existing organic demand. I walk them through unit economics: ad auction CPMs in India, realistic e-commerce conversion rates (2-3%), and average order values. I present a 90-day roadmap: Month 1 focuses on finding winning creative angles and stabilizing at a profitable 2.5x-3.5x baseline; Month 2 optimizes AOV and post-purchase bundles; Month 3 scales spend while protecting contribution margins.",
+    "followUp": "If the client insists on 10x or threatens to cancel, what is your stance?",
+    "commonMistakes": ["Promising 10x just to close the deal, then inevitably getting fired two weeks later"],
+    "tip": "Act as a trusted business consultant, not an order-taker."
+  },
+  {
+    "slug": "iq-strat-07-present-to-non-tech-ceo",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-07-client-reporting-communication",
+    "question": "How do you present weekly ad performance to a non-technical CEO or founder?",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Lead with commercial business metrics: Revenue, Ad Spend, Blended CAC, Net Profit",
+      "Avoid technical media jargon (keep CPM, CTR, CAPI in the appendix)",
+      "Follow the 5-point formula: What happened, Why, Action taken, Client needs, Next date",
+      "Highlight clear visual charts and one key creative win"
+    ],
+    "modelAnswer": "CEOs care about cash flow and customer acquisition, not algorithm jargon. I never start a presentation talking about CPM or frequency. I lead with the executive scorecard: 'We spent ₹2,50,000 this week, generated ₹8,20,000 in net sales at a 3.28x ROAS, acquiring 410 new customers at a ₹610 CAC.' Then I explain the story in plain terms: our new founder-story Reel outperformed all other ads, lowering customer acquisition cost by 18%. I conclude with our testing priorities for next week and any inventory constraints they need to prepare for.",
+    "followUp": "How do you handle a week where numbers were down?",
+    "commonMistakes": ["Overwhelming the CEO with 30-column spreadsheets of vanity metrics"],
+    "tip": "Talk like a business owner: Revenue, CAC, and Net Margins."
+  },
+  {
+    "slug": "iq-strat-08-meta-vs-google-split",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-01-funnel-architecture",
+    "question": "How do you decide the budget allocation split between Meta Ads and Google Ads for an e-commerce brand?",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Intent vs Discovery: Google captures existing search intent; Meta creates net-new demand",
+      "Google Search & Shopping captures bottom-of-funnel users already searching for the product",
+      "Meta feeds top-of-funnel by generating awareness and desire",
+      "Typical split: 60-70% Meta (demand generation) and 30-40% Google (demand capture)"
+    ],
+    "modelAnswer": "The budget split between Meta and Google depends on intent versus discovery. Google Ads is intent-capture: it targets people actively searching for specific solutions (e.g. 'buy wooden dining table online'). If high-intent search volume exists, I always fund Google Search and Shopping first to capture all active demand. However, search volume has a finite ceiling. Meta Ads is demand generation: it introduces products to users who didn't know they needed them. A standard e-commerce allocation is 65% Meta to generate cold interest, and 35% Google to capture branded search and search intent.",
+    "followUp": "What happens if you run heavy Meta ads without protecting your branded search on Google?",
+    "commonMistakes": ["Treating Meta and Google as competitors rather than complementary funnel partners"],
+    "tip": "Explain that Meta creates demand while Google captures intent."
+  },
+  {
+    "slug": "iq-strat-09-account-restricted-sop",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-08-policies-rejections-account-health",
+    "question": "An ad account is suddenly restricted 24 hours before a major sale event. What is your emergency response plan?",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Immediate triage: Check Account Quality for the exact restriction reason",
+      "File an expedited appeal with verified PAN/business documentation",
+      "Activate the pre-configured backup ad account and pixel asset backup",
+      "Maintain transparent client communication with next update timeline"
+    ],
+    "modelAnswer": "When an account is restricted, panic is the enemy; preparation is the remedy. First, I inspect Account Quality to identify the exact trigger: is it an identity verification hold, suspicious billing activity, or a policy strike? I submit a formal appeal immediately with verified business PAN and GST documents. Second, for mature accounts, we maintain a pre-warmed backup ad account connected to the same pixel. I activate the backup campaigns to keep revenue flowing while the primary account is in appeal. Finally, I brief the client within 30 minutes, outlining the steps taken and committing to an hourly update.",
+    "followUp": "How do you design an account structure to prevent catastrophic downtime from a single account ban?",
+    "commonMistakes": ["Creating 5 brand new spam accounts from personal profiles, triggering permanent IP bans"],
+    "tip": "Highlight pre-planned redundancy and calm appeal protocols."
+  },
+  {
+    "slug": "iq-strat-10-attribution-models-plain-terms",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-04-attribution-and-incrementality",
+    "question": "Explain Last-Click, Data-Driven, and Media Mix Modeling (MMM) in simple terms.",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Last-Click: Gives 100% credit to the final link tapped before purchase (like giving the goal to the striker and ignoring the assist)",
+      "Data-Driven: Uses algorithmic fractional weighting across all customer touchpoints",
+      "Media Mix Modeling (MMM): High-level statistical regression measuring macro channel impact over time",
+      "Modern brands use blended MER + MMM for strategic budget allocation"
+    ],
+    "modelAnswer": "Think of a football match: Last-Click attribution awards 100% of the victory to the striker who tapped the ball into the net, completely ignoring the midfielder who intercepted the ball and made the cross. It overvalues Google Search and direct traffic, while starving Meta video ads that generated the initial interest. Data-Driven attribution uses machine learning to assign fractional credit to each touchpoint. Media Mix Modeling (MMM) takes a macro statistical approach: it measures how weekly shifts in total ad spend across channels correlate with overall company revenue, giving the executive team an unbiased view of cross-channel impact.",
+    "followUp": "Why are top agencies moving away from pure last-click attribution?",
+    "commonMistakes": ["Believing that one single attribution model is 100% objective truth"],
+    "tip": "Use the sports assist vs striker goal analogy."
+  },
+  {
+    "slug": "iq-strat-11-create-team-sops",
+    "tier": "strategist",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-strategist-06-account-structure-and-audits",
+    "question": "How do you design Standard Operating Procedures (SOPs) for junior media buyers to ensure consistent quality?",
+    "levelTag": "Strategist",
+    "keyPoints": [
+      "Standardized campaign and ad set naming conventions (e.g. [PROSP]_[Broad]_[Format]_[Date])",
+      "Pre-flight launch checklist: UTM tracking, pixel events, budget verification, GST input",
+      "Daily optimization rules: Strict kill criteria and scaling percentage rules",
+      "Weekly retrospective and shared creative winner log"
+    ],
+    "modelAnswer": "To scale an agency without chaos, junior buyers need ironclad SOPs. I establish three non-negotiables: First, standardized naming conventions (e.g. [FUNNEL]_[TARGETING]_[CREATIVE_CODE]_[DATE]) so anyone can read an account at a glance. Second, a mandatory 8-point Pre-Flight Launch Checklist covering UTM parameters, pixel fires, and budget decimals to eliminate human error. Third, mathematical kill-and-scale rules: buyers know exactly when to cut an ad (e.g. spend > 2x target CPA with CTR < 0.8%) and when to scale (15% budget bump on 3-day profitable consistency). This removes guesswork and guarantees account quality.",
+    "followUp": "How do you audit junior media buyers without micromanaging them?",
+    "commonMistakes": ["Leaving naming conventions and kill decisions up to personal subjective mood"],
+    "tip": "Detail naming conventions, pre-flight checklists, and rule-based kill criteria."
+  }
+]

@@ -1,0 +1,287 @@
+[
+  {
+    "slug": "iq-op-01-custom-vs-lookalike",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-01-custom-audiences",
+    "question": "What is the difference between Custom and Lookalike audiences, and what makes a high-quality seed?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Custom Audience: People who already interacted with your brand (website visitors, customer lists, video viewers)",
+      "Lookalike Audience: Meta finding new cold prospects who statistically mirror your seed audience",
+      "Seed quality matters more than size: 500 repeat buyers beat 10,000 contest entrants",
+      "1% Lookalike represents highest similarity"
+    ],
+    "modelAnswer": "A Custom Audience consists of people who have already engaged with your brand, such as website visitors, Instagram engagers, or past purchasers from a CRM CSV. A Lookalike Audience takes a high-quality Custom Audience (the seed) and instructs Meta's AI to find new people across the country who share the same browsing behaviors, interests, and demographics. The quality of the seed list is vital: a seed of 500 repeat high-AOV buyers produces a far more profitable Lookalike than a bloated list of 10,000 free contest entrants.",
+    "followUp": "When would you choose a 1% Lookalike versus a 3% Lookalike?",
+    "commonMistakes": ["Using low-intent seed lists like random giveaway participants"],
+    "tip": "Emphasize garbage-in, garbage-out when discussing seed lists."
+  },
+  {
+    "slug": "iq-op-02-pixel-vs-capi",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-03-meta-pixel-and-events",
+    "question": "What are the Meta Pixel and Conversions API (CAPI), why use both, and how does deduplication work?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Pixel: Browser-side JavaScript tracker (can be blocked by ad blockers or iOS restrictions)",
+      "CAPI: Server-to-server direct data pipeline (resilient to browser blocking)",
+      "Using both provides redundant tracking and improves Event Match Quality (EMQ)",
+      "Deduplication: Sending identical event_id and event_name so Meta counts the action only once"
+    ],
+    "modelAnswer": "The Meta Pixel is a browser-side JavaScript tag on your website, but it can lose 15-30% of signals due to ad-blockers and iOS privacy restrictions. The Conversions API (CAPI) sends conversion events directly from your web server to Meta's servers, bypassing browser blockers. We implement both in tandem to maximize event match quality. To prevent double-counting purchases, we pass identical 'event_id' and 'event_name' parameters from both browser and server. When Meta receives both signals within 48 hours, it deduplicates them into a single recorded conversion.",
+    "followUp": "What is Event Match Quality (EMQ) and what parameters boost it?",
+    "commonMistakes": ["Running CAPI without event_id, causing double-reported conversions"],
+    "tip": "Explain deduplication via the event_id parameter."
+  },
+  {
+    "slug": "iq-op-03-cpl-doubled-diagnose",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-10-reporting-breakdowns",
+    "question": "CPL doubled this week from ₹100 to ₹200 on an active campaign. What steps do you take to diagnose it?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Check tracking first: Did pixel or CAPI stop firing? Is form loading?",
+      "Compare CPM, CTR, and CVR side by side to isolate the drop",
+      "Check Frequency: Is audience fatigue setting in (> 3.5)?",
+      "Check for unintended budget or audience edits that reset learning"
+    ],
+    "modelAnswer": "I follow a strict diagnostic checklist before touching any ads. First, I verify technical health: is the landing page loading in under 2 seconds, and is the Pixel firing correctly? Second, I compare CPM, CTR, and CVR against last week. If CPM doubled while CTR remained stable, auction competition or audience saturation is the issue. If CTR plummeted, the creative has fatigued. If CTR is normal but CVR collapsed, there is an issue with the offer or landing page form. Finally, I check frequency; if it exceeds 3.5, I refresh creatives.",
+    "followUp": "If CTR dropped from 2.0% to 0.7%, what is your immediate move?",
+    "commonMistakes": ["Changing ad copy blindly without analyzing metrics first"],
+    "tip": "Use the CPM → CTR → CVR diagnostic funnel."
+  },
+  {
+    "slug": "iq-op-04-lowest-cost-vs-cost-cap",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-06-bidding-and-cost-controls",
+    "question": "When should you use Lowest Cost bidding versus Cost Cap or Bid Cap?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Lowest Cost: Default auction bidding, spends full budget to get maximum volume at market rates",
+      "Cost Cap: Sets an average cost ceiling; controls costs but will underspend if cap is too low",
+      "Bid Cap: Sets maximum individual auction bid; strict control for experienced media buyers",
+      "Use Lowest Cost for testing; use Cost Cap to protect margins when scaling"
+    ],
+    "modelAnswer": "Lowest Cost (Highest Volume) is ideal when testing new creatives or starting out, because Meta spends your entire budget to find the best available results at current market prices. Cost Cap is valuable when scaling aggressively with strict unit margins: you set an average target (e.g. ₹150 CPL), and Meta only bids when it predicts it can achieve that cost. However, if your Cost Cap is set below market reality, the ad set will fail to spend. Bid Cap sets a ceiling on every single auction bid, used primarily for event ticketing or high-frequency flash sales.",
+    "followUp": "Your Cost Cap campaign is not spending any money. What is happening?",
+    "commonMistakes": ["Setting a Cost Cap 50% below current benchmark and wondering why spend is zero"],
+    "tip": "Clarify that Cost Cap prioritizes margin while Lowest Cost prioritizes volume."
+  },
+  {
+    "slug": "iq-op-05-creative-testing-methodology",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-08-creative-testing-framework",
+    "question": "How do you systematically test creatives without burning ad spend?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Isolate one variable at a time (Hooks vs Body vs Format)",
+      "Use Dynamic Creative (DCT) or structured ABO test ad sets",
+      "Keep audience and budget identical across test variants",
+      "Test hooks in the first 3 seconds first because they drive 80% of CTR variance"
+    ],
+    "modelAnswer": "Scientific creative testing requires isolating one variable at a time. I use an ABO (Ad Set Budget) testing structure with a proven broad or lookalike audience. To test hooks, I keep the body of the video and the offer identical, changing only the opening 3-second hook visual and voiceover across 3-4 variations. I give each variation 3-5 days to accumulate at least 2-3x target CPL in spend. I evaluate winners based on Outbound CTR and Cost Per Result. Once a hook proves itself as a winner, I graduate it into our main scaling campaign.",
+    "followUp": "How much budget do you allocate to your creative testing sandbox versus your scaling campaigns?",
+    "commonMistakes": ["Testing multiple changes at once (new video + new copy + new audience)"],
+    "tip": "Explain the testing sandbox to scaling campaign graduation pipeline."
+  },
+  {
+    "slug": "iq-op-06-lower-cpl-without-hurting-quality",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-05-getting-leads-forms-vs-web-vs-whatsapp",
+    "question": "How do you lower Cost Per Lead without sacrificing lead quality?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Add 1-2 qualifying custom questions on Instant Forms (e.g. budget, timeline)",
+      "Test Click-to-WhatsApp with automated greeting questions",
+      "Refine creative hook to call out the exact ideal customer persona",
+      "Improve landing page speed and mobile form layout"
+    ],
+    "modelAnswer": "Lowering CPL while maintaining lead quality requires creative pre-qualification. Rather than using generic clickbait, the ad creative itself must clearly state the offer, target audience, and price expectations. On Meta Instant Forms, I add 1 or 2 high-intent custom questions (such as 'When are you planning to start?' or 'What is your monthly budget?'). This prevents accidental auto-fill submissions. For service clients, switching to Click-to-WhatsApp with an automated welcome prompt filters out low-intent users while lowering cost per conversation.",
+    "followUp": "Why does adding one question to a form often reduce lead complaints from the sales team?",
+    "commonMistakes": ["Adding 10 unnecessary form fields that kill conversion rate entirely"],
+    "tip": "Focus on creative qualification and custom form questions."
+  },
+  {
+    "slug": "iq-op-07-leads-cheap-poor-quality",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-05-getting-leads-forms-vs-web-vs-whatsapp",
+    "question": "Leads are coming in at ₹30 each, but the sales team reports nobody is answering calls. How do you solve this?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Check Speed to Lead: Are calls happening within 5 minutes or 24 hours later?",
+      "Switch from 'More Volume' instant form to 'Higher Intent' (review step)",
+      "Add qualifying questions or OTP phone verification",
+      "Check if creative promised something misleading (e.g. 'Win free iPhone')"
+    ],
+    "modelAnswer": "This is a classic 'cheap lead trap'. First, I audit the sales team's Speed to Lead: if leads are called 24 hours later, response rates drop by 80%. Leads must be contacted within 5 to 15 minutes via CRM integration. Second, I inspect the ad creative: did it promise a free giveaway that attracted non-buyers? Third, in Meta Instant Forms, I change the form type from 'More Volume' to 'Higher Intent', which forces users to review their details on a confirmation screen. Finally, I ask for user-typed answers rather than auto-filled fields.",
+    "followUp": "How does integrating WhatsApp automated follow-ups help with unresponsive leads?",
+    "commonMistakes": ["Assuming the problem is 100% on Meta without checking the sales call process"],
+    "tip": "Address both the ad configuration and the operational speed-to-lead."
+  },
+  {
+    "slug": "iq-op-08-roas-falling-spend-steady",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-10-reporting-breakdowns",
+    "question": "ROAS has been steadily dropping over the past 3 weeks while ad spend remains flat. Why?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Creative fatigue: Audience has seen the same ads repeatedly",
+      "Audience saturation in narrow retargeting pools",
+      "E-commerce factors: Seasonality, stockouts of bestsellers, or increased shipping charges",
+      "Rising competition inflating CPM in peak shopping periods"
+    ],
+    "modelAnswer": "When spend is steady but ROAS decays over multiple weeks, the primary culprit is creative fatigue. Check frequency: if frequency on cold prospecting is above 3.5, your audience is fatigued and ignoring the ads. Second, look at your retargeting pool: if cold traffic has slowed, the warm retargeting pool shrinks and burns out. Third, investigate e-commerce store factors: are top-selling product sizes out of stock? Did competitor pricing drop? To fix this, I introduce fresh creative angles and expand audience targeting to re-invigorate the funnel.",
+    "followUp": "How often should an e-commerce brand introduce new ad creatives?",
+    "commonMistakes": ["Blaming tracking without checking creative fatigue and inventory"],
+    "tip": "Highlight creative fatigue and check store inventory availability."
+  },
+  {
+    "slug": "iq-op-09-meta-vs-ga4-discrepancy",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-04-conversions-api-events-manager",
+    "question": "Why do Meta Ads Manager and Google Analytics 4 (GA4) report different sales numbers?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Attribution model differences: Meta defaults to 7-day click / 1-day view; GA4 defaults to last-click data-driven",
+      "Cross-device tracking gaps in browser analytics",
+      "View-through conversions counted by Meta but not by standard GA4 session models",
+      "UTM tracking parameters dropped during redirects or app switches"
+    ],
+    "modelAnswer": "Meta and GA4 use fundamentally different attribution models. Meta defaults to a 7-day click and 1-day view attribution window: if someone sees your ad on Instagram, doesn't click, but visits your website directly on desktop 4 hours later and buys, Meta credits the ad. GA4 uses a session-based or data-driven attribution model that typically gives credit to direct or Google search. Furthermore, Meta tracks user identities across apps and mobile devices, whereas GA4 relies heavily on browser cookies that can break across app-to-browser transitions.",
+    "followUp": "How do you explain this discrepancy to a client who thinks Meta is lying?",
+    "commonMistakes": ["Saying one platform is right and the other is fake"],
+    "tip": "Explain view-through conversions and attribution models calmly."
+  },
+  {
+    "slug": "iq-op-10-audience-overlap",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-01-custom-audiences",
+    "question": "What is Audience Overlap, why is it harmful, and how do you prevent it?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Two or more of your ad sets competing in auctions for the exact same users",
+      "Self-competition inflates CPM and wastes ad budget",
+      "Use Meta's Audience Overlap tool to identify overlapping segments",
+      "Consolidate similar audiences or use strict mutual exclusions"
+    ],
+    "modelAnswer": "Audience Overlap happens when multiple ad sets in your account target audiences that share a high percentage of identical users (for example, targeting 'Yoga' in Ad Set 1 and 'Pilates' in Ad Set 2 with 60% user overlap). When this occurs, your own ad sets enter the auction bidding against each other, driving up your CPM. To prevent this, I use strict audience exclusions (such as excluding customer list from cold prospecting) or consolidate similar interest groups into a single unified ad set.",
+    "followUp": "At what percentage overlap should you consider consolidating two ad sets?",
+    "commonMistakes": ["Running cold and retargeting ads without excluding past purchasers"],
+    "tip": "Explain self-bidding and advocate for audience consolidation."
+  },
+  {
+    "slug": "iq-op-11-retargeting-exclusions",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-09-retargeting-funnels",
+    "question": "How do you structure retargeting funnels and exclusions for an e-commerce brand?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Exclude past 30-day purchasers from all cold prospecting and retargeting campaigns",
+      "Segment retargeting by recency: 0-7 days (high intent) vs 8-30 days (reminder)",
+      "Match creative to stage: cart abandoners get discounts; social engagers get reviews",
+      "Cap frequency to avoid annoying warm prospects"
+    ],
+    "modelAnswer": "Clean retargeting requires disciplined exclusions. In my cold prospecting campaigns, I always exclude all website visitors (past 30 days) and all purchasers (past 180 days). For retargeting, I create segmented custom audiences based on recency: a 0-7 day window for high-intent cart abandoners, and an 8-30 day window for general website and social engagers. High-intent cart abandoners receive ads addressing objections, offering limited-time discounts or free shipping, while excluding anyone who completes a purchase.",
+    "followUp": "Why should you exclude recent purchasers from your retargeting campaigns?",
+    "commonMistakes": ["Showing 20% discount ads to someone who bought the item 10 minutes ago"],
+    "tip": "Emphasize mutual exclusions and recency segmentation."
+  },
+  {
+    "slug": "iq-op-12-frequency-is-5-what-now",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-07-learning-phase-optimization",
+    "question": "Your cold acquisition campaign has reached a Frequency of 5.2. What happens, and what actions do you take?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Frequency > 5 on cold traffic means severe ad fatigue",
+      "CTR drops, negative feedback increases, and CPM inflates",
+      "Action 1: Refresh creatives with new visual hooks immediately",
+      "Action 2: Broaden audience targeting or expand geographic bounds"
+    ],
+    "modelAnswer": "A frequency of 5.2 on a cold prospecting campaign indicates severe creative fatigue. The target audience has seen the exact same ad an average of five times; people become blind to it, CTR collapses, and users may report the ad as repetitive, which damages ad quality and spikes CPM. My immediate actions: First, deploy 2 to 3 new creative variations with fresh visual hooks into the ad set. Second, evaluate audience size: expand age or geographic bounds, or transition to broad targeting to give the algorithm a wider pool of fresh prospects.",
+    "followUp": "Is a frequency of 5.0 acceptable on a 3-day flash sale retargeting campaign?",
+    "commonMistakes": ["Ignoring frequency until CPL has completely crashed"],
+    "tip": "Explain that frequency is healthy for retargeting, but toxic for cold prospecting."
+  },
+  {
+    "slug": "iq-op-13-split-50k-monthly-budget",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-01-custom-audiences",
+    "question": "How would you allocate a ₹50,000/month budget for a new Indian D2C jewellery brand?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "70% TOFU (Cold acquisition): ~₹35,000 to find new buyers (Advantage+ or broad lookalikes)",
+      "20% MOFU/BOFU (Retargeting): ~₹10,000 for cart abandoners and Instagram engagers",
+      "10% Creative Testing Sandbox: ~₹5,000 for weekly hook and angle experiments",
+      "Daily spend pacing: ~₹1,600/day across all campaigns"
+    ],
+    "modelAnswer": "With a ₹50,000 monthly budget (~₹1,650/day), I allocate 70% (₹1,150/day) to Top-of-Funnel cold acquisition, using high-contrast video Reels and carousels targeted at broad women 22-45 and wedding interests. I allocate 20% (₹330/day) to Bottom-of-Funnel retargeting, targeting 14-day cart abandoners and Instagram engagers with customer reviews and a special offer. The remaining 10% (₹170/day) is reserved in an ABO sandbox to continuously test 2 new creative hooks weekly so we never run out of winning ads.",
+    "followUp": "What would cause you to shift more budget towards retargeting or creative testing?",
+    "commonMistakes": ["Allocating 50% of budget to retargeting when the brand has zero traffic"],
+    "tip": "Use the 70/20/10 budget allocation framework."
+  },
+  {
+    "slug": "iq-op-14-event-match-quality",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-04-conversions-api-events-manager",
+    "question": "What is Event Match Quality (EMQ) in Meta Events Manager, and why is it critical?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Score from 0-10 measuring how well customer data sent with server events matches Meta user accounts",
+      "Key parameters: hashed email (em), phone number (ph), IP address, user agent, click ID (fbc), browser ID (fbp)",
+      "Higher EMQ directly improves attribution and lowers CPM",
+      "Aim for EMQ score of 8.0 or higher on Purchase and Lead events"
+    ],
+    "modelAnswer": "Event Match Quality (EMQ) is a rating from 0 to 10 in Meta Events Manager indicating how effectively customer data sent with server events can be matched to active Meta user accounts. When a purchase occurs, passing rich customer parameters—such as hashed email, phone number with country code (+91), first/last name, client IP, and fbp/fbc cookies—enables Meta to verify exactly which user converted. A high EMQ score (8.0+) ensures maximum attribution accuracy, enhances Lookalike audience quality, and reduces CPM.",
+    "followUp": "What is the single most valuable customer parameter to pass for Indian e-commerce matching?",
+    "commonMistakes": ["Sending server events without user phone numbers or emails"],
+    "tip": "Name specific match parameters: email, phone, fbp, fbc."
+  },
+  {
+    "slug": "iq-op-15-when-to-turn-ad-set-off",
+    "tier": "operator",
+    "platform": "meta",
+    "type": "concept",
+    "lessonSlug": "meta-operator-10-reporting-breakdowns",
+    "question": "What strict criteria do you follow to decide when to pause an underperforming ad set?",
+    "levelTag": "Junior",
+    "keyPoints": [
+      "Allow spend to reach 2x to 3x target CPL/CPA before making a call",
+      "Check leading indicators first: CTR (< 0.8%) and CPC",
+      "Review over at least a 3-day window to avoid knee-jerk daily volatility",
+      "Pause unprofitable ad sets and reallocate budget to proven winners"
+    ],
+    "modelAnswer": "I enforce disciplined, emotionless kill criteria. I never pause an ad set after 4 hours of spend; I let it spend at least 2x to 3x the target Cost Per Result. For example, if target CPL is ₹100, I allow ₹250 to ₹300 in spend across 72 hours. If it generates zero leads and leading indicators like Outbound CTR are below 0.8%, it is paused. If an ad set was profitable previously but its 7-day rolling ROAS drops 30% below breakeven despite fresh creative, I pause it and reallocate budget to current winning sets.",
+    "followUp": "What is the danger of pausing and restarting ad sets frequently?",
+    "commonMistakes": ["Pausing ads after spending only ₹50 with zero conversion data"],
+    "tip": "Cite spend thresholds relative to target CPA/CPL."
+  }
+]

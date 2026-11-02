@@ -1,0 +1,63 @@
+{
+  "slug": "meta-rookie-01-what-is-performance-marketing",
+  "world": "meta",
+  "tier": "rookie",
+  "order": 1,
+  "title": "What is Performance Marketing?",
+  "minutes": 4,
+  "objectives": [
+    "Explain performance marketing in one clear sentence",
+    "Identify the difference between paid ads and organic posts",
+    "Understand how cost per result works with simple math"
+  ],
+  "glossary": ["performance-marketing", "funnel", "conversion"],
+  "blocks": [
+    { "type": "pixie", "text": "Hi! Welcome to AdQuest. Today we learn how businesses pay for real results, not empty views." },
+    { "type": "text", "text": "Traditional ads like billboards or magazine posters cost money whether anyone buys or not." },
+    { "type": "analogy", "title": "The Tea Stall Analogy", "text": "Imagine a tea stall owner pays a helper ₹5 for every customer he brings inside. That is performance marketing: you pay for measurable results." },
+    { "type": "compare", "left": { "title": "Organic Social Media", "points": ["Free to post content", "Slow and unpredictable reach", "Relies entirely on algorithms"] }, "right": { "title": "Paid Performance Ads", "points": ["You set your exact budget", "Fast and predictable results", "You choose exactly who sees it"] } },
+    { "type": "steps", "title": "The 4-Step Marketing Funnel", "items": ["1. See the ad on mobile", "2. Click through with interest", "3. Submit a lead form or message", "4. Complete a purchase"] },
+    { "type": "tip", "text": "In performance marketing, every single rupee you spend is tracked against the outcome it produces." },
+    { "type": "warning", "text": "Views alone are not results. A million views with zero customer inquiries is a wasted budget." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "A bakery spends ₹2,000 on ads and gets 40 cake inquiries. What is the cost per inquiry?",
+      "options": ["₹20", "₹50", "₹80", "₹200"],
+      "answer": 1,
+      "hint": "Divide total money spent by the number of results.",
+      "explain": "₹2,000 ÷ 40 = ₹50 per inquiry. In advertising, we call this Cost Per Lead (CPL)."
+    },
+    {
+      "id": "q2",
+      "q": "True or False: In performance marketing, a million views with zero sales is considered a big success.",
+      "type": "tf",
+      "answer": false,
+      "hint": "Performance marketing is judged by measurable business results, not vanity views.",
+      "explain": "False. Views without actions do not pay the bills. Performance marketing focuses on measurable conversions."
+    },
+    {
+      "id": "q3",
+      "q": "What is the primary advantage of paid ads over organic posting?",
+      "options": ["Paid ads are always free", "Paid ads allow fast, predictable reach to your ideal customers", "Paid ads require no photos or text", "Paid ads guarantee a 100% purchase rate"],
+      "answer": 1,
+      "hint": "Think about speed and control over who sees your message.",
+      "explain": "Paid ads let you reach targeted prospects immediately without waiting months for organic growth."
+    },
+    {
+      "id": "q4",
+      "q": "Put the customer funnel stages in the correct chronological order.",
+      "type": "order",
+      "items": ["See the ad on Instagram", "Click to view the salon menu", "Fill the appointment form", "Visit the salon for service"],
+      "answer": [0, 1, 2, 3],
+      "hint": "Follow the journey from cold viewer to happy customer.",
+      "explain": "A customer first sees the ad, clicks through, submits their details, and finally purchases."
+    }
+  ],
+  "recap": [
+    "Performance marketing means paying for countable, measurable business results.",
+    "The funnel traces the journey from seeing an ad to becoming a paying customer."
+  ],
+  "next": "meta-rookie-02-meet-the-meta-world"
+}

@@ -1,0 +1,47 @@
+{
+  "general": {
+    "cpm_high": "High CPM usually means audience competition is intense or your audience size is too narrow (< 100k). Try broadening your targeting.",
+    "ctr_low": "Low CTR indicates the visual hook isn't stopping the scroll. Test high-contrast imagery, user-generated videos, or a bold problem statement in the first 3 seconds.",
+    "cpl_high": "High CPL can happen if your lead form has too many complex questions or your offer isn't compelling enough.",
+    "zero_conversions": "Zero conversions with normal clicks is almost always a Pixel/CAPI tracking misconfiguration or a slow/broken landing page."
+  },
+  "sims": {
+    "sim-rookie-01-salon-leads": [
+      "Set your objective to 'Leads' so Meta optimizes for bookings rather than cheap clicks.",
+      "Choose a balanced local audience (100k-2M) and test a before/after video creative with a special introductory discount."
+    ],
+    "sim-rookie-02-fix-narrow-audience": [
+      "A narrow audience under 50,000 causes frequency and CPM to shoot through the roof. Expand your age range or remove restrictive interest layering."
+    ],
+    "sim-operator-01-budget-split": [
+      "Allocate 70% of budget to cold prospecting (TOFU) and 30% to retargeting website and social engagers."
+    ],
+    "sim-operator-02-creative-ab-test": [
+      "In a clean A/B test, keep audience and budget identical and change only the video hook."
+    ],
+    "sim-operator-03-tracking-fix": [
+      "Always verify that standard events (Lead, Purchase) fire with correct currency and value parameters in Events Manager."
+    ],
+    "sim-strategist-01-scale-budget": [
+      "Scale vertically in 15-20% increments every 48-72 hours to prevent resetting Meta's machine learning phase."
+    ],
+    "sim-strategist-02-account-audit": [
+      "Look for audience overlap, learning limited ad sets, fragmented budgets, and missing exclusions."
+    ]
+  },
+  "bosses": {
+    "boss-rookie-launch-day": [
+      "For a local business wanting bookings, 'Leads' objective beats 'Traffic' every single time.",
+      "On day 3, don't panic if spend is still optimizing. Check CTR first to ensure people find the creative attractive.",
+      "If frequency is under 1.5 and CTR is above 1.5%, give the ad set time to exit the learning phase."
+    ],
+    "boss-operator-expensive-leads": [
+      "When CPL jumps overnight, don't change your winning ad copy immediately! Check your tracking pixel and landing page load speed first.",
+      "Excluding people who already converted in the last 30 days immediately lowers wasted spend."
+    ],
+    "boss-strategist-scale-or-kill": [
+      "Campaigns with ROAS consistently above 3.0x and stable CPM are prime candidates for vertical budget increases.",
+      "If a campaign has frequency > 5.0 and falling CTR, killing or refreshing creatives is better than pouring more money into it."
+    ]
+  }
+}

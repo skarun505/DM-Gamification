@@ -1,0 +1,66 @@
+{
+  "slug": "meta-strategist-08-policies-rejections-account-health",
+  "world": "meta",
+  "tier": "strategist",
+  "order": 8,
+  "title": "Ad Policies, Rejections & Account Health",
+  "minutes": 5,
+  "objectives": [
+    "Navigate Meta Advertising Standards and avoid sudden ad rejections or disablements",
+    "Identify common policy triggers: personal attributes, before/after imagery, misleading claims, and financial guarantees",
+    "Master the appeals protocol to restore restricted ad accounts and Business Managers"
+  ],
+  "glossary": ["account-quality", "policy-appeal", "personal-attributes"],
+  "blocks": [
+    { "type": "pixie", "text": "Nothing stops revenue faster than a disabled ad account! Knowing Meta's advertising policies inside out makes you invaluable to any brand." },
+    { "type": "text", "text": "Meta relies on automated AI bots to review ads. Understanding what triggers these algorithms helps you write compelling copy that converts without getting banned." },
+    { "type": "steps", "title": "Top 5 Frequent Policy Violations in India", "items": [
+      "1. Personal Attributes: Never imply or call out a user's sensitive traits directly (e.g., 'Are you suffering from hair loss?' violates policy; 'Discover our Ayurvedic scalp care routine' is compliant).",
+      "2. Unrealistic & Before/After Claims: Side-by-side weight loss or extreme acne transformations will trigger instant rejection.",
+      "3. Financial & Get-Rich Guarantees: Promising specific stock trading returns, easy side-hustle money, or guaranteed wealth is prohibited.",
+      "4. Landing Page Mismatch: If your ad talks about protein powder but links to an affiliate blog with pop-up ads, your account gets flagged.",
+      "5. Circumventing Systems: Creating a new ad account to bypass restrictions on an existing account will lead to a permanent Business Manager ban."
+    ]},
+    { "type": "analogy", "title": "The Airport Security Scanner", "text": "Meta's automated reviewer is like an airport baggage scanner. It searches for specific flag keywords ('cure', 'guaranteed cash', 'weight loss in 3 days'). If it sees them, your bag is held for inspection even if your product is completely legitimate." },
+    { "type": "tip", "text": "Always request human review inside Account Quality. Automated bots reject innocent copy up to 30% of the time. A polite, evidence-backed appeal often restores the ad within 24-48 hours." },
+    { "type": "warning", "text": "Never use the same credit card across multiple ad accounts if one account has unpaid balances or severe policy violations, as Meta may link and ban the entire billing profile." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "Which ad copy headline strictly violates Meta's 'Personal Attributes' policy?",
+      "options": [
+        "Discover nourishing ayurvedic scalp oil for stronger roots",
+        "Are you suffering from severe belly fat and low self-esteem?",
+        "3 tips to maintain high energy during long workdays",
+        "Explore premium ergonomic chairs designed for developers"
+      ],
+      "answer": 1,
+      "explain": "Calling out specific personal health conditions or physical insecurities directly ('Are you suffering from...') violates Meta's personal attributes policy."
+    },
+    {
+      "id": "q2",
+      "q": "What should you do first when an ad gets rejected by Meta's automated review system for an incorrect reason?",
+      "options": [
+        "Create a brand new Facebook profile and register a new company",
+        "Check Meta Account Quality, review the specific flagged policy, adjust if needed, and request a human review",
+        "Immediately sue Meta in local court",
+        "Duplicate the exact same rejected ad 50 times"
+      ],
+      "answer": 1,
+      "explain": "Navigating to Account Quality to review the policy flag and requesting a manual human review is the standard operating procedure."
+    },
+    {
+      "id": "q3",
+      "q": "Why are extreme 'Before and After' split photos banned for health, cosmetic, and fitness ads on Meta?",
+      "options": [
+        "Meta only allows black-and-white photos",
+        "They often generate unrealistic expectations and negative self-perception among users",
+        "Meta's servers cannot store two pictures in one ad",
+        "Before and After photos are patented by Google"
+      ],
+      "answer": 1,
+      "explain": "Meta restricts dramatic before-and-after imagery to protect user well-being and prevent misleading expectations."
+    }
+  ]
+}

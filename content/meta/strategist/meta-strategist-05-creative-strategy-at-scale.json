@@ -1,0 +1,72 @@
+{
+  "slug": "meta-strategist-05-creative-strategy-at-scale",
+  "world": "meta",
+  "tier": "strategist",
+  "order": 5,
+  "title": "Creative Strategy at Scale",
+  "minutes": 5,
+  "objectives": [
+    "Build a scalable Hook & Angle Library for your brand",
+    "Direct and brief micro-influencer User-Generated Content (UGC)",
+    "Identify leading indicators of creative fatigue before ROAS crashes"
+  ],
+  "glossary": ["hook", "creative-angle", "user-generated-content", "creative-fatigue"],
+  "blocks": [
+    { "type": "pixie", "text": "At scale, you don't run out of audience—you run out of creative! Here is how you maintain creative velocity." },
+    { "type": "text", "text": "When spending ₹50,000+ per day, ads burn out quickly. Top brands maintain a constant production pipeline testing 4-6 fresh hooks weekly." },
+    { "type": "steps", "title": "The 4 Core Psychological Angles", "items": ["1. The Frustration Angle: Call out the annoying problem competitors fail to solve", "2. The Transformation Angle: High-contrast Before vs After visual proof", "3. The Curiosity Angle: 'The one ingredient your skincare routine is missing...'", "4. The Us vs Them Angle: Side-by-side comparison debunking cheap alternatives"] },
+    { "type": "analogy", "title": "The Hollywood Movie Trailer", "text": "A studio doesn't release just one trailer for a blockbuster. They release an action trailer for gamers, a romance trailer for couples, and a comedy teaser for families. The movie is the same, but the hooks target different psychology!" },
+    { "type": "tip", "text": "UGC Creator Briefs: Keep creator briefs simple. Give them a 3-second hook script, product demonstration points, and let them speak in their natural language (Hinglish/Tamil/Bengali)." },
+    { "type": "warning", "text": "Leading Fatigue Signals: Watch your 3-second Thumbstop rate and Outbound CTR. If CTR drops by 25% over 3 consecutive days, fatigue has started—launch fresh hooks before CPL doubles!" }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "q": "What is the primary operational bottleneck when scaling ad spend from ₹5,000/day to ₹50,000/day?",
+      "options": [
+        "Running out of hard drive space",
+        "Creative velocity: Producing and testing enough fresh hooks to stay ahead of audience fatigue",
+        "Meta server maintenance",
+        "GST portal downtime"
+      ],
+      "answer": 1,
+      "explain": "At scale, audiences exhaust ads quickly. Without a repeatable creative testing pipeline, acquisition costs escalate."
+    },
+    {
+      "id": "q2",
+      "q": "What is a leading early indicator that a winning ad creative is beginning to suffer from fatigue?",
+      "options": [
+        "Your bank balance increases",
+        "Outbound CTR drops by 20-30% while Frequency climbs above 3.5 on cold traffic",
+        "The video resolution drops to 480p",
+        "Instagram changes its app icon"
+      ],
+      "answer": 1,
+      "explain": "A declining CTR paired with rising frequency signals that viewers are becoming blind to the hook."
+    },
+    {
+      "id": "q3",
+      "q": "Why is user-generated content (UGC) shot in natural everyday language (like Hinglish) so powerful for Indian brands?",
+      "options": [
+        "It looks and feels like authentic peer recommendations rather than polished corporate advertising",
+        "Meta charges less tax on UGC",
+        "UGC videos never get rejected",
+        "UGC runs only on weekends"
+      ],
+      "answer": 0,
+      "explain": "Authentic creator content blends natively into the social feed, building immediate peer trust and stopping the scroll."
+    },
+    {
+      "id": "q4",
+      "q": "True or False: Testing 5 different 3-second hooks with the exact same video body is an efficient way to discover new winning ads.",
+      "type": "tf",
+      "answer": true,
+      "explain": "True! The hook drives 80% of click variance. Changing just the first 3 seconds can revive a fatigued winning ad."
+    }
+  ],
+  "recap": [
+    "Scale requires creative velocity: test multiple angles (Frustration, Transformation, Comparison).",
+    "Monitor Thumbstop rate and CTR daily to detect fatigue before ROAS decays."
+  ],
+  "next": "meta-strategist-06-account-structure-and-audits"
+}

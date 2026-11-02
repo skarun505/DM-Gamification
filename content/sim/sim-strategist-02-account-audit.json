@@ -1,0 +1,28 @@
+{
+  "slug": "sim-strategist-02-account-audit",
+  "title": "Strategist Sim 2: The Troubled Account Audit",
+  "brief": "You inherited an EdTech ad account in Bengaluru where CPL skyrocketed past ₹350 due to 14 fragmented micro-campaigns, extreme audience overlap, and outdated creatives. Restructure the account with ₹2,000/day over 7 days using consolidated broad targeting and authentic student testimonial UGC to bring CPL down below ₹150 and secure at least 40 high-intent leads!",
+  "fixed": {
+    "baseCPM": 170,
+    "baseCTR": 0.02,
+    "baseCVR": 0.08,
+    "offerStrength": 1.15,
+    "landingQuality": 1.1,
+    "pixelInstalled": true,
+    "aov": 2500
+  },
+  "editable": ["objective", "dailyBudget", "audience", "creative", "placements"],
+  "creativeOptions": [
+    { "id": "a", "label": "Outdated 2022 banner with tiny illegible bullet points", "quality": 0.6 },
+    { "id": "b", "label": "Student career transformation interview + syllabus breakdown + free demo invite", "quality": 1.45 },
+    { "id": "c", "label": "Generic stock image of classroom with 'Admit Now' button", "quality": 0.75 }
+  ],
+  "pass": {
+    "all": [
+      { "metric": "CPL", "op": "<=", "value": 150 },
+      { "metric": "conversions", "op": ">=", "value": 40 }
+    ]
+  },
+  "hintIds": ["sim-strategist-02-account-audit"],
+  "xp": 75
+}

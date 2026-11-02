@@ -1,0 +1,27 @@
+{
+  "slug": "sim-operator-03-tracking-fix",
+  "title": "Operator Sim 3: The Broken Pixel Fix",
+  "brief": "A D2C brand's campaign shows thousands of link clicks but ZERO recorded conversions because the pixel was disconnected. Reconnect the pixel tracking, choose the 'sales' objective, and achieve at least 20 recorded purchases!",
+  "fixed": {
+    "baseCPM": 170,
+    "baseCTR": 0.016,
+    "baseCVR": 0.045,
+    "offerStrength": 1.1,
+    "landingQuality": 1.0,
+    "pixelInstalled": true,
+    "aov": 1200
+  },
+  "editable": ["objective", "dailyBudget", "audience", "creative", "placements", "pixelInstalled"],
+  "creativeOptions": [
+    { "id": "a", "label": "Customer unboxing video with 5-star review overlay", "quality": 1.35 },
+    { "id": "b", "label": "Catalog image collage", "quality": 0.8 }
+  ],
+  "pass": {
+    "all": [
+      { "metric": "conversions", "op": ">=", "value": 20 },
+      { "metric": "ROAS", "op": ">=", "value": 2.0 }
+    ]
+  },
+  "hintIds": ["sim-operator-03-tracking-fix"],
+  "xp": 50
+}

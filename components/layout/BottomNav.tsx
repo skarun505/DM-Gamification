@@ -10,7 +10,7 @@ export function BottomNav() {
 
   const links = [
     { href: '/home', label: 'Home', icon: Home },
-    { href: '/map', label: 'Map', icon: Map },
+    { href: '/map', label: 'Learning Map', icon: Map },
     { href: '/interview', label: 'Dojo', icon: Briefcase },
     { href: '/tutor', label: 'Pixie', icon: MessageCircle },
     { href: '/profile', label: 'Profile', icon: User },

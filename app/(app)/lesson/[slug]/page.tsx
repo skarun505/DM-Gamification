@@ -339,7 +339,7 @@ export default function LessonPlayerPage() {
             className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors"
           >
             <ArrowLeft size={16} />
-            <span>Map</span>
+            <span>Learning Map</span>
           </Link>
           <div className="text-center font-heading text-sm text-slate-800 dark:text-slate-100 truncate px-2 max-w-[200px] sm:max-w-xs">
             {lesson.title}
@@ -816,7 +816,7 @@ export default function LessonPlayerPage() {
                 href="/map"
                 className="py-3.5 px-6 rounded-2xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-700 dark:text-slate-200 font-heading font-bold text-sm text-center"
               >
-                Return to Map
+                Return to Learning Map
               </Link>
             </div>
           </div>

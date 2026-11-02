@@ -73,7 +73,7 @@ export default function BossPage() {
       <div className="text-center py-12">
         <h2 className="text-xl font-bold">Boss Battle Not Found</h2>
         <Link href="/map" className="mt-4 inline-block text-indigo-600 font-bold">
-          ← Return to Map
+          ← Return to Learning Map
         </Link>
       </div>
     );
@@ -376,7 +376,7 @@ export default function BossPage() {
                 href="/map"
                 className="py-3 px-8 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-heading font-bold text-sm shadow-md"
               >
-                Return to Map
+                Return to Learning Map
               </Link>
             </div>
           </div>

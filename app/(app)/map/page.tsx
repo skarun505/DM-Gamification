@@ -453,13 +453,13 @@ export default function WorldMapPage() {
       <div className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-amber-600 rounded-3xl p-6 text-white shadow-card flex items-center justify-between">
         <div>
           <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wider block">
-            Campaign Roadmap
+            AdQuest Mastery Pathway
           </span>
           <h2 className="font-heading font-extrabold text-2xl sm:text-3xl mt-0.5">
-            Meta Ads Learning Pathway
+            Interactive Learning Map 🗺️
           </h2>
           <p className="text-xs sm:text-sm text-indigo-100 mt-1 max-w-md">
-            Complete each unit's visual study guide & quiz step-by-step. Clear all units, pass the simulators, and defeat the Boss to unlock the next Tier!
+            Master performance marketing step-by-step: study visual guides, pass quizzes, solve live ad account labs, and conquer Boss Battles to level up!
           </p>
         </div>
         <PixieMascot mood="happy" size={76} className="shrink-0 hidden sm:block" />

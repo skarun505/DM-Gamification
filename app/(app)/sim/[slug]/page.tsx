@@ -177,7 +177,7 @@ export default function SimPage() {
           className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-indigo-600 transition-colors"
         >
           <ArrowLeft size={16} />
-          <span>Campaign Map</span>
+          <span>Learning Map</span>
         </Link>
         <span className="text-xs font-bold text-amber-600 bg-amber-50 dark:bg-amber-950/60 px-3 py-1 rounded-full border border-amber-200 dark:border-amber-900">
           Earn +{scenario.xp} XP

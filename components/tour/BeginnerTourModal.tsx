@@ -60,13 +60,13 @@ const TOUR_STEPS: TourStep[] = [
     ],
   },
   {
-    title: 'The Campaign Learning Map 🗺️',
+    title: 'The Interactive Learning Map 🗺️',
     tagline: 'Visual Guides first, then Practice Quizzes',
     badge: 'Step 2 of 6 • Curriculum Flow',
     icon: <Map className="text-indigo-500" size={24} />,
     pixieMood: 'happy',
     description:
-      'Every unit on the Campaign Map is structured in a clean, single-flow card designed to guarantee understanding before testing:',
+      'Every unit on the Learning Map is structured in a clean, single-flow card designed to guarantee understanding before testing:',
     points: [
       {
         icon: '📖',

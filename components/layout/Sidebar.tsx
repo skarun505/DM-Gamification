@@ -33,7 +33,7 @@ export function Sidebar() {
 
   const navItems = [
     { href: '/home', label: 'Home Dashboard', icon: Home },
-    { href: '/map', label: 'Campaign Map', icon: Map },
+    { href: '/map', label: 'Learning Map', icon: Map },
     { href: '/interview', label: 'Interview Dojo', icon: Briefcase },
     { href: '/tutor', label: 'Ask Pixie (AI)', icon: MessageCircle },
     { href: '/daily', label: 'Daily Challenge', icon: Calendar },

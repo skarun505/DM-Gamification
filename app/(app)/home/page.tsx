@@ -115,7 +115,7 @@ export default function HomePage() {
               href="/map"
               className="py-3 px-5 rounded-2xl bg-indigo-500/30 hover:bg-indigo-500/40 text-white font-bold text-sm backdrop-blur-sm flex items-center gap-2 transition-all"
             >
-              <span>View Map</span>
+              <span>Learning Map</span>
               <ArrowRight size={16} />
             </Link>
             <button
@@ -184,7 +184,7 @@ export default function HomePage() {
             href="/map"
             className="py-3 px-5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-heading font-extrabold text-xs shadow-md shadow-amber-500/25 transition-all"
           >
-            Go to Roadmap ➔
+            Go to Learning Map ➔
           </Link>
         </div>
       </div>

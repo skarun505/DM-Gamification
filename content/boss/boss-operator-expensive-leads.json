@@ -91,6 +91,7 @@
       "step": 6,
       "title": "Step 6: Executing the Recovery Plan",
       "context": "You have identified all the leaks. What is the comprehensive recovery roadmap you execute today?",
+      "question": "What is the comprehensive recovery roadmap you execute today to drop CPL back to target?",
       "options": [
         "Delete the entire ad account and start fresh with a new Facebook page",
         "1. Pause fatigued Ad Set 1; 2. Consolidate overlapping audiences; 3. Compress landing page images to hit <2s load time; 4. Reduce form fields to 3 essential questions; 5. Deploy 3 fresh video hook variations.",

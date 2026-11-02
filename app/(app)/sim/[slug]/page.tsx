@@ -451,6 +451,54 @@ export default function SimPage() {
                   ))}
                 </ul>
               </div>
+
+              {/* Action Navigation: Next Simulator or Return */}
+              <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                {passEvaluation?.passed ? (
+                  <>
+                    <Link
+                      href={
+                        (slug && {
+                          'sim-rookie-01-salon-leads': '/sim/sim-rookie-02-fix-narrow-audience',
+                          'sim-rookie-02-fix-narrow-audience': '/boss/boss-rookie-launch-day',
+                          'sim-operator-01-budget-split': '/sim/sim-operator-02-creative-ab-test',
+                          'sim-operator-02-creative-ab-test': '/sim/sim-operator-03-tracking-fix',
+                          'sim-operator-03-tracking-fix': '/boss/boss-operator-expensive-leads',
+                          'sim-strategist-01-scale-budget': '/sim/sim-strategist-02-account-audit',
+                          'sim-strategist-02-account-audit': '/boss/boss-strategist-scale-or-kill',
+                        }[slug]) || '/map'
+                      }
+                      className="flex-1 py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-heading font-extrabold text-sm shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 transition-all active:scale-98"
+                    >
+                      <span>
+                        {(slug && {
+                          'sim-rookie-01-salon-leads': 'Next: Sim R2 (Fix Audience) ➔',
+                          'sim-rookie-02-fix-narrow-audience': 'Conquer Boss 1 (Launch Day) ⚔️',
+                          'sim-operator-01-budget-split': 'Next: Sim O2 (Creative A/B) ➔',
+                          'sim-operator-02-creative-ab-test': 'Next: Sim O3 (Tracking Fix) ➔',
+                          'sim-operator-03-tracking-fix': 'Conquer Boss 2 (Expensive Leads) ⚔️',
+                          'sim-strategist-01-scale-budget': 'Next: Sim S2 (Account Audit) ➔',
+                          'sim-strategist-02-account-audit': 'Conquer Boss 3 (Scale or Kill) ⚔️',
+                        }[slug]) || 'Proceed to Next Stage ➔'}
+                      </span>
+                    </Link>
+                    <Link
+                      href="/map"
+                      className="py-3.5 px-6 rounded-2xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-700 dark:text-slate-200 font-heading font-bold text-sm text-center transition-colors"
+                    >
+                      Return to Map
+                    </Link>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => setResults(null)}
+                    className="w-full py-3.5 px-6 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-heading font-extrabold text-sm shadow-md flex items-center justify-center gap-2 transition-all active:scale-98"
+                  >
+                    <RotateCcw size={16} />
+                    <span>Adjust Parameters & Try Again</span>
+                  </button>
+                )}
+              </div>
             </div>
           ) : (
             <div className="h-full min-h-[350px] flex flex-col items-center justify-center rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-700 p-8 text-center text-slate-400">

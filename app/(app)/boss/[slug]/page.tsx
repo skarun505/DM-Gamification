@@ -8,6 +8,7 @@ import { BossBattle, BossStep } from '@/lib/content/schema';
 import { useGame } from '@/components/game/GameContext';
 import { PixieMascot } from '@/components/ui/PixieMascot';
 import { createClient } from '@/lib/supabase/client';
+import { CertificateModal, CertificateData } from '@/components/certificate/CertificateModal';
 import {
   Shield,
   ArrowLeft,
@@ -18,6 +19,7 @@ import {
   Trophy,
   RotateCcw,
   Sparkles,
+  Award,
 } from 'lucide-react';
 
 export default function BossPage() {
@@ -36,6 +38,7 @@ export default function BossPage() {
   const [score, setScore] = useState(0);
   const [showHint, setShowHint] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [showCertModal, setShowCertModal] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -316,21 +319,36 @@ export default function BossPage() {
             </p>
 
             {passed ? (
-              <div className="my-6 p-4 rounded-2xl bg-gradient-to-r from-emerald-50 to-indigo-50 dark:from-slate-900 dark:to-slate-900 border border-emerald-300 dark:border-slate-700 flex justify-around">
-                <div className="flex flex-col items-center">
-                  <span className="text-xs text-slate-500 font-bold uppercase">Reward</span>
-                  <span className="font-heading font-extrabold text-2xl text-emerald-600">
-                    +{boss.xp} XP
-                  </span>
+              <>
+                <div className="my-6 p-4 rounded-2xl bg-gradient-to-r from-emerald-50 to-indigo-50 dark:from-slate-900 dark:to-slate-900 border border-emerald-300 dark:border-slate-700 flex justify-around">
+                  <div className="flex flex-col items-center">
+                    <span className="text-xs text-slate-500 font-bold uppercase">Reward</span>
+                    <span className="font-heading font-extrabold text-2xl text-emerald-600">
+                      +{boss.xp} XP
+                    </span>
+                  </div>
+                  <div className="w-px bg-slate-200 dark:bg-slate-700" />
+                  <div className="flex flex-col items-center">
+                    <span className="text-xs text-slate-500 font-bold uppercase">AdCoins</span>
+                    <span className="font-heading font-extrabold text-2xl text-amber-600">
+                      +{boss.coins}
+                    </span>
+                  </div>
                 </div>
-                <div className="w-px bg-slate-200 dark:bg-slate-700" />
-                <div className="flex flex-col items-center">
-                  <span className="text-xs text-slate-500 font-bold uppercase">AdCoins</span>
-                  <span className="font-heading font-extrabold text-2xl text-amber-600">
-                    +{boss.coins}
-                  </span>
+
+                {/* Claim E-Certificate Button */}
+                <div className="my-5">
+                  <button
+                    type="button"
+                    onClick={() => setShowCertModal(true)}
+                    className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-indigo-600 hover:from-amber-600 hover:to-indigo-700 text-white font-heading font-extrabold text-sm sm:text-base shadow-xl shadow-amber-500/20 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02] active:scale-98"
+                  >
+                    <Award size={22} className="text-amber-200 animate-bounce" />
+                    <span>🎓 Claim Your Official {boss.tier.toUpperCase()} E-Certificate!</span>
+                    <Sparkles size={18} className="text-amber-200" />
+                  </button>
                 </div>
-              </div>
+              </>
             ) : (
               <div className="my-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs sm:text-sm">
                 You need at least {boss.passScorePct}% to defeat the Boss and unlock the next tier.
@@ -362,6 +380,36 @@ export default function BossPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Official E-Certificate Modal */}
+      {boss && (
+        <CertificateModal
+          isOpen={showCertModal}
+          onClose={() => setShowCertModal(false)}
+          data={{
+            tier: boss.tier,
+            tierName: boss.tier.toUpperCase(),
+            certificateTitle:
+              boss.tier === 'rookie'
+                ? 'Certified Performance Marketing Associate (Rookie)'
+                : boss.tier === 'operator'
+                ? 'Certified Meta Ads Performance Operator'
+                : 'Master Performance Marketing Strategist',
+            recipientName: profile?.display_name || 'Deepana',
+            issueDate: new Intl.DateTimeFormat('en-IN', {
+              dateStyle: 'long',
+              timeZone: 'Asia/Kolkata',
+            }).format(new Date()),
+            credentialId: `ADQ-${boss.tier.toUpperCase()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}-IN`,
+            skills:
+              boss.tier === 'rookie'
+                ? ['Auction Dynamics', 'Campaign Architecture', 'Funnel Stages', 'Creative Hooks', 'Metrics 101']
+                : boss.tier === 'operator'
+                ? ['Pixel & CAPI', 'Cost Controls', 'Learning Phase Optimization', 'A/B Testing', 'Custom Audiences']
+                : ['Full-Funnel Scaling', 'Advantage+ Shopping', 'Incrementality', 'Account Audits', 'CEO Reporting'],
+          }}
+        />
       )}
     </div>
   );

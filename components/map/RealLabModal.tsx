@@ -266,3 +266,4 @@ export function RealLabModal({ lab, isOpen, onClose, onComplete }: RealLabModalP
     </div>
   );
 }
+

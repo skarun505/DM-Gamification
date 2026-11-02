@@ -8,6 +8,7 @@ import { PixieMascot } from '@/components/ui/PixieMascot';
 import { StreakFlame } from '@/components/game/StreakFlame';
 import { CoinBadge } from '@/components/game/CoinBadge';
 import { createClient } from '@/lib/supabase/client';
+import { CertificateModal, CertificateData } from '@/components/certificate/CertificateModal';
 import {
   Award,
   Lock,
@@ -17,31 +18,45 @@ import {
   Sparkles,
   Zap,
   CheckCircle2,
+  Printer,
+  FileCheck,
 } from 'lucide-react';
 
 export default function ProfilePage() {
   const { profile, refreshProfile } = useGame();
   const [earnedBadges, setEarnedBadges] = useState<Map<string, string>>(new Map());
+  const [completedBosses, setCompletedBosses] = useState<Set<string>>(new Set());
+  const [selectedCert, setSelectedCert] = useState<CertificateData | null>(null);
   const [shopMsg, setShopMsg] = useState('');
   const supabase = createClient();
 
   useEffect(() => {
-    async function loadUserBadges() {
+    async function loadUserData() {
       if (!profile?.id) return;
       try {
-        const { data } = await supabase
+        const { data: bData } = await supabase
           .from('user_badges')
           .select('badge_slug, earned_at')
           .eq('user_id', profile.id);
 
-        const map = new Map<string, string>();
-        data?.forEach((b) => map.set(b.badge_slug, b.earned_at));
-        setEarnedBadges(map);
+        const bMap = new Map<string, string>();
+        bData?.forEach((b) => bMap.set(b.badge_slug, b.earned_at));
+        setEarnedBadges(bMap);
+
+        const { data: bossData } = await supabase
+          .from('boss_attempts')
+          .select('boss_slug')
+          .eq('user_id', profile.id)
+          .eq('passed', true);
+
+        const bSet = new Set<string>();
+        bossData?.forEach((b) => bSet.add(b.boss_slug));
+        setCompletedBosses(bSet);
       } catch (err) {
-        console.error('Failed to load badges:', err);
+        console.error('Failed to load profile data:', err);
       }
     }
-    loadUserBadges();
+    loadUserData();
   }, [profile?.id]);
 
   const { level, title, progressPercent, currentLevelXP, nextLevelXP } = getLevelInfo(
@@ -172,6 +187,110 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      {/* Official E-Certificates of Mastery */}
+      <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-card border border-slate-200/80 dark:border-slate-700 space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-700">
+          <div className="flex items-center gap-2">
+            <FileCheck size={22} className="text-amber-500" />
+            <h3 className="font-heading font-extrabold text-xl text-slate-800 dark:text-slate-100">
+              Official E-Certificates
+            </h3>
+          </div>
+          <span className="text-xs font-bold text-amber-600 bg-amber-50 dark:bg-amber-950/50 px-3 py-1 rounded-full border border-amber-200">
+            Print & Share
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            {
+              tier: 'rookie' as const,
+              name: 'Tier 1: Rookie Media Buyer',
+              title: 'Certified Performance Marketing Associate (Rookie)',
+              slug: 'boss-rookie-launch-day',
+              skills: ['Auction Dynamics', 'Campaign Architecture', 'Funnel Stages', 'Creative Hooks', 'Metrics 101'],
+              unlocked: completedBosses.has('boss-rookie-launch-day') || (profile?.xp ?? 0) >= 100,
+            },
+            {
+              tier: 'operator' as const,
+              name: 'Tier 2: Meta Ads Operator',
+              title: 'Certified Meta Ads Performance Operator',
+              slug: 'boss-operator-expensive-leads',
+              skills: ['Pixel & CAPI', 'Cost Controls', 'Learning Phase', 'A/B Testing Sandbox', 'Custom Audiences'],
+              unlocked: completedBosses.has('boss-operator-expensive-leads'),
+            },
+            {
+              tier: 'strategist' as const,
+              name: 'Tier 3: Master Strategist',
+              title: 'Master Performance Marketing Strategist',
+              slug: 'boss-strategist-scale-or-kill',
+              skills: ['Full-Funnel Scaling', 'Advantage+ Shopping', 'Incrementality', 'Account Audits', 'CEO Reporting'],
+              unlocked: completedBosses.has('boss-strategist-scale-or-kill'),
+            },
+          ].map((cert) => (
+            <div
+              key={cert.tier}
+              className={`p-5 rounded-2xl border-2 flex flex-col justify-between transition-all ${
+                cert.unlocked
+                  ? 'border-amber-400/80 bg-gradient-to-b from-amber-50/40 to-white dark:from-slate-800 dark:to-slate-900 shadow-sm'
+                  : 'border-slate-200 dark:border-slate-700/60 bg-slate-50/50 dark:bg-slate-900/40 opacity-70'
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className={`w-8 h-8 rounded-xl flex items-center justify-center font-bold text-xs ${
+                    cert.unlocked ? 'bg-amber-100 text-amber-700' : 'bg-slate-200 text-slate-400'
+                  }`}>
+                    {cert.unlocked ? <Award size={18} /> : <Lock size={15} />}
+                  </span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                    {cert.tier.toUpperCase()}
+                  </span>
+                </div>
+                <h4 className="font-heading font-extrabold text-sm text-slate-800 dark:text-slate-100">
+                  {cert.name}
+                </h4>
+                <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                  {cert.unlocked
+                    ? 'Verified by AdQuest Mentorship Board. Ready to print or export as PDF.'
+                    : `Conquer ${cert.slug.replace(/-/g, ' ')} to unlock this diploma.`}
+                </p>
+              </div>
+
+              <div className="pt-4">
+                {cert.unlocked ? (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setSelectedCert({
+                        tier: cert.tier,
+                        tierName: cert.tier.toUpperCase(),
+                        certificateTitle: cert.title,
+                        recipientName: profile?.display_name || 'Deepana',
+                        issueDate: new Intl.DateTimeFormat('en-IN', {
+                          dateStyle: 'long',
+                          timeZone: 'Asia/Kolkata',
+                        }).format(new Date()),
+                        credentialId: `ADQ-${cert.tier.toUpperCase()}-${(profile?.id || 'USER').substring(0, 6).toUpperCase()}-IN`,
+                        skills: cert.skills,
+                      })
+                    }
+                    className="w-full py-2.5 px-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-heading font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95"
+                  >
+                    <Printer size={14} />
+                    <span>View & Print Certificate</span>
+                  </button>
+                ) : (
+                  <div className="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-400 text-center text-xs font-semibold">
+                    Locked (Beat Boss)
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Badges Showcase */}
       <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-card border border-slate-200/80 dark:border-slate-700 space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-700">
@@ -219,6 +338,15 @@ export default function ProfilePage() {
           })}
         </div>
       </div>
+
+      {/* Certificate Modal */}
+      {selectedCert && (
+        <CertificateModal
+          isOpen={!!selectedCert}
+          onClose={() => setSelectedCert(null)}
+          data={selectedCert}
+        />
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-# ADQUEST — Antigravity Master Build Guide
+hing # ADQUEST — Antigravity Master Build Guide
 
 > **Drop this file into an empty Antigravity workspace and say:**
 > *"Read ANTIGRAVITY_GUIDE.md fully. Build the entire project end to end. Only stop to ask me for the credentials listed in Section 2. Do everything else yourself."*

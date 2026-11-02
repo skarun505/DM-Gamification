@@ -1,15 +1,29 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useGame } from '@/components/game/GameContext';
 import { StreakFlame } from '@/components/game/StreakFlame';
 import { CoinBadge } from '@/components/game/CoinBadge';
 import { PixieMascot } from '@/components/ui/PixieMascot';
-import { Bell, Sparkles } from 'lucide-react';
+import { Bell, Sparkles, Volume2, VolumeX } from 'lucide-react';
+import { soundFx } from '@/lib/sound/audio';
 
 export function Navbar() {
   const { profile, unreadNotesCount } = useGame();
+  const [isMuted, setIsMuted] = useState(false);
+
+  useEffect(() => {
+    setIsMuted(soundFx.getMuted());
+  }, []);
+
+  const handleToggleSound = () => {
+    const next = soundFx.toggleMute();
+    setIsMuted(next);
+    if (!next) {
+      soundFx.playCorrect();
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full bg-[#FAF8F5]/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 px-4 py-2.5 sm:px-6">
@@ -31,6 +45,17 @@ export function Navbar() {
         <div className="flex items-center gap-2 sm:gap-3">
           <StreakFlame streak={profile?.streak ?? 1} size="sm" />
           <CoinBadge coins={profile?.coins ?? 0} size="sm" />
+
+          {/* Sound FX Toggle */}
+          <button
+            type="button"
+            onClick={handleToggleSound}
+            aria-label={isMuted ? 'Unmute Sound Effects' : 'Mute Sound Effects'}
+            title={isMuted ? 'Sound FX: Off (Click to turn on)' : 'Sound FX: On (Click to mute)'}
+            className="p-2 rounded-xl text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
+          >
+            {isMuted ? <VolumeX size={20} className="text-slate-400" /> : <Volume2 size={20} className="text-indigo-600" />}
+          </button>
 
           {/* Mentor Notes notification bell */}
           <Link

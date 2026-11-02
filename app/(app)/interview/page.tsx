@@ -22,6 +22,8 @@ import {
   Award,
   ChevronDown,
   ChevronUp,
+  Copy,
+  Check,
 } from 'lucide-react';
 
 export default function InterviewDojoHub() {
@@ -35,6 +37,15 @@ export default function InterviewDojoHub() {
   // New Interview Dojo enhancements
   const [targetRole, setTargetRole] = useState<'executive' | 'specialist' | 'strategist'>('executive');
   const [showQuestionAnswer, setShowQuestionAnswer] = useState(false);
+  const [copiedScript, setCopiedScript] = useState(false);
+
+  const handleCopyScript = () => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(dailyQuestion.modelScript);
+      setCopiedScript(true);
+      setTimeout(() => setCopiedScript(false), 2500);
+    }
+  };
 
   const supabase = createClient();
 
@@ -284,9 +295,20 @@ export default function InterviewDojoHub() {
         {showQuestionAnswer && (
           <div className="mt-4 p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 space-y-3.5 animate-fadeIn">
             <div>
-              <div className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-600 flex items-center gap-1 mb-1">
-                <CheckCircle2 size={14} />
-                <span>What to Say in the Interview (Model Script):</span>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-600 flex items-center gap-1">
+                  <CheckCircle2 size={14} />
+                  <span>What to Say in the Interview (Model Script):</span>
+                </span>
+                <button
+                  type="button"
+                  onClick={handleCopyScript}
+                  className="py-1 px-3 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1 transition-colors"
+                  title="Copy model script to clipboard"
+                >
+                  {copiedScript ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+                  <span>{copiedScript ? 'Copied! ✓' : 'Copy Script'}</span>
+                </button>
               </div>
               <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium leading-relaxed italic">
                 {dailyQuestion.modelScript}

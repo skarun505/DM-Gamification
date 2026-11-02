@@ -8,6 +8,9 @@ import { XPBar } from '@/components/game/XPBar';
 import { StreakFlame } from '@/components/game/StreakFlame';
 import { CoinBadge } from '@/components/game/CoinBadge';
 import { createClient } from '@/lib/supabase/client';
+import { CertificateModal, CertificateData } from '@/components/certificate/CertificateModal';
+import { MistakeReviewModal } from '@/components/notebook/MistakeReviewModal';
+import { getSavedMistakes, MistakeItem } from '@/lib/storage/mistake-notebook';
 import {
   Play,
   Calendar,
@@ -18,6 +21,9 @@ import {
   Sparkles,
   BookOpen,
   CheckCircle2,
+  RotateCcw,
+  BookMarked,
+  ShieldAlert,
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -25,6 +31,10 @@ export default function HomePage() {
   const [completedCount, setCompletedCount] = useState(0);
   const [latestNote, setLatestNote] = useState<any>(null);
   const [readinessScore, setReadinessScore] = useState(0);
+  const [isCertModalOpen, setIsCertModalOpen] = useState(false);
+  const [mistakes, setMistakes] = useState<MistakeItem[]>([]);
+  const [isMistakesModalOpen, setIsMistakesModalOpen] = useState(false);
+
   const supabase = createClient();
 
   useEffect(() => {
@@ -61,6 +71,9 @@ export default function HomePage() {
           const coveragePct = Math.min(100, (attempts.length / 15) * 100);
           setReadinessScore(Math.round(0.6 * avgPct + 0.4 * coveragePct));
         }
+
+        // Mistakes from notebook
+        setMistakes(getSavedMistakes());
       } catch (err) {
         console.error('Failed to load dashboard:', err);
       }
@@ -69,6 +82,9 @@ export default function HomePage() {
   }, [profile?.id]);
 
   const nextLessonSlug = 'meta-rookie-01-what-is-performance-marketing';
+  const rookieGoal = 10;
+  const remaining = Math.max(0, rookieGoal - completedCount);
+  const certProgressPct = Math.min(100, Math.round((completedCount / rookieGoal) * 100));
 
   return (
     <div className="space-y-6">
@@ -121,6 +137,85 @@ export default function HomePage() {
         <XPBar xp={profile?.xp ?? 0} />
       </div>
 
+      {/* NEW: Tier 1 Certificate Countdown Card */}
+      <div className="p-6 rounded-3xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-indigo-500/10 border-2 border-amber-300 dark:border-amber-900/60 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-sm">
+        <div className="flex items-center gap-4 text-center sm:text-left">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-white flex items-center justify-center shrink-0 shadow-md">
+            <Award size={32} />
+          </div>
+          <div>
+            <div className="flex items-center justify-center sm:justify-start gap-2">
+              <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-400">
+                Official Certification Pathway
+              </span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300">
+                Tier 1 Diploma
+              </span>
+            </div>
+            <h3 className="font-heading font-extrabold text-lg text-slate-900 dark:text-slate-100 mt-0.5">
+              {remaining === 0
+                ? 'All Rookie Units Complete! Ready for Boss 1 & Diploma.'
+                : `${completedCount} of ${rookieGoal} Units Mastered — ${remaining} Units Away!`}
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Pass all lessons, conquer Boss 1 (Launch Day), and download your verified certificate with credential ID.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto justify-center">
+          <button
+            type="button"
+            onClick={() => setIsCertModalOpen(true)}
+            className="py-3 px-5 rounded-2xl bg-white dark:bg-slate-800 hover:bg-slate-50 text-amber-800 dark:text-amber-300 font-heading font-bold text-xs border border-amber-300 dark:border-amber-800 shadow-sm transition-all"
+          >
+            Preview Certificate 🎓
+          </button>
+          <Link
+            href="/map"
+            className="py-3 px-5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-heading font-extrabold text-xs shadow-md shadow-amber-500/25 transition-all"
+          >
+            Go to Roadmap ➔
+          </Link>
+        </div>
+      </div>
+
+      {/* NEW: Smart Mistake Notebook Card (if weak spots exist) */}
+      {mistakes.length > 0 && (
+        <div className="p-5 rounded-3xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/60 flex flex-col sm:flex-row items-center justify-between gap-4 animate-fadeIn">
+          <div className="flex items-center gap-3.5 text-center sm:text-left">
+            <div className="w-11 h-11 rounded-2xl bg-rose-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+              <BookMarked size={22} />
+            </div>
+            <div>
+              <div className="flex items-center justify-center sm:justify-start gap-1.5">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-rose-600 dark:text-rose-400">
+                  Targeted Learning
+                </span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">
+                  {mistakes.length} Weak Spots
+                </span>
+              </div>
+              <h4 className="font-heading font-bold text-sm text-slate-900 dark:text-slate-100 mt-0.5">
+                Smart Mistake Notebook
+              </h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Questions you missed in recent lessons are saved here. Clear them in 60 seconds to lock in retention!
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsMistakesModalOpen(true)}
+            className="py-2.5 px-5 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-heading font-bold text-xs shadow-md shadow-rose-600/20 shrink-0 w-full sm:w-auto flex items-center justify-center gap-1.5"
+          >
+            <RotateCcw size={14} />
+            <span>Review Mistakes ({mistakes.length}) ➔</span>
+          </button>
+        </div>
+      )}
+
       {/* 2-Column Action Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Daily Challenge Card */}
@@ -168,7 +263,7 @@ export default function HomePage() {
               Interview Dojo & Portfolio
             </h3>
             <p className="text-xs text-slate-500 mt-1">
-              Practice real questions asked at top Indian performance marketing agencies.
+              Practice real agency questions, STAR stories, and voice simulated interviews.
             </p>
           </div>
           <div className="mt-4 flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400">
@@ -226,7 +321,43 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* Certificate Preview Modal */}
+      {isCertModalOpen && (
+        <CertificateModal
+          data={{
+            tier: 'rookie',
+            tierName: 'Tier 1: Rookie',
+            certificateTitle: 'Certified Meta Ads Foundations Associate',
+            recipientName: profile?.display_name || 'Deepana',
+            issueDate: new Date().toLocaleDateString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric',
+            }),
+            credentialId: `AQ-R1-${(profile?.id || 'demo').slice(0, 8).toUpperCase()}`,
+            skills: [
+              'Performance Marketing Funnels (TOFU ➔ BOFU)',
+              '3-Level Campaign Architecture (Campaign, Ad Set, Ad)',
+              'The 6 Core Algorithmic Objectives & Intent',
+              'Media Buying Math: ROAS, CPA, CPC, CTR & CPM',
+              'Meta Total Value Auction Formula',
+            ],
+          }}
+          isOpen={isCertModalOpen}
+          onClose={() => setIsCertModalOpen(false)}
+        />
+      )}
+
+      {/* Mistake Notebook Modal */}
+      {isMistakesModalOpen && (
+        <MistakeReviewModal
+          mistakes={mistakes}
+          isOpen={isMistakesModalOpen}
+          onClose={() => setIsMistakesModalOpen(false)}
+          onUpdateMistakes={(updated) => setMistakes(updated)}
+        />
+      )}
     </div>
   );
 }
-

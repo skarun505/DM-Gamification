@@ -23,9 +23,13 @@ import {
   MessageCircle,
   Eye,
   AlertTriangle,
+  Calculator,
 } from 'lucide-react';
 import { ALL_TEACHING_CONCEPTS, TeachingConcept } from '@/lib/content/teaching-concepts';
 import { VisualGuideCard } from '@/components/teaching/VisualGuideCard';
+import { FormulaCalculatorModal } from '@/components/ui/FormulaCalculatorModal';
+import { soundFx } from '@/lib/sound/audio';
+import { saveMistakeToNotebook } from '@/lib/storage/mistake-notebook';
 
 export default function LessonPlayerPage() {
   const params = useParams();
@@ -38,6 +42,7 @@ export default function LessonPlayerPage() {
   const [loading, setLoading] = useState(true);
   const [mode, setMode] = useState<'learn' | 'quiz' | 'result' | 'mastery_failed'>('learn');
   const [isVisualPeekOpen, setIsVisualPeekOpen] = useState(false);
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
 
   // Quiz state
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
@@ -171,6 +176,7 @@ export default function LessonPlayerPage() {
     }
 
     if (correct) {
+      soundFx.playCorrect();
       setIsAnswerCorrect(true);
       setIsAnswerSubmitted(true);
       setScore((prev) => prev + 1);
@@ -180,6 +186,23 @@ export default function LessonPlayerPage() {
           : '✅ Correct on second chance! Good job identifying and correcting the mistake.'
       );
     } else {
+      soundFx.playRetry();
+
+      // Auto-save to smart mistake notebook for easy targeted review
+      if (currentQuestion) {
+        saveMistakeToNotebook({
+          lessonSlug: lesson.slug,
+          lessonTitle: lesson.title,
+          questionIndex: currentQuizIndex,
+          question: currentQuestion.q,
+          options: currentQuestion.options,
+          type: currentQuestion.type,
+          answer: currentQuestion.answer,
+          explain: currentQuestion.explain,
+          hint: currentQuestion.hint,
+        });
+      }
+
       if (attemptCount === 1) {
         // CHANCE 1 FAILED: Grant Attempt 2!
         setAttemptCount(2);
@@ -220,11 +243,13 @@ export default function LessonPlayerPage() {
 
       // 30% ERROR RULE: If >30% of answers are wrong, must restart from scratch!
       if (failureRate > 30) {
+        soundFx.playRetry();
         setMode('mastery_failed');
         return;
       }
 
       // PASSED WITH >= 70% ACCURACY!
+      soundFx.playVictory();
       const finalScore = score;
       const isPerfect = finalScore === totalQuestions;
 
@@ -312,6 +337,15 @@ export default function LessonPlayerPage() {
             {lesson.title}
           </div>
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIsCalculatorOpen(true)}
+              className="flex items-center gap-1 text-amber-700 dark:text-amber-300 hover:text-amber-800 bg-amber-50 dark:bg-amber-950/60 px-2.5 py-1 rounded-full text-xs font-bold transition-colors"
+              title="Open Performance Calculator & Formula Sheet"
+            >
+              <Calculator size={13} />
+              <span className="hidden sm:inline">Calculator</span>
+            </button>
             {mode === 'quiz' && (
               <button
                 type="button"
@@ -869,6 +903,12 @@ export default function LessonPlayerPage() {
           </div>
         </div>
       )}
+
+      {/* Live Performance Formula & Calculator Modal */}
+      <FormulaCalculatorModal
+        isOpen={isCalculatorOpen}
+        onClose={() => setIsCalculatorOpen(false)}
+      />
     </div>
   );
 }

@@ -125,6 +125,14 @@ export default function SimPage() {
 
         await awardLocalXP(scenario.xp || 50, 10, 'sim', scenario.slug);
 
+        try {
+          const stored = JSON.parse(localStorage.getItem('adquest_completed_slugs') || '[]');
+          if (!stored.includes(scenario.slug)) {
+            stored.push(scenario.slug);
+            localStorage.setItem('adquest_completed_slugs', JSON.stringify(stored));
+          }
+        } catch (e) {}
+
         if (profile?.id) {
           await supabase.from('sim_runs').insert({
             user_id: profile.id,

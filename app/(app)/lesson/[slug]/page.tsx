@@ -276,6 +276,14 @@ export default function LessonPlayerPage() {
       // Award XP in DB & local game state
       await awardLocalXP(xpGained, coinsGained, 'lesson', lesson.slug);
 
+      try {
+        const stored = JSON.parse(localStorage.getItem('adquest_completed_slugs') || '[]');
+        if (!stored.includes(lesson.slug)) {
+          stored.push(lesson.slug);
+          localStorage.setItem('adquest_completed_slugs', JSON.stringify(stored));
+        }
+      } catch (e) {}
+
       // Record lesson progress
       if (profile?.id) {
         await supabase.from('lesson_progress').upsert(

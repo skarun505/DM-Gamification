@@ -48,7 +48,15 @@ export default function HomePage() {
           .select('*', { count: 'exact', head: true })
           .eq('user_id', profile.id)
           .eq('status', 'completed');
-        setCompletedCount(count || 0);
+        let completed = count || 0;
+        try {
+          const localStored = JSON.parse(localStorage.getItem('adquest_completed_slugs') || '[]');
+          completed = Math.max(
+            completed,
+            localStored.filter((s: string) => s.startsWith('meta-rookie')).length
+          );
+        } catch (e) {}
+        setCompletedCount(completed);
 
         // Latest mentor note
         const { data: notes } = await supabase

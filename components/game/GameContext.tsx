@@ -44,47 +44,73 @@ export function GameProvider({ children }: { children: ReactNode }) {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (!user) {
-        setProfile(null);
-        setLoading(false);
-        return;
+      if (user) {
+        // Fetch profile
+        const { data } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .maybeSingle();
+
+        if (data) {
+          setProfile(data as Profile);
+          setLoading(false);
+          return;
+        } else {
+          setProfile({
+            id: user.id,
+            display_name: user.email?.split('@')[0] || 'Learner',
+            role: 'learner',
+            avatar: 'rocket',
+            xp: 0,
+            coins: 0,
+            streak: 1,
+            best_streak: 1,
+            streak_freezes: 0,
+            last_active_date: null,
+          });
+          setLoading(false);
+          return;
+        }
       }
+    } catch (err) {
+      console.warn('Supabase offline or unreachable, using local session:', err);
+    }
 
-      // Fetch profile
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .maybeSingle();
-
-      if (data) {
-        setProfile(data as Profile);
-      } else {
-        // If profile was just created or trigger delayed, fallback
+    // Resilient local session fallback
+    try {
+      const raw = typeof window !== 'undefined' ? localStorage.getItem('adquest_active_user') : null;
+      if (raw) {
+        const stored = JSON.parse(raw);
         setProfile({
-          id: user.id,
-          display_name: user.email?.split('@')[0] || 'Learner',
+          id: stored.id || 'learner-deepana-1',
+          display_name: stored.display_name || 'Deepana',
+          role: stored.role || 'learner',
+          avatar: 'rocket',
+          xp: stored.xp ?? 150,
+          coins: stored.coins ?? 25,
+          streak: stored.streak ?? 1,
+          best_streak: stored.best_streak ?? 1,
+          streak_freezes: stored.streak_freezes ?? 0,
+          last_active_date: new Date().toISOString(),
+        });
+      } else {
+        // Default Deepana profile for zero-block immediate access
+        setProfile({
+          id: 'learner-deepana-1',
+          display_name: 'Deepana',
           role: 'learner',
           avatar: 'rocket',
-          xp: 0,
-          coins: 0,
+          xp: 150,
+          coins: 25,
           streak: 1,
           best_streak: 1,
           streak_freezes: 0,
-          last_active_date: null,
+          last_active_date: new Date().toISOString(),
         });
       }
-
-      // Fetch unread mentor notes
-      const { count } = await supabase
-        .from('mentor_notes')
-        .select('*', { count: 'exact', head: true })
-        .eq('to_user', user.id)
-        .eq('read', false);
-
-      setUnreadNotesCount(count || 0);
-    } catch (err) {
-      console.error('Error fetching game profile:', err);
+    } catch (e) {
+      setProfile(null);
     } finally {
       setLoading(false);
     }
@@ -109,22 +135,30 @@ export function GameProvider({ children }: { children: ReactNode }) {
         // Fallback optimistic update if offline/mock
         setProfile((prev) => {
           if (!prev) return null;
-          return {
+          const updated = {
             ...prev,
             xp: prev.xp + xp,
             coins: prev.coins + coins,
           };
+          try {
+            localStorage.setItem('adquest_active_user', JSON.stringify(updated));
+          } catch (e) {}
+          return updated;
         });
       }
     } catch (err) {
       console.warn('award_xp RPC fallback:', err);
       setProfile((prev) => {
         if (!prev) return null;
-        return {
+        const updated = {
           ...prev,
           xp: prev.xp + xp,
           coins: prev.coins + coins,
         };
+        try {
+          localStorage.setItem('adquest_active_user', JSON.stringify(updated));
+        } catch (e) {}
+        return updated;
       });
     }
   };

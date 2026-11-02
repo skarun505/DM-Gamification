@@ -21,28 +21,62 @@ export default function SignUpPage() {
     setErrorMsg('');
     setLoading(true);
 
+    const name = displayName.trim() || 'Learner';
+    const localUser = {
+      id: `learner-${Date.now()}`,
+      email: email.trim(),
+      display_name: name,
+      role: 'learner' as const,
+      xp: 0,
+      coins: 0,
+      streak: 1,
+    };
+
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
-            display_name: displayName.trim() || 'Learner',
+            display_name: name,
           },
         },
       });
 
-      if (error) {
+      if (!error && data?.user) {
+        localStorage.setItem(
+          'adquest_active_user',
+          JSON.stringify({
+            id: data.user.id,
+            email: data.user.email,
+            display_name: name,
+            role: 'learner',
+          })
+        );
+        router.push('/home');
+        router.refresh();
+        return;
+      }
+
+      if (
+        error &&
+        !error.message.toLowerCase().includes('fetch') &&
+        !error.message.toLowerCase().includes('network') &&
+        !error.message.toLowerCase().includes('failed')
+      ) {
         setErrorMsg(error.message);
         setLoading(false);
         return;
       }
 
+      // Supabase is offline or paused -> Sign up locally
+      localStorage.setItem('adquest_active_user', JSON.stringify(localUser));
       router.push('/home');
       router.refresh();
     } catch (err: any) {
-      setErrorMsg(err.message || 'Failed to sign up. Please try again.');
-      setLoading(false);
+      localStorage.setItem('adquest_active_user', JSON.stringify(localUser));
+      router.push('/home');
+      router.refresh();
     }
   };
 

@@ -65,6 +65,11 @@ export default function WorldMapPage() {
         ba?.forEach((r) => set.add(r.boss_slug));
         xp?.forEach((r) => r.ref && set.add(r.ref));
 
+        try {
+          const localStored = JSON.parse(localStorage.getItem('adquest_completed_slugs') || '[]');
+          localStored.forEach((s: string) => set.add(s));
+        } catch (e) {}
+
         setCompletedSlugs(set);
       } catch (err) {
         console.error('Failed to load map progress:', err);

@@ -116,6 +116,14 @@ export default function BossPage() {
 
         await awardLocalXP(boss.xp || 150, boss.coins || 30, 'boss', boss.slug);
 
+        try {
+          const stored = JSON.parse(localStorage.getItem('adquest_completed_slugs') || '[]');
+          if (!stored.includes(boss.slug)) {
+            stored.push(boss.slug);
+            localStorage.setItem('adquest_completed_slugs', JSON.stringify(stored));
+          }
+        } catch (e) {}
+
         if (profile?.id) {
           await supabase.from('boss_attempts').insert({
             user_id: profile.id,

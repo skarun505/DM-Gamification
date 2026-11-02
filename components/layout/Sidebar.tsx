@@ -26,7 +26,12 @@ export function Sidebar() {
   const supabase = createClient();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch (e) {}
+    try {
+      localStorage.removeItem('adquest_active_user');
+    } catch (e) {}
     router.push('/login');
     router.refresh();
   };

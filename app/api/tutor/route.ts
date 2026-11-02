@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     }
 
     const today = getTodayIST();
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY || 'AIzaSyCi3jANH0tcC1Mn1UjctrcLchgevVK-xbg';
 
     if (!apiKey) {
       return NextResponse.json({

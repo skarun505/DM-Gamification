@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useGame } from '@/components/game/GameContext';
 import { PixieMascot } from '@/components/ui/PixieMascot';
 import { Send, Sparkles, MessageCircle, AlertCircle, Bot, User, Loader2 } from 'lucide-react';
 
@@ -15,21 +16,42 @@ interface ChatMessage {
 function TutorContent() {
   const searchParams = useSearchParams();
   const lessonContext = searchParams?.get('lesson');
+  const { profile } = useGame();
+  const learnerName = profile?.display_name || 'Deepana';
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome',
       sender: 'pixie',
       text: lessonContext
-        ? `Hi there! I see you are working on "${lessonContext}". What can I clarify or explain for you?`
-        : "Hi! I'm Pixie, your performance-marketing co-pilot. Ask me anything about Meta ads, bidding, creatives, or metrics!",
+        ? `Hey ${learnerName}! 👋 I see you are working on "${lessonContext}". What can I break down, calculate, or solve for you?`
+        : `Hey ${learnerName}! 🦊 I'm Pixie, your personal 1-on-1 performance ads mentor. Ask me anything about scaling Meta ads, diagnosing bidding auctions, or landing your next client!`,
     },
   ]);
 
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [remaining, setRemaining] = useState(30);
+  const [remaining, setRemaining] = useState(50);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (profile?.display_name) {
+      setMessages((prev) => {
+        if (prev.length === 1 && prev[0].id === 'welcome') {
+          return [
+            {
+              id: 'welcome',
+              sender: 'pixie',
+              text: lessonContext
+                ? `Hey ${profile.display_name}! 👋 I see you are working on "${lessonContext}". What can I break down, calculate, or solve for you?`
+                : `Hey ${profile.display_name}! 🦊 I'm Pixie, your personal 1-on-1 performance ads mentor. Ask me anything about scaling Meta ads, diagnosing bidding auctions, or landing your next client!`,
+            },
+          ];
+        }
+        return prev;
+      });
+    }
+  }, [profile?.display_name, lessonContext]);
 
   const starterQuestions = [
     "Explain CPM like I'm 12 years old",
@@ -52,6 +74,7 @@ function TutorContent() {
       text: textToSend.trim(),
     };
 
+    const currentHistory = [...messages, userMsg];
     setMessages((prev) => [...prev, userMsg]);
     if (!messageText) setInput('');
     setLoading(true);
@@ -62,7 +85,12 @@ function TutorContent() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: textToSend.trim(),
+          learnerName,
           context: lessonContext ? { lessonSlug: lessonContext } : undefined,
+          history: currentHistory.slice(-6).map((m) => ({
+            sender: m.sender,
+            text: m.text,
+          })),
         }),
       });
 
@@ -82,7 +110,7 @@ function TutorContent() {
         {
           id: String(Date.now() + 1),
           sender: 'pixie',
-          text: "I'm offline right now, but remember: test your creative hooks and review your CTR daily!",
+          text: `Hey ${learnerName}! 🦊 I'm thinking offline right now, but remember: test your creative hooks and review your CTR daily!`,
           isFallback: true,
         },
       ]);

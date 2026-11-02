@@ -1,97 +1,129 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { PIXIE_SYSTEM_PROMPT } from '@/lib/tutor/prompt';
+import { getPixieSystemPrompt } from '@/lib/tutor/prompt';
 import { getFallbackReply } from '@/lib/tutor/fallback';
 import { getTodayIST } from '@/lib/game/streak';
 
-const DAILY_LIMIT = 30;
+const DAILY_LIMIT = 50;
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    const body = await req.json();
+    const { message, context, history, learnerName } = body;
 
-    if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const { message, context } = await req.json();
     if (!message || typeof message !== 'string') {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     }
 
-    const today = getTodayIST();
+    // Identify user (prioritize client-sent learner name to avoid network blocking)
+    let activeName = (learnerName && typeof learnerName === 'string' && learnerName.trim())
+      ? learnerName.trim()
+      : 'Deepana';
 
-    // Check usage count for today
-    const { data: usageRow } = await supabase
-      .from('tutor_usage')
-      .select('count')
-      .eq('user_id', user.id)
-      .eq('day', today)
-      .maybeSingle();
-
-    const currentCount = usageRow?.count || 0;
-    if (currentCount >= DAILY_LIMIT) {
-      return NextResponse.json({
-        reply: `You've used all ${DAILY_LIMIT} AI questions for today! Here's a quick tip from Pixie: ${getFallbackReply(message)}`,
-        remaining: 0,
-        isFallback: true,
-      });
+    if (!learnerName) {
+      try {
+        const supabase = await createClient();
+        const authPromise = supabase.auth.getUser();
+        const timeoutPromise = new Promise<any>((_, reject) =>
+          setTimeout(() => reject(new Error('auth_timeout')), 500)
+        );
+        const { data } = await Promise.race([authPromise, timeoutPromise]);
+        if (data?.user?.user_metadata?.display_name) {
+          activeName = data.user.user_metadata.display_name;
+        }
+      } catch (authErr) {
+        // Fallback to activeName
+      }
     }
 
+    const today = getTodayIST();
     const apiKey = process.env.GEMINI_API_KEY;
+
     if (!apiKey) {
       return NextResponse.json({
-        reply: getFallbackReply(message),
-        remaining: DAILY_LIMIT - currentCount,
+        reply: `Hey ${activeName}! 🦊 ${getFallbackReply(message)}`,
+        remaining: DAILY_LIMIT,
         isFallback: true,
       });
     }
 
+    // Build personal system instruction
+    const systemPrompt = getPixieSystemPrompt(
+      activeName,
+      typeof context === 'object' ? JSON.stringify(context, null, 2) : context
+    );
+
     let reply = '';
-    try {
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({
-        model: process.env.GEMINI_MODEL || 'gemini-1.5-flash',
-        systemInstruction: PIXIE_SYSTEM_PROMPT,
-      });
+    const candidateModels = [
+      'gemini-2.5-flash',
+      'gemini-flash-latest',
+      'gemini-2.5-flash-lite',
+    ];
 
-      const promptContext = context
-        ? `\nCurrent context: ${JSON.stringify(context)}`
-        : '';
-      const prompt = `${promptContext}\nLearner question: ${message}`;
+    const genAI = new GoogleGenerativeAI(apiKey);
 
-      const res = await model.generateContent(prompt);
-      reply = res.response.text();
-    } catch (apiErr: any) {
-      console.warn('Gemini API call failed, falling back:', apiErr?.message);
-      reply = getFallbackReply(message);
+    // Multi-turn history formatting
+    const formattedHistory: { role: string; parts: { text: string }[] }[] = [];
+    if (Array.isArray(history)) {
+      for (const item of history.slice(-6)) {
+        if (item.text && item.sender) {
+          formattedHistory.push({
+            role: item.sender === 'user' ? 'user' : 'model',
+            parts: [{ text: item.text }],
+          });
+        }
+      }
     }
 
-    // Increment usage
-    await supabase.from('tutor_usage').upsert(
-      {
-        user_id: user.id,
-        day: today,
-        count: currentCount + 1,
-      },
-      { onConflict: 'user_id,day' }
-    );
+    // Try generation with fallback models
+    let generatedSuccess = false;
+    for (const modelName of candidateModels) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          systemInstruction: systemPrompt,
+        });
+
+        // Use multi-turn chat if history exists
+        if (formattedHistory.length > 0) {
+          const chat = model.startChat({
+            history: formattedHistory,
+          });
+          const res = await chat.sendMessage(message);
+          reply = res.response.text();
+        } else {
+          const res = await model.generateContent(message);
+          reply = res.response.text();
+        }
+
+        if (reply && reply.trim().length > 0) {
+          generatedSuccess = true;
+          break;
+        }
+      } catch (err: any) {
+        console.warn(`Model ${modelName} failed, trying next:`, err?.message);
+      }
+    }
+
+    if (!generatedSuccess || !reply) {
+      // Personalized fallback if all API calls fail
+      reply = `Hey ${activeName}! 🦊 ${getFallbackReply(message)}`;
+    }
 
     return NextResponse.json({
       reply,
-      remaining: DAILY_LIMIT - (currentCount + 1),
-      isFallback: false,
+      remaining: DAILY_LIMIT,
+      isFallback: !generatedSuccess,
     });
   } catch (err: any) {
     console.error('Tutor route error:', err);
     return NextResponse.json(
-      { reply: getFallbackReply('help'), isFallback: true },
+      {
+        reply: `Hey there! 🦊 I'm Pixie, your performance ads mentor. I had a quick hiccup, but remember: in digital advertising, test your creative hook first whenever CTR is low!`,
+        isFallback: true,
+      },
       { status: 200 }
     );
   }
 }
-

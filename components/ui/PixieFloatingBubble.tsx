@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { useGame } from '@/components/game/GameContext';
 import { PixieMascot } from './PixieMascot';
 import {
   MessageCircle,
@@ -23,18 +24,39 @@ interface ChatMessage {
 
 export function PixieFloatingBubble() {
   const pathname = usePathname();
+  const { profile } = useGame();
+  const learnerName = profile?.display_name || 'Deepana';
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'init',
       sender: 'pixie',
-      text: "Hey there! 👋 I'm Pixie, your 24/7 ad mentor. Stuck on a question or campaign? Ask me anything!",
+      text: `Hey ${learnerName}! 👋 I'm Pixie, your personal 1-on-1 performance ads mentor. Stuck on a question, campaign strategy, or math formula? Ask me anything!`,
     },
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [remaining, setRemaining] = useState(30);
+  const [remaining, setRemaining] = useState(50);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Update initial message when profile loads
+  useEffect(() => {
+    if (profile?.display_name) {
+      setMessages((prev) => {
+        if (prev.length === 1 && prev[0].id === 'init') {
+          return [
+            {
+              id: 'init',
+              sender: 'pixie',
+              text: `Hey ${profile.display_name}! 👋 I'm Pixie, your personal 1-on-1 performance ads mentor. Stuck on a question, campaign strategy, or math formula? Ask me anything!`,
+            },
+          ];
+        }
+        return prev;
+      });
+    }
+  }, [profile?.display_name]);
 
   // Auto-scroll chat
   useEffect(() => {
@@ -65,6 +87,7 @@ export function PixieFloatingBubble() {
       text: textToSend,
     };
 
+    const currentHistory = [...messages, userMsg];
     setMessages((prev) => [...prev, userMsg]);
     if (!customText) setInput('');
     setLoading(true);
@@ -75,7 +98,18 @@ export function PixieFloatingBubble() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: textToSend,
-          context: `Current page: ${pathname}`,
+          learnerName,
+          context: {
+            page: pathname,
+            learnerName,
+            xp: profile?.xp ?? 0,
+            streak: profile?.streak ?? 1,
+            role: profile?.role ?? 'learner',
+          },
+          history: currentHistory.slice(-6).map((m) => ({
+            sender: m.sender,
+            text: m.text,
+          })),
         }),
       });
 
@@ -89,8 +123,8 @@ export function PixieFloatingBubble() {
             text: data.reply,
           },
         ]);
-        if (typeof data.remainingToday === 'number') {
-          setRemaining(data.remainingToday);
+        if (typeof data.remaining === 'number') {
+          setRemaining(data.remaining);
         }
       } else {
         setMessages((prev) => [
@@ -98,7 +132,7 @@ export function PixieFloatingBubble() {
           {
             id: String(Date.now() + 1),
             sender: 'pixie',
-            text: "Remember: Great campaigns test one variable at a time (hooks, audiences, or offers). Check your creative fatigue or widen your targeting!",
+            text: `Hey ${learnerName}! 🦊 Great campaigns test one variable at a time (hooks, audiences, or offers). Are you reviewing creative fatigue or optimizing targeting?`,
           },
         ]);
       }
@@ -108,7 +142,7 @@ export function PixieFloatingBubble() {
         {
           id: String(Date.now() + 1),
           sender: 'pixie',
-          text: "Looks like network is sluggish, but here's a quick rule of thumb: If CPM is high, widen your audience. If CTR is low, change the 3-second hook!",
+          text: `Hey ${learnerName}! 🦊 Looks like our connection blinked, but here's a golden rule: If CPM is high, widen your audience. If CTR is low, change the 3-second hook!`,
         },
       ]);
     } finally {
@@ -149,11 +183,11 @@ export function PixieFloatingBubble() {
               </div>
               <div>
                 <h3 className="font-heading font-extrabold text-sm leading-tight flex items-center gap-1.5">
-                  <span>Pixie Co-pilot</span>
+                  <span>Pixie • 1-on-1 Mentor</span>
                   <Sparkles size={13} className="text-amber-300" />
                 </h3>
                 <span className="text-[11px] text-indigo-200">
-                  {remaining}/30 free hints today
+                  Dedicated to {learnerName} • {remaining} questions today
                 </span>
               </div>
             </div>

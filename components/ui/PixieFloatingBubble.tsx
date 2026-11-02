@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useGame } from '@/components/game/GameContext';
 import { PixieMascot } from './PixieMascot';
+import { FormattedChatText } from './FormattedChatText';
 import {
   MessageCircle,
   X,
@@ -230,13 +231,13 @@ export function PixieFloatingBubble() {
                   )}
 
                   <div
-                    className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 leading-relaxed font-medium text-xs sm:text-sm ${
+                    className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 leading-relaxed text-xs sm:text-sm ${
                       isPixie
-                        ? 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-xs'
+                        ? 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-xs shadow-xs'
                         : 'bg-indigo-600 text-white rounded-tr-xs'
                     }`}
                   >
-                    {m.text}
+                    <FormattedChatText text={m.text} isUser={!isPixie} />
                   </div>
 
                   {!isPixie && (

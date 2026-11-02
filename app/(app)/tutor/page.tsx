@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useGame } from '@/components/game/GameContext';
 import { PixieMascot } from '@/components/ui/PixieMascot';
+import { FormattedChatText } from '@/components/ui/FormattedChatText';
 import { Send, Sparkles, MessageCircle, AlertCircle, Bot, User, Loader2 } from 'lucide-react';
 
 interface ChatMessage {
@@ -162,7 +163,7 @@ function TutorContent() {
                   : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-none border border-slate-200 dark:border-slate-700 shadow-sm'
               }`}
             >
-              {m.text}
+              <FormattedChatText text={m.text} isUser={m.sender === 'user'} />
               {m.isFallback && (
                 <span className="block mt-1 text-[11px] text-amber-600 dark:text-amber-400 font-semibold">
                   ⚡ Quick Offline Hint

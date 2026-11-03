@@ -5,22 +5,24 @@ import { usePathname } from 'next/navigation';
 import { useGame } from '@/components/game/GameContext';
 import { PixieMascot } from './PixieMascot';
 import { FormattedChatText } from './FormattedChatText';
+import { PixieApiKeyModal } from './PixieApiKeyModal';
+import { generateExpertReply } from '@/lib/tutor/expert-engine';
 import {
-  MessageCircle,
   X,
   Send,
   Sparkles,
   Bot,
   User,
   Loader2,
-  Minimize2,
-  HelpCircle,
+  Settings,
+  RotateCcw,
 } from 'lucide-react';
 
 interface ChatMessage {
   id: string;
   sender: 'user' | 'pixie';
   text: string;
+  provider?: string;
 }
 
 export function PixieFloatingBubble() {
@@ -29,35 +31,55 @@ export function PixieFloatingBubble() {
   const learnerName = profile?.display_name || 'Deepana';
 
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: 'init',
-      sender: 'pixie',
-      text: `Hey ${learnerName}! 👋 I'm Pixie, your personal 1-on-1 performance ads mentor. Stuck on a question, campaign strategy, or math formula? Ask me anything!`,
-    },
-  ]);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [userApiKey, setUserApiKey] = useState('');
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [remaining, setRemaining] = useState(50);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Update initial message when profile loads
+  const storageKey = `adquest_pixie_chat_${learnerName}`;
+
+  // Load API key & chat history on mount
   useEffect(() => {
-    if (profile?.display_name) {
-      setMessages((prev) => {
-        if (prev.length === 1 && prev[0].id === 'init') {
-          return [
-            {
-              id: 'init',
-              sender: 'pixie',
-              text: `Hey ${profile.display_name}! 👋 I'm Pixie, your personal 1-on-1 performance ads mentor. Stuck on a question, campaign strategy, or math formula? Ask me anything!`,
-            },
-          ];
+    if (typeof window !== 'undefined') {
+      const storedKey = localStorage.getItem('adquest_user_gemini_key') || '';
+      setUserApiKey(storedKey);
+
+      try {
+        const savedChat = localStorage.getItem(storageKey);
+        if (savedChat) {
+          const parsed = JSON.parse(savedChat);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setMessages(parsed);
+            return;
+          }
         }
-        return prev;
-      });
+      } catch {
+        // Fallback to init
+      }
+
+      setMessages([
+        {
+          id: 'init',
+          sender: 'pixie',
+          text: `Hey ${learnerName}! 👋 I'm Pixie, your personal 1-on-1 performance ads mentor. Stuck on an ad test, campaign strategy, or math formula? Ask me anything!`,
+        },
+      ]);
     }
-  }, [profile?.display_name]);
+  }, [learnerName, storageKey]);
+
+  // Persist messages whenever updated
+  useEffect(() => {
+    if (typeof window !== 'undefined' && messages.length > 0) {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(messages.slice(-30)));
+      } catch {
+        // ignore quota errors
+      }
+    }
+  }, [messages, storageKey]);
 
   // Auto-scroll chat
   useEffect(() => {
@@ -66,10 +88,22 @@ export function PixieFloatingBubble() {
     }
   }, [messages, isOpen, loading]);
 
-  // Don't show floating bubble on the full /tutor page
   if (pathname === '/tutor') {
     return null;
   }
+
+  const handleClearChat = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(storageKey);
+    }
+    setMessages([
+      {
+        id: String(Date.now()),
+        sender: 'pixie',
+        text: `Hey ${learnerName}! 🦊 Started a brand-new chat session! What ad challenge or question can I help you solve right now?`,
+      },
+    ]);
+  };
 
   const quickPrompts = [
     "Give me a hint for this question",
@@ -94,12 +128,20 @@ export function PixieFloatingBubble() {
     setLoading(true);
 
     try {
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+      if (userApiKey) {
+        headers['x-gemini-key'] = userApiKey;
+      }
+
       const res = await fetch('/api/tutor', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({
           message: textToSend,
           learnerName,
+          apiKey: userApiKey,
           context: {
             page: pathname,
             learnerName,
@@ -107,7 +149,7 @@ export function PixieFloatingBubble() {
             streak: profile?.streak ?? 1,
             role: profile?.role ?? 'learner',
           },
-          history: currentHistory.slice(-6).map((m) => ({
+          history: currentHistory.slice(-8).map((m) => ({
             sender: m.sender,
             text: m.text,
           })),
@@ -122,28 +164,35 @@ export function PixieFloatingBubble() {
             id: String(Date.now() + 1),
             sender: 'pixie',
             text: data.reply,
+            provider: data.provider,
           },
         ]);
         if (typeof data.remaining === 'number') {
           setRemaining(data.remaining);
         }
       } else {
+        // Fallback to our specialized domain engine
+        const fallbackReply = generateExpertReply(textToSend, learnerName, currentHistory);
         setMessages((prev) => [
           ...prev,
           {
             id: String(Date.now() + 1),
             sender: 'pixie',
-            text: `Hey ${learnerName}! 🦊 Great campaigns test one variable at a time (hooks, audiences, or offers). Are you reviewing creative fatigue or optimizing targeting?`,
+            text: fallbackReply,
+            provider: 'offline',
           },
         ]);
       }
     } catch {
+      // Offline fallback: Use expert engine instead of a generic canned sentence
+      const fallbackReply = generateExpertReply(textToSend, learnerName, currentHistory);
       setMessages((prev) => [
         ...prev,
         {
           id: String(Date.now() + 1),
           sender: 'pixie',
-          text: `Hey ${learnerName}! 🦊 Looks like our connection blinked, but here's a golden rule: If CPM is high, widen your audience. If CTR is low, change the 3-second hook!`,
+          text: fallbackReply,
+          provider: 'offline',
         },
       ]);
     } finally {
@@ -162,12 +211,11 @@ export function PixieFloatingBubble() {
           <button
             onClick={() => setIsOpen(true)}
             className="w-14 h-14 rounded-full bg-gradient-to-tr from-indigo-600 via-indigo-500 to-amber-400 p-0.5 shadow-xl hover:shadow-indigo-500/30 transition-all hover:scale-110 active:scale-95 flex items-center justify-center relative"
-            title="Ask Pixie AI Tutor"
+            title="Ask Pixie AI Mentor"
           >
             <div className="w-full h-full rounded-full bg-white dark:bg-slate-900 flex items-center justify-center overflow-hidden">
               <PixieMascot mood="happy" size={38} />
             </div>
-            {/* Pulsing notification dot */}
             <span className="absolute top-0 right-0 w-4 h-4 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full animate-pulse" />
           </button>
         </div>
@@ -175,30 +223,46 @@ export function PixieFloatingBubble() {
 
       {/* Slide-out / Floating Pop-up Modal */}
       {isOpen && (
-        <div className="fixed bottom-20 sm:bottom-6 right-2 sm:right-6 z-50 w-[95vw] sm:w-[380px] max-h-[580px] h-[80vh] sm:h-[540px] bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-indigo-100 dark:border-slate-700 flex flex-col overflow-hidden animate-fadeIn">
+        <div className="fixed bottom-20 sm:bottom-6 right-2 sm:right-6 z-50 w-[95vw] sm:w-[400px] max-h-[600px] h-[82vh] sm:h-[560px] bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-indigo-100 dark:border-slate-700 flex flex-col overflow-hidden animate-fadeIn">
           {/* Header */}
-          <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 p-4 text-white flex items-center justify-between shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-white/20 p-1 flex items-center justify-center shrink-0">
-                <PixieMascot mood="happy" size={30} />
+          <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 p-3.5 text-white flex items-center justify-between shadow-sm">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-full bg-white/20 p-1 flex items-center justify-center shrink-0">
+                <PixieMascot mood="happy" size={28} />
               </div>
               <div>
-                <h3 className="font-heading font-extrabold text-sm leading-tight flex items-center gap-1.5">
+                <h3 className="font-heading font-extrabold text-xs sm:text-sm leading-tight flex items-center gap-1.5">
                   <span>Pixie • 1-on-1 Mentor</span>
                   <Sparkles size={13} className="text-amber-300" />
                 </h3>
-                <span className="text-[11px] text-indigo-200">
-                  Dedicated to {learnerName} • {remaining} questions today
+                <span className="text-[10px] text-indigo-200">
+                  Dedicated to {learnerName} • {userApiKey ? '⚡ Gemini AI Active' : '🦊 AI Mentor'}
                 </span>
               </div>
             </div>
 
-            <button
-              onClick={() => setIsOpen(false)}
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
-            >
-              <X size={18} />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={handleClearChat}
+                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                title="New Chat / Clear History"
+              >
+                <RotateCcw size={14} />
+              </button>
+              <button
+                onClick={() => setIsSettingsOpen(true)}
+                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                title="AI Settings (Add Gemini Key)"
+              >
+                <Settings size={14} />
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors ml-1"
+              >
+                <X size={16} />
+              </button>
+            </div>
           </div>
 
           {/* Quick Prompts Bar */}
@@ -208,7 +272,7 @@ export function PixieFloatingBubble() {
                 key={i}
                 onClick={() => handleSend(p)}
                 disabled={loading}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-white dark:bg-slate-700 text-[11px] font-bold text-indigo-700 dark:text-indigo-300 border border-indigo-200/60 dark:border-slate-600 hover:bg-indigo-100 transition-colors shadow-xs"
+                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-white dark:bg-slate-700 text-[11px] font-bold text-indigo-700 dark:text-indigo-300 border border-indigo-200/60 dark:border-slate-600 hover:bg-indigo-100 dark:hover:bg-slate-600 transition-colors shadow-xs"
               >
                 {p}
               </button>
@@ -216,7 +280,7 @@ export function PixieFloatingBubble() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 text-sm">
+          <div className="flex-1 overflow-y-auto p-3.5 space-y-3 text-xs sm:text-sm">
             {messages.map((m) => {
               const isPixie = m.sender === 'pixie';
               return (
@@ -250,9 +314,9 @@ export function PixieFloatingBubble() {
             })}
 
             {loading && (
-              <div className="flex items-center gap-2 text-xs text-indigo-600 font-semibold p-2">
+              <div className="flex items-center gap-2 text-xs text-indigo-600 dark:text-indigo-400 font-semibold p-2">
                 <Loader2 size={15} className="animate-spin" />
-                <span>Pixie is thinking...</span>
+                <span>Pixie is formulating your answer...</span>
               </div>
             )}
             <div ref={messagesEndRef} />
@@ -264,26 +328,32 @@ export function PixieFloatingBubble() {
               e.preventDefault();
               handleSend();
             }}
-            className="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 flex items-center gap-2"
+            className="p-3 border-t border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-900 flex items-center gap-2"
           >
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask anything or request a hint..."
-              className="flex-1 py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 px-3.5 py-2.5 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm focus:outline-hidden focus:ring-2 focus:ring-indigo-500 dark:text-slate-100"
             />
             <button
               type="submit"
-              disabled={!input.trim() || loading}
-              className="w-9 h-9 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 text-white flex items-center justify-center shrink-0 transition-colors shadow-sm"
+              disabled={loading || !input.trim()}
+              className="w-10 h-10 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center transition-colors disabled:opacity-40 disabled:hover:bg-indigo-600 shadow-md shrink-0"
             >
               <Send size={15} />
             </button>
           </form>
         </div>
       )}
+
+      {/* Settings Modal */}
+      <PixieApiKeyModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        onKeySaved={(k) => setUserApiKey(k)}
+      />
     </>
   );
 }
-

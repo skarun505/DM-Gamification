@@ -31,16 +31,57 @@ function sanitizeHistory(rawHistory: any[]) {
   return sanitized;
 }
 
+/**
+ * Attempts to fetch a response from the free Pollinations AI endpoint
+ * with a quick timeout.
+ */
+async function tryPollinations(prompt: string, systemPrompt: string): Promise<string | null> {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 4000);
+
+    const encodedPrompt = encodeURIComponent(prompt);
+    const encodedSystem = encodeURIComponent(systemPrompt);
+    const url = `https://text.pollinations.ai/${encodedPrompt}?system=${encodedSystem}&seed=${Date.now()}`;
+
+    const res = await fetch(url, {
+      signal: controller.signal,
+      headers: { 'User-Agent': 'AdQuest/1.0' },
+    });
+    clearTimeout(timeout);
+
+    if (!res.ok) return null;
+    const text = await res.text();
+
+    if (
+      !text ||
+      text.includes('Free limit reached') ||
+      text.includes('<!DOCTYPE html>') ||
+      text.trim().length < 15
+    ) {
+      return null;
+    }
+
+    return text.trim();
+  } catch {
+    return null;
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { message, context, history, learnerName } = body;
+    const { message, context, history, learnerName, apiKey: bodyKey } = body;
 
     if (!message || typeof message !== 'string') {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     }
 
-    // Identify user (prioritize client-sent learner name to avoid network blocking)
+    // Prioritize user-provided key from header or body, then env
+    const headerKey = req.headers.get('x-gemini-key');
+    const activeApiKey = (headerKey && headerKey.trim()) || (bodyKey && bodyKey.trim()) || process.env.GEMINI_API_KEY || '';
+
+    // Identify user
     let activeName = (learnerName && typeof learnerName === 'string' && learnerName.trim())
       ? learnerName.trim()
       : 'Deepana';
@@ -56,13 +97,10 @@ export async function POST(req: NextRequest) {
         if (data?.user?.user_metadata?.display_name) {
           activeName = data.user.user_metadata.display_name;
         }
-      } catch (authErr) {
+      } catch {
         // Fallback to activeName
       }
     }
-
-    const today = getTodayIST();
-    const apiKey = process.env.GEMINI_API_KEY;
 
     // Build personal system instruction
     const systemPrompt = getPixieSystemPrompt(
@@ -71,16 +109,18 @@ export async function POST(req: NextRequest) {
     );
 
     let reply = '';
-    let generatedSuccess = false;
+    let provider = 'offline';
 
-    if (apiKey) {
+    // 1. Try Google Gemini if API key is present
+    if (activeApiKey) {
       const candidateModels = [
+        'gemini-1.5-flash',
+        'gemini-2.0-flash',
         'gemini-2.5-flash',
         'gemini-flash-latest',
-        'gemini-2.5-flash-lite',
       ];
 
-      const genAI = new GoogleGenerativeAI(apiKey);
+      const genAI = new GoogleGenerativeAI(activeApiKey);
       const formattedHistory = Array.isArray(history) ? sanitizeHistory(history) : [];
 
       for (const modelName of candidateModels) {
@@ -91,9 +131,7 @@ export async function POST(req: NextRequest) {
           });
 
           if (formattedHistory.length > 0) {
-            const chat = model.startChat({
-              history: formattedHistory,
-            });
+            const chat = model.startChat({ history: formattedHistory });
             const res = await chat.sendMessage(message);
             reply = res.response.text();
           } else {
@@ -102,24 +140,35 @@ export async function POST(req: NextRequest) {
           }
 
           if (reply && reply.trim().length > 0) {
-            generatedSuccess = true;
+            provider = 'gemini';
             break;
           }
         } catch (err: any) {
-          console.warn(`Model ${modelName} failed, trying next:`, err?.message);
+          console.warn(`Gemini model ${modelName} failed:`, err?.message);
         }
       }
     }
 
-    if (!generatedSuccess || !reply) {
-      // Use Pixie's specialized mathematical and diagram knowledge engine
+    // 2. Try Pollinations if Gemini was not available or failed
+    if (!reply) {
+      const pollinationsReply = await tryPollinations(message, systemPrompt);
+      if (pollinationsReply) {
+        reply = pollinationsReply;
+        provider = 'pollinations';
+      }
+    }
+
+    // 3. Fall back to our extensive, personalized domain knowledge engine
+    if (!reply) {
       reply = generateExpertReply(message, activeName, history);
+      provider = 'pixie_offline';
     }
 
     return NextResponse.json({
       reply,
       remaining: DAILY_LIMIT,
-      isFallback: !generatedSuccess,
+      isFallback: provider === 'pixie_offline',
+      provider,
     });
   } catch (err: any) {
     console.error('Tutor route error:', err);
@@ -127,6 +176,7 @@ export async function POST(req: NextRequest) {
       {
         reply: generateExpertReply('help', 'Deepana'),
         isFallback: true,
+        provider: 'pixie_offline',
       },
       { status: 200 }
     );

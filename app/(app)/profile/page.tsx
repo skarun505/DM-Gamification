@@ -20,14 +20,19 @@ import {
   CheckCircle2,
   Printer,
   FileCheck,
+  RotateCcw,
+  AlertTriangle,
+  Check,
 } from 'lucide-react';
 
 export default function ProfilePage() {
-  const { profile, refreshProfile } = useGame();
+  const { profile, refreshProfile, resetAccountData } = useGame();
   const [earnedBadges, setEarnedBadges] = useState<Map<string, string>>(new Map());
   const [completedBosses, setCompletedBosses] = useState<Set<string>>(new Set());
   const [selectedCert, setSelectedCert] = useState<CertificateData | null>(null);
   const [shopMsg, setShopMsg] = useState('');
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [resetSuccess, setResetSuccess] = useState(false);
   const supabase = createClient();
 
   useEffect(() => {
@@ -337,6 +342,63 @@ export default function ProfilePage() {
             );
           })}
         </div>
+      </div>
+
+      {/* Account Reset & Start Fresh */}
+      <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-card border border-rose-100 dark:border-rose-950/60 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-slate-100 dark:border-slate-700">
+          <div>
+            <div className="flex items-center gap-2">
+              <RotateCcw size={18} className="text-rose-500" />
+              <h3 className="font-heading font-extrabold text-lg text-slate-800 dark:text-slate-100">
+                Account Progress Management
+              </h3>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Want to start the curriculum from scratch? Reset all quiz scores, XP, and completed lessons.
+            </p>
+          </div>
+
+          {!showResetConfirm ? (
+            <button
+              onClick={() => setShowResetConfirm(true)}
+              className="px-4 py-2.5 rounded-xl border border-rose-200 dark:border-rose-800/60 bg-rose-50/60 dark:bg-rose-950/30 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-400 text-xs font-bold transition-colors shrink-0"
+            >
+              Reset Account to Brand New
+            </button>
+          ) : (
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={() => setShowResetConfirm(false)}
+                className="px-3 py-2 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={async () => {
+                  await resetAccountData();
+                  setShowResetConfirm(false);
+                  setResetSuccess(true);
+                  setTimeout(() => {
+                    setResetSuccess(false);
+                    window.location.href = '/map';
+                  }, 1200);
+                }}
+                className="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-md transition-all flex items-center gap-1.5"
+              >
+                <AlertTriangle size={14} />
+                <span>Yes, Reset to Level 1</span>
+              </button>
+            </div>
+          )}
+        </div>
+
+        {resetSuccess && (
+          <div className="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold flex items-center gap-2 animate-fadeIn">
+            <Check size={16} className="text-emerald-500" />
+            <span>Account reset successfully! Redirecting you to Learning Map Level 1...</span>
+          </div>
+        )}
       </div>
 
       {/* Certificate Modal */}

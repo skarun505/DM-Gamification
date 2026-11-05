@@ -5,15 +5,40 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { PixieMascot } from '@/components/ui/PixieMascot';
-import { Mail, Lock, ArrowRight, Loader2 } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Loader2, RotateCcw, Check } from 'lucide-react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [resetSuccessMsg, setResetSuccessMsg] = useState('');
   const router = useRouter();
   const supabase = createClient();
+
+  const handleResetData = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('adquest_completed_slugs');
+      localStorage.removeItem('adquest_mistake_notebook');
+      localStorage.removeItem('adquest_tour_completed');
+      localStorage.removeItem('adquest_pixie_chat_Deepana');
+      localStorage.removeItem('adquest_pixie_tutor_chat_Deepana');
+      localStorage.setItem('adquest_account_reset_version', 'v2_deepana_fresh_reset');
+
+      const cleanUser = {
+        id: 'learner-deepana-1',
+        email: 'deepana@adquest.com',
+        display_name: 'Deepana',
+        role: 'learner' as const,
+        xp: 0,
+        coins: 0,
+        streak: 1,
+      };
+      localStorage.setItem('adquest_active_user', JSON.stringify(cleanUser));
+      setResetSuccessMsg('Deepana account reset to brand new (0 XP & quizzes cleared)!');
+      setTimeout(() => setResetSuccessMsg(''), 4000);
+    }
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,8 +56,8 @@ export default function LoginPage() {
       email: email.trim(),
       display_name: displayName,
       role: 'learner' as const,
-      xp: 150,
-      coins: 25,
+      xp: 0,
+      coins: 0,
       streak: 1,
     };
 
@@ -50,6 +75,9 @@ export default function LoginPage() {
             email: data.user.email,
             display_name: displayName,
             role: 'learner',
+            xp: 0,
+            coins: 0,
+            streak: 1,
           })
         );
         router.push('/home');
@@ -100,6 +128,13 @@ export default function LoginPage() {
           </div>
         )}
 
+        {resetSuccessMsg && (
+          <div className="mb-4 p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs dark:bg-emerald-950/40 dark:border-emerald-900 dark:text-emerald-300 flex items-center gap-1.5 animate-fadeIn">
+            <Check size={14} className="shrink-0" />
+            <span>{resetSuccessMsg}</span>
+          </div>
+        )}
+
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
@@ -113,7 +148,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@domain.com"
-                className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
+                className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
               />
             </div>
           </div>
@@ -130,7 +165,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
+                className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
               />
             </div>
           </div>
@@ -138,10 +173,13 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 px-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white font-bold font-heading text-base flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/25 transition-all disabled:opacity-50"
+            className="w-full py-3 px-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-heading font-extrabold text-sm shadow-md hover:shadow-indigo-500/20 active:scale-[0.99] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {loading ? (
-              <Loader2 className="animate-spin" size={20} />
+              <>
+                <Loader2 className="animate-spin" size={18} />
+                <span>Opening AdQuest...</span>
+              </>
             ) : (
               <>
                 <span>Continue Playing</span>
@@ -155,6 +193,15 @@ export default function LoginPage() {
         <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-700/80">
           <div className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 flex items-center justify-between">
             <span>⚡ Quick Login Credentials:</span>
+            <button
+              type="button"
+              onClick={handleResetData}
+              className="text-[10px] text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 font-bold lowercase"
+              title="Reset all quiz and XP data to make Deepana account brand new"
+            >
+              <RotateCcw size={11} />
+              <span>reset data</span>
+            </button>
           </div>
           <div className="grid grid-cols-2 gap-2">
             <button
@@ -210,4 +257,3 @@ export default function LoginPage() {
     </div>
   );
 }
-

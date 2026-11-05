@@ -26,9 +26,12 @@ interface GameContextType {
   closeBadgeToast: () => void;
   awardLocalXP: (xp: number, coins: number, source: string, ref?: string) => Promise<void>;
   refreshProfile: () => Promise<void>;
+  resetAccountData: () => Promise<void>;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
+
+const CURRENT_RESET_VERSION = 'v2_deepana_fresh_reset';
 
 export function GameProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -38,7 +41,50 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
   const supabase = createClient();
 
+  // One-time automatic clean reset for brand new account experience
+  const checkVersionReset = () => {
+    if (typeof window === 'undefined') return;
+    try {
+      const storedVersion = localStorage.getItem('adquest_account_reset_version');
+      if (storedVersion !== CURRENT_RESET_VERSION) {
+        localStorage.removeItem('adquest_completed_slugs');
+        localStorage.removeItem('adquest_mistake_notebook');
+        localStorage.removeItem('adquest_tour_completed');
+        localStorage.removeItem('adquest_pixie_chat_Deepana');
+        localStorage.removeItem('adquest_pixie_tutor_chat_Deepana');
+
+        let displayName = 'Deepana';
+        try {
+          const raw = localStorage.getItem('adquest_active_user');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (parsed.display_name) displayName = parsed.display_name;
+          }
+        } catch {}
+
+        const cleanUser = {
+          id: 'learner-deepana-1',
+          display_name: displayName,
+          role: 'learner',
+          avatar: 'rocket',
+          xp: 0,
+          coins: 0,
+          streak: 1,
+          best_streak: 1,
+          streak_freezes: 0,
+          last_active_date: null,
+        };
+        localStorage.setItem('adquest_active_user', JSON.stringify(cleanUser));
+        localStorage.setItem('adquest_account_reset_version', CURRENT_RESET_VERSION);
+      }
+    } catch (e) {
+      console.warn('Version check error:', e);
+    }
+  };
+
   const fetchProfile = async () => {
+    checkVersionReset();
+
     try {
       const {
         data: { user },
@@ -87,26 +133,26 @@ export function GameProvider({ children }: { children: ReactNode }) {
           display_name: stored.display_name || 'Deepana',
           role: stored.role || 'learner',
           avatar: 'rocket',
-          xp: stored.xp ?? 150,
-          coins: stored.coins ?? 25,
+          xp: stored.xp ?? 0,
+          coins: stored.coins ?? 0,
           streak: stored.streak ?? 1,
           best_streak: stored.best_streak ?? 1,
           streak_freezes: stored.streak_freezes ?? 0,
-          last_active_date: new Date().toISOString(),
+          last_active_date: null,
         });
       } else {
-        // Default Deepana profile for zero-block immediate access
+        // Default clean Deepana profile for brand-new learner
         setProfile({
           id: 'learner-deepana-1',
           display_name: 'Deepana',
           role: 'learner',
           avatar: 'rocket',
-          xp: 150,
-          coins: 25,
+          xp: 0,
+          coins: 0,
           streak: 1,
           best_streak: 1,
           streak_freezes: 0,
-          last_active_date: new Date().toISOString(),
+          last_active_date: null,
         });
       }
     } catch (e) {
@@ -163,6 +209,52 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const resetAccountData = async () => {
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('adquest_completed_slugs');
+        localStorage.removeItem('adquest_mistake_notebook');
+        localStorage.removeItem('adquest_tour_completed');
+        if (profile?.display_name) {
+          localStorage.removeItem(`adquest_pixie_chat_${profile.display_name}`);
+          localStorage.removeItem(`adquest_pixie_tutor_chat_${profile.display_name}`);
+        }
+        localStorage.removeItem('adquest_pixie_chat_Deepana');
+        localStorage.removeItem('adquest_pixie_tutor_chat_Deepana');
+        localStorage.setItem('adquest_account_reset_version', CURRENT_RESET_VERSION);
+
+        const cleanUser: Profile = {
+          id: profile?.id || 'learner-deepana-1',
+          display_name: profile?.display_name || 'Deepana',
+          role: profile?.role || 'learner',
+          avatar: 'rocket',
+          xp: 0,
+          coins: 0,
+          streak: 1,
+          best_streak: 1,
+          streak_freezes: 0,
+          last_active_date: null,
+        };
+
+        localStorage.setItem('adquest_active_user', JSON.stringify(cleanUser));
+        setProfile(cleanUser);
+      }
+
+      // If Supabase is connected, call server API or reset tables
+      try {
+        await fetch('/api/user/reset', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: profile?.id }),
+        });
+      } catch (e) {
+        console.warn('Server reset API call ignored:', e);
+      }
+    } catch (err) {
+      console.error('Failed to reset account:', err);
+    }
+  };
+
   const showBadgeToast = (badge: Badge) => {
     setActiveBadgeToast(badge);
   };
@@ -182,6 +274,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
         closeBadgeToast,
         awardLocalXP,
         refreshProfile: fetchProfile,
+        resetAccountData,
       }}
     >
       {children}
@@ -196,4 +289,3 @@ export function useGame() {
   }
   return context;
 }
-

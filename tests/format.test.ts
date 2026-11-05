@@ -19,8 +19,8 @@ describe('Pixie Expert Engine Formatting', () => {
 
     expect(reply).toContain('Deepana');
     expect(reply).toContain('CPL (Cost Per Lead)');
-    expect(reply).toContain('📐 **The Formula:**');
-    expect(reply).toContain('🔢 **Step-by-Step Calculation:**');
+    expect(reply).toContain('📐 **Jarvis Mathematical Architecture:**');
+    expect(reply).toContain('🔢 **Telemetry Breakdown');
     // Ensure zero ASCII box characters
     expect(reply).not.toMatch(/[┌┐└┘├┤─│]/);
     expect(reply).not.toMatch(/\|/);
@@ -32,4 +32,3 @@ describe('Pixie Expert Engine Formatting', () => {
     expect(reply).toContain('**Deepana**');
   });
 });
-
